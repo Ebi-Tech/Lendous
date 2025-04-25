@@ -1,0 +1,240 @@
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import SlideInSection from '../../../components/SlideInSection';
+
+const Services: React.FC = () => {
+  const baseSlides = [
+    '/hero-bg1.jpg', // Black businessman working on laptop
+    '/hero-bg2.jpg', // Nigerian marketplace
+    '/hero-bg3.jpg', // Black business team meeting
+    '/hero-bg4.jpg', // Sunrise over African savanna
+  ];
+
+  // Duplicate the first slide at the end for seamless looping
+  const slides = [...baseSlides, baseSlides[0]];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  // Preload images to improve loading performance
+  useEffect(() => {
+    const preloadImages = async () => {
+      const promises = baseSlides.map((src) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = resolve;
+          img.onerror = resolve; // Resolve even if an image fails to load
+        });
+      });
+      await Promise.all(promises);
+      setImagesLoaded(true);
+    };
+
+    preloadImages();
+  }, []);
+
+  // Slideshow logic with seamless looping
+  useEffect(() => {
+    if (!imagesLoaded) return; // Wait until images are loaded before starting slideshow
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => {
+        const next = prev + 1;
+        // When reaching the last slide (the duplicated one), reset to 0
+        if (next === slides.length - 1) {
+          // Use a timeout to allow the transition to finish before resetting
+          setTimeout(() => setCurrentSlide(0), 1000); // Match the transition duration
+          return next;
+        }
+        return next;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [slides.length, imagesLoaded]);
+
+  // Calculate the transform for the slideshow
+  const transformStyle = {
+    transform: `translateX(-${currentSlide * (100 / slides.length)}%)`,
+    transition: currentSlide === 0 ? 'none' : 'transform 1s ease-in-out',
+  };
+
+  // Function to handle smooth scrolling to the Services section
+  const scrollToServices = () => {
+    const servicesSection = document.getElementById('services');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="bg-[#E2D8EC] font-poppins">
+      {/* Hero Section */}
+      <SlideInSection direction="down" className="relative h-screen flex items-center justify-center text-[#FFFFFF] overflow-hidden">
+        <div className="absolute inset-0">
+          {/* Fallback gradient while images are loading */}
+          {!imagesLoaded && (
+            <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85"></div>
+          )}
+          <div
+            className="flex h-full"
+            style={{
+              ...transformStyle,
+              width: `${slides.length * 100}%`,
+            }}
+          >
+            {slides.map((slide, index) => (
+              <div
+                key={index}
+                className="h-full bg-cover bg-center"
+                style={{
+                  backgroundImage: imagesLoaded ? `url(${slide})` : 'none',
+                  width: `${100 / slides.length}%`,
+                }}
+              ></div>
+            ))}
+          </div>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85"></div>
+        <div className="relative z-10 max-w-6xl mx-auto text-center px-4 sm:px-6 py-8">
+          <h1 className="text-[36px] sm:text-[40px] md:text-[52px] font-extrabold tracking-tight drop-shadow-lg">
+            Comprehensive Services for African SMEs
+          </h1>
+          <p className="text-[22px] sm:text-[26px] md:text-[30px] mt-6 italic text-[#F0E8FF] drop-shadow-md font-light">
+            We’ve Got You Covered
+          </p>
+          <div className="mt-10 flex justify-center">
+            <motion.button
+              onClick={scrollToServices}
+              whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold transition duration-300 shadow-lg"
+            >
+              Explore Services
+            </motion.button>
+          </div>
+        </div>
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+        >
+          <svg className="w-8 h-8 text-[#1AF866]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </motion.div>
+      </SlideInSection>
+
+      {/* Services Section with Wrapper Div for ID */}
+      <div id="services">
+        <SlideInSection direction="left" className="py-20 sm:py-24 px-4 sm:px-6 bg-[#FFFFFF]">
+          <div className="max-w-6xl mx-auto text-center">
+            <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-extrabold text-[#27408F] leading-tight">
+              Services
+            </h2>
+            <p className="text-[16px] sm:text-[18px] mt-4 text-gray-700 font-light">
+              We blend our combined expertise across the following service areas to give you solutions.
+            </p>
+            <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12">
+              {[
+                {
+                  title: 'Lendous Tech',
+                  services: [
+                    'Development',
+                    'Web',
+                    'Business App Development',
+                    'Dashboard Development',
+                    'Data Analysis & Reporting',
+                    'Business Systems Setup',
+                    'Digital Transformation',
+                    'Workflow Automation',
+                    'Robotic Process Automation',
+                    'Tech Tools Curation',
+                    'Agents',
+                    'CRM, ERPs, HRIS, BFMS, Apps, BI/Analytics Tools etc.',
+                  ],
+                },
+                {
+                  title: 'Lendous People',
+                  services: [
+                    'People Operations',
+                    'Talent Acquisition',
+                    'Outsourced Hiring',
+                    'Rent a Resource (EaaS)',
+                    'Learning & Development',
+                    'Senior Leaders Training',
+                    'Middle Managers Training',
+                    'New Managers Training',
+                    'Operational Teams’ Training (HR, Sales, Systems & Process, Customer Service etc.)',
+                  ],
+                },
+                {
+                  title: 'Lendous Capital',
+                  services: [
+                    'Funding Readiness Support',
+                    'Pitch deck development',
+                    'Investor/Lender Introduction',
+                    'Grant & Loan application',
+                    'Credit & Financial Health Advisory',
+                    'SME credit risk analysis',
+                    'Financial health improvement plans',
+                    'Debt/Equity guidance for growth financing',
+                  ],
+                },
+                {
+                  title: 'Lendous Support',
+                  services: [
+                    'Advisory',
+                    'Across all Areas of Expertise',
+                    'Sales & Expansion',
+                    'In-Country Expansion',
+                    'Africa Expansion (East & West Africa)',
+                    'Market Research & Analysis',
+                    'Solution Delivery',
+                    'Project Management',
+                    'Process Management',
+                    'Change Management',
+                    'Continuous Improvement',
+                    'Business Compliance',
+                  ],
+                },
+              ].map((category, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(112, 48, 160, 0.4)' }}
+                  className="p-6 sm:p-8 rounded-2xl shadow-xl transition-transform duration-300 bg-gradient-to-br from-[#F0E8FF] to-[#F9F5FF]"
+                >
+                  <h3 className="text-[20px] sm:text-[22px] font-bold text-[#27408F]">{category.title}</h3>
+                  <ul className="mt-6 space-y-3 text-[16px] sm:text-[18px] text-gray-700 font-light">
+                    {category.services.map((service, idx) => (
+                      <li key={idx}>
+                        - {service}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+            <div className="mt-12 sm:mt-16">
+              <Link href="/solutions">
+                <motion.button
+                  whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold transition duration-300 shadow-lg"
+                >
+                  Explore Solutions
+                </motion.button>
+              </Link>
+            </div>
+          </div>
+        </SlideInSection>
+      </div>
+    </div>
+  );
+};
+
+export default Services;
