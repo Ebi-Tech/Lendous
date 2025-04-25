@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import SlideInSection from '../../components/SlideInSection';
+import Navbar from '../../components/Navbar';
 
 const Home: React.FC = () => {
   const baseSlides = [
@@ -61,6 +62,8 @@ const Home: React.FC = () => {
             ))}
           </div>
         </div>
+        {/* Navbar placed directly on the Hero section */}
+        <Navbar />
         <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85"></div>
         <div className="relative z-10 max-w-6xl mx-auto text-center px-4 sm:px-6 py-8">
           <h1 className="text-[36px] sm:text-[40px] md:text-[52px] font-extrabold tracking-tight drop-shadow-lg">

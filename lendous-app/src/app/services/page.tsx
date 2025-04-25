@@ -3,7 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { FaLaptopCode, FaUsers, FaMoneyBillWave, FaHandshake } from 'react-icons/fa';
 import SlideInSection from '../../../components/SlideInSection';
+import Navbar from '../../../components/Navbar';
 
 const Services: React.FC = () => {
   const baseSlides = [
@@ -71,10 +73,22 @@ const Services: React.FC = () => {
     }
   };
 
+  // Map icons to service categories
+  const serviceIcons = {
+    'Lendous Tech': <FaLaptopCode className="w-6 h-6 text-[#27408F]" />,
+    'Lendous People': <FaUsers className="w-6 h-6 text-[#27408F]" />,
+    'Lendous Capital': <FaMoneyBillWave className="w-6 h-6 text-[#27408F]" />,
+    'Lendous Support': <FaHandshake className="w-6 h-6 text-[#27408F]" />,
+  };
+
   return (
     <div className="bg-[#E2D8EC] font-poppins">
       {/* Hero Section */}
-      <SlideInSection direction="down" className="relative h-screen flex items-center justify-center text-[#FFFFFF] overflow-hidden">
+      <div id="hero-section">
+        <SlideInSection
+          direction="down"
+          className="relative h-screen flex items-center justify-center text-[#FFFFFF] overflow-hidden"
+        >
         <div className="absolute inset-0">
           {/* Fallback gradient while images are loading */}
           {!imagesLoaded && (
@@ -100,6 +114,10 @@ const Services: React.FC = () => {
           </div>
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85"></div>
+
+        {/* Navbar placed directly on the Hero section */}
+        <Navbar />
+
         <div className="relative z-10 max-w-6xl mx-auto text-center px-4 sm:px-6 py-8">
           <h1 className="text-[36px] sm:text-[40px] md:text-[52px] font-extrabold tracking-tight drop-shadow-lg">
             Comprehensive Services for African SMEs
@@ -127,7 +145,8 @@ const Services: React.FC = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </motion.div>
-      </SlideInSection>
+        </SlideInSection>
+      </div>
 
       {/* Services Section with Wrapper Div for ID */}
       <div id="services">
@@ -139,7 +158,7 @@ const Services: React.FC = () => {
             <p className="text-[16px] sm:text-[18px] mt-4 text-gray-700 font-light">
               We blend our combined expertise across the following service areas to give you solutions.
             </p>
-            <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12">
+            <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-6">
               {[
                 {
                   title: 'Lendous Tech',
@@ -205,17 +224,29 @@ const Services: React.FC = () => {
               ].map((category, index) => (
                 <motion.div
                   key={index}
-                  whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(112, 48, 160, 0.4)' }}
-                  className="p-6 sm:p-8 rounded-2xl shadow-xl transition-transform duration-300 bg-gradient-to-br from-[#F0E8FF] to-[#F9F5FF]"
+                  whileHover={{ scale: 1.02, boxShadow: '0 0 15px rgba(112, 48, 160, 0.3)' }}
+                  className="p-6 rounded-xl shadow-md transition-transform duration-300 bg-gradient-to-r from-[#F5F5FF] to-[#FAFAFF] border border-gray-200"
                 >
-                  <h3 className="text-[20px] sm:text-[22px] font-bold text-[#27408F]">{category.title}</h3>
-                  <ul className="mt-6 space-y-3 text-[16px] sm:text-[18px] text-gray-700 font-light">
+                  <div className="flex items-center mb-4">
+                    {serviceIcons[category.title as keyof typeof serviceIcons]}
+                    <h3 className="text-[20px] font-semibold text-[#27408F] ml-3">{category.title}</h3>
+                  </div>
+                  {/* Vertical ordered list for small screens */}
+                  <ol className="sm:hidden list-decimal list-inside text-[16px] text-gray-700 font-medium space-y-2">
                     {category.services.map((service, idx) => (
-                      <li key={idx}>
-                        - {service}
-                      </li>
+                      <li key={idx}>{service}</li>
                     ))}
-                  </ul>
+                  </ol>
+                  {/* Horizontal list with bullets for larger screens */}
+                  <div className="hidden sm:flex sm:flex-wrap sm:gap-4 text-[16px] text-gray-700 font-medium">
+                    {category.services.map((service, idx) => (
+                      <span key={idx} className="flex items-center">
+                        <span className="text-[#7030A0] text-[14px] mr-2 font-bold">•</span>
+                        {service}
+                        {idx < category.services.length - 1 && ' '}
+                      </span>
+                    ))}
+                  </div>
                 </motion.div>
               ))}
             </div>
