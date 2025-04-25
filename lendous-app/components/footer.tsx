@@ -10,9 +10,13 @@ const Footer: React.FC = () => {
         {/* Lendous Section */}
         <div>
           <h3 className="text-[20px] sm:text-[24px] font-bold flex items-center">
-            <svg className="w-8 h-8 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+            <Image
+              src="/favicon.ico"
+              alt="Lendous Logo"
+              width={32}
+              height={32}
+              className="w-8 h-8 mr-2"
+            />
             Lendous
           </h3>
           <p className="text-[14px] sm:text-[16px] mt-4">

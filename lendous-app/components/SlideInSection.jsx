@@ -6,18 +6,21 @@ const SlideInSection = ({ children, direction = "left", className }) => {
   const variants = {
     hidden: {
       opacity: 0,
-      x: direction === "left" ? -100 : direction === "right" ? 100 : 0,
-      y: direction === "up" ? 100 : direction === "down" ? -100 : 0
+      x: direction === "left" ? -150 : direction === "right" ? 150 : 0,
+      y: direction === "up" ? 150 : direction === "down" ? -150 : 0,
+      scale: 0.95,
     },
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
+      scale: 1,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    }
+        duration: 1,
+        ease: "easeOut",
+        staggerChildren: 0.2,
+      },
+    },
   };
 
   return (
