@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,11 +28,16 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
           {/* Logo Placeholder */}
-          <div className="flex-shrink-0">
-            {/* Placeholder for the logo - replace with your logo image */}
-            <div className="w-32 h-10 bg-gray-300 flex items-center justify-center text-gray-500">
-              [Logo Placeholder]
-            </div>
+          <div className="flex-shrink-0 w-32 h-10 flex items-center justify-center">
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/footer-logo.png"
+              alt="Lendous Logo"
+              width={50}
+              height={32}
+            />
+           <p className="text-transparent bg-clip-text bg-gradient-to-r from-[#C4A7E7] to-[#A3BFFA] text-[20px] font-bold ml-2">Lendous</p>
+          </Link>
           </div>
 
           {/* Desktop Navigation Links */}
