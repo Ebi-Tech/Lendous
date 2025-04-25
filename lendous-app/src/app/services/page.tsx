@@ -84,12 +84,8 @@ const Services: React.FC = () => {
   return (
     <div className="bg-[#E2D8EC] font-poppins">
       {/* Hero Section */}
-      <div id="hero-section">
-        <SlideInSection
-          direction="down"
-          className="relative h-screen flex items-center justify-center text-[#FFFFFF] overflow-hidden"
-        >
-        <div className="absolute inset-0">
+      <div id="hero-section" className="relative h-screen flex items-center justify-center text-[#FFFFFF] overflow-hidden">
+        <div className="absolute inset-0 z-0">
           {/* Fallback gradient while images are loading */}
           {!imagesLoaded && (
             <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85"></div>
@@ -113,7 +109,7 @@ const Services: React.FC = () => {
             ))}
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85 z-0"></div>
 
         {/* Navbar placed directly on the Hero section */}
         <Navbar />
@@ -137,7 +133,7 @@ const Services: React.FC = () => {
           </div>
         </div>
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
         >
@@ -145,7 +141,6 @@ const Services: React.FC = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </motion.div>
-        </SlideInSection>
       </div>
 
       {/* Services Section with Wrapper Div for ID */}

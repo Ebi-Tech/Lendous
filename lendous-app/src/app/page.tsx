@@ -41,7 +41,7 @@ const Home: React.FC = () => {
   return (
     <div className="bg-[#E2D8EC] font-poppins">
       {/* Hero Section */}
-      <SlideInSection direction="down" className="relative h-screen flex items-center justify-center text-[#FFFFFF] overflow-hidden">
+      <div className="relative h-screen flex items-center justify-center text-[#FFFFFF] overflow-hidden">
         <div className="absolute inset-0">
           <div
             className="flex h-full"
@@ -93,7 +93,7 @@ const Home: React.FC = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </motion.div>
-      </SlideInSection>
+      </div>
 
       {/* Problems We Solve Section with Stats */}
       <SlideInSection direction="left" className="py-20 sm:py-24 px-4 sm:px-6 bg-[#FFFFFF]">
@@ -165,7 +165,7 @@ const Home: React.FC = () => {
             <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-extrabold">
               Ready to Grow Your Business?
             </h2>
-            </div>
+          </div>
           <Link href="/contact">
             <motion.button
               whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(255, 255, 255, 0.5)' }}
