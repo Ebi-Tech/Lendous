@@ -1,9 +1,8 @@
-"use client"
+"use client";
 
-import { redirect } from 'next/navigation';
 import { motion } from 'framer-motion';
 
-export const FAQSection: React.FC = () => {
+const FAQSection: React.FC = () => {
   const faqs = [
     {
       question: 'What types of businesses do you support?',
@@ -67,7 +66,4 @@ export const FAQSection: React.FC = () => {
   );
 };
 
-// Redirect /faq to /#faq
-export default function FAQPage() {
-  redirect('/#faq');
-}
+export default FAQSection;

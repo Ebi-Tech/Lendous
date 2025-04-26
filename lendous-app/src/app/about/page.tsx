@@ -1,12 +1,11 @@
-"use client"
+"use client";
 
-import { redirect } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FaLinkedin } from 'react-icons/fa';
 import SlideInSection from '../../../components/SlideInSection';
 
-export const AboutSection: React.FC = () => {
+const AboutSection: React.FC = () => {
   return (
     <>
       {/* Intro Section */}
@@ -102,7 +101,4 @@ export const AboutSection: React.FC = () => {
   );
 };
 
-// Redirect /about to /#about
-export default function AboutPage() {
-  redirect('/#about');
-}
+export default AboutSection;

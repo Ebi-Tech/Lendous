@@ -1,9 +1,8 @@
-"use client"
+"use client";
 
-import { redirect } from 'next/navigation';
 import { motion } from 'framer-motion';
 
-export const TrainingProgramsSection: React.FC = () => {
+const TrainingProgramsSection: React.FC = () => {
   const trainingPrograms = [
     {
       title: 'Senior Leaders Training',
@@ -65,7 +64,4 @@ export const TrainingProgramsSection: React.FC = () => {
   );
 };
 
-// Redirect /training-programs to /#training-programs
-export default function TrainingProgramsPage() {
-  redirect('/#training-programs');
-}
+export default TrainingProgramsSection;

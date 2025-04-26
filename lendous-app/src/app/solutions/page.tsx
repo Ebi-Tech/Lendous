@@ -1,8 +1,4 @@
-"use client"
-
-import { redirect } from 'next/navigation';
-
-export const SolutionsSection: React.FC = () => {
+const SolutionsSection: React.FC = () => {
   return (
     <section id="solutions" className="py-20 sm:py-24 px-4 sm:px-6 bg-[#FFFFFF]">
       <div className="max-w-6xl mx-auto text-center">
@@ -17,7 +13,4 @@ export const SolutionsSection: React.FC = () => {
   );
 };
 
-// Redirect /solutions to /#solutions
-export default function SolutionsPage() {
-  redirect('/#solutions');
-}
+export default SolutionsSection;

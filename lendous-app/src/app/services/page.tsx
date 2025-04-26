@@ -1,12 +1,11 @@
-"use client"
+"use client";
 
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaLaptopCode, FaUsers, FaMoneyBillWave, FaHandshake } from 'react-icons/fa';
 import SlideInSection from '../../../components/SlideInSection';
 
-export const ServicesSection: React.FC = () => {
+const ServicesSection: React.FC = () => {
   const serviceIcons = {
     'Lendous Tech': <FaLaptopCode className="w-6 h-6 text-[#27408F]" />,
     'Lendous People': <FaUsers className="w-6 h-6 text-[#27408F]" />,
@@ -99,7 +98,7 @@ export const ServicesSection: React.FC = () => {
         </p>
 
         {/* Service Cards */}
-        <div className="mt-12 sm:mt-16 text-left">
+        <div className="mt-12 sm:mt-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
             {serviceData.map((category, index) => (
               <motion.div
@@ -147,7 +146,4 @@ export const ServicesSection: React.FC = () => {
   );
 };
 
-// Redirect /services to /#services
-export default function ServicesPage() {
-  redirect('/#services');
-}
+export default ServicesSection;
