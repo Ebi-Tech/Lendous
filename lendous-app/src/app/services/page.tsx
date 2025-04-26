@@ -228,7 +228,7 @@ const Services: React.FC = () => {
                       {serviceIcons[category.title as keyof typeof serviceIcons]}
                       <h3 className="text-[32px] font-semibold text-[#27408F] ml-3">{category.title}</h3>
                     </div>
-                    <ol className="sm:hidden list-decimal list-inside text-[16px] text-gray-700 font-medium space-y-2">
+                    <ol className="sm:hidden list-disc list-inside text-[16px] text-gray-700 font-medium space-y-6">
                       {category.services.map((service, idx) => (
                         <li key={idx}>{service}</li>
                       ))}
