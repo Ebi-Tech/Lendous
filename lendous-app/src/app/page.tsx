@@ -1,96 +1,234 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
-import SlideInSection from '../../components/SlideInSection';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Navbar from '../../components/Navbar';
+import { AboutSection } from './about/page';
+import { ServicesSection } from './services/page';
+import { SolutionsSection } from './solutions/page';
+import { TrainingProgramsSection } from './training-programs/page';
+import { FAQSection } from './faq/page';
 
 const Home: React.FC = () => {
   const baseSlides = [
-    '/hero-bg1.jpg',
-    '/hero-bg2.jpg',
-    '/hero-bg3.jpg',
-    '/hero-bg4.jpg',
+    {
+      background: '/hero-bg1.jpg',
+      title: 'Ready to Be The Next Big Thing in Africa?',
+      subtitle: 'Grow with Lendous',
+    },
+    {
+      background: '/hero-bg2.jpg',
+      title: 'Starting & Growing a Business is Hard. We are Here to Make it Easier',
+      subtitle: 'Select service(s) to explore our range, get a free consultation to ensure solutions fit your stage, receive an online quote, and see your solution deployed with ongoing support.',
+    },
+    {
+      background: '/hero-bg3.jpg',
+      title: 'The Lendous Assurance: You Will Never Work Alone!',
+      subtitle: 'Whenever your business needs anything, think Lendous first',
+    },
   ];
 
   const slides = [...baseSlides, baseSlides[0]];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [imageLoadError, setImageLoadError] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   useEffect(() => {
+    const preloadImages = async () => {
+      let hasLoadedAtLeastOne = false;
+      const promises = baseSlides.map((slide) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = slide.background;
+          img.onload = () => {
+            console.log(`Successfully loaded image: ${slide.background}`);
+            hasLoadedAtLeastOne = true;
+            resolve(true);
+          };
+          img.onerror = () => {
+            console.error(`Failed to load image: ${slide.background}`);
+            resolve(false);
+          };
+        });
+      });
+
+      const results = await Promise.all(promises);
+      if (hasLoadedAtLeastOne) {
+        setImagesLoaded(true);
+      } else {
+        setImageLoadError(true);
+        console.error('All hero background images failed to load. Please ensure the images are in the public directory (e.g., public/hero-bg1.jpg).');
+      }
+    };
+
+    preloadImages();
+  }, [slides]);
+
+  useEffect(() => {
+    if (!imagesLoaded || !isAutoPlaying) return;
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => {
         const next = prev + 1;
-        if (next === slides.length) {
-          return 0;
+        if (next === slides.length - 1) {
+          setTimeout(() => setCurrentSlide(0), 2000);
+          return next;
         }
         return next;
       });
-    }, 3000);
+    }, 10000);
+
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [slides.length, imagesLoaded, isAutoPlaying]);
 
-  const transformStyle =
-    currentSlide === 0
-      ? { transform: 'translateX(0)', transition: 'none' }
-      : { transform: `translateX(-${currentSlide * (100 / slides.length)}%)`, transition: 'transform 1s ease-in-out' };
+  const transformStyle = {
+    transform: `translateX(-${currentSlide * (100 / slides.length)}%)`,
+    transition: currentSlide === 0 ? 'none' : 'transform 1s ease-in-out',
+  };
 
-  // Define gradients for step cards (matching Services page)
-  const stepGradients = [
-    'bg-gradient-to-br from-[#E2D8EC] to-[#F5F5FF]',
-    'bg-gradient-to-br from-[#F0E8FF] to-[#FAFAFF]',
-    'bg-gradient-to-br from-[#F5F5FF] to-[#E2D8EC]',
-    'bg-gradient-to-br from-[#FAFAFF] to-[#F0E8FF]',
-  ];
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handlePrevSlide = () => {
+    setIsAutoPlaying(false);
+    setCurrentSlide((prev) => {
+      const next = prev - 1;
+      if (next < 0) {
+        return baseSlides.length - 1;
+      }
+      return next;
+    });
+    setTimeout(() => setIsAutoPlaying(true), 10000);
+  };
+
+  const handleNextSlide = () => {
+    setIsAutoPlaying(false);
+    setCurrentSlide((prev) => {
+      const next = prev + 1;
+      if (next === slides.length - 1) {
+        setTimeout(() => setCurrentSlide(0), 2000);
+        return next;
+      }
+      return next;
+    });
+    setTimeout(() => setIsAutoPlaying(true), 10000);
+  };
 
   return (
-    <div className="bg-[#E2D8EC] font-poppins">
-      {/* Hero Section */}
-      <div className="relative h-screen flex items-center justify-center text-[#FFFFFF] overflow-hidden">
-        <div className="absolute inset-0">
-          <div
-            className="flex h-full"
-            style={{
-              ...transformStyle,
-              width: `${slides.length * 100}%`,
-            }}
+    <div className="bg-[#E2D8EC] font-aptos overflow-x-hidden">
+      {/* Hero Section with Slider */}
+      <div id="hero-section" className="relative min-h-screen flex items-center justify-center text-[#FFFFFF] overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          {imageLoadError ? (
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-[#FFFFFF] text-[16px] bg-black bg-opacity-50 z-10">
+              <p>Failed to load hero background images. Please check image paths.</p>
+              <p className="mt-2 text-[14px]">Images should be in the public directory (e.g., public/hero-bg1.jpg).</p>
+            </div>
+          ) : (
+            <div
+              className="flex h-full"
+              style={{
+                ...transformStyle,
+                width: `${slides.length * 100}%`,
+              }}
+            >
+              {slides.map((slide, index) => (
+                <div
+                  key={index}
+                  className="h-full bg-cover bg-center"
+                  style={{
+                    backgroundImage: imagesLoaded ? `url(${slide.background})` : 'none',
+                    width: `${100 / slides.length}%`,
+                  }}
+                ></div>
+              ))}
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85 z-1"></div>
+        </div>
+        <Navbar scrollToSection={scrollToSection} />
+        <div className="relative z-10 max-w-6xl mx-auto text-center px-4 sm:px-6 py-4">
+          <motion.h1
+            key={slides[currentSlide].title}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 1, ease: 'easeInOut' }}
+            className="text-[#FFFFFF] text-[32px] font-extrabold tracking-tight drop-shadow-lg break-words"
           >
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className="h-full bg-cover bg-center"
-                style={{
-                  backgroundImage: `url(${slide})`,
-                  width: `${100 / slides.length}%`,
-                }}
-              ></div>
-            ))}
+            {slides[currentSlide].title}
+          </motion.h1>
+          <motion.p
+            key={slides[currentSlide].subtitle}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 1, ease: 'easeInOut', delay: 0.2 }}
+            className="mt-8 italic text-[#E2D8EC] drop-shadow-md font-light break-words leading-tight text-[24px]"
+          >
+            {slides[currentSlide].subtitle}
+          </motion.p>
+          {/* Stats Cards Above the Button */}
+          {currentSlide === 2 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-10 max-w-4xl mx-auto flex flex-row flex-wrap justify-between space-x-4"
+            >
+              <div className="flex flex-col items-center">
+                <div className="w-24 h-24 bg-[#7030A0] rounded-full flex items-center justify-center">
+                  <span className="text-[#FFFFFF] text-[24px] font-bold">$300M+</span>
+                </div>
+                <p className="mt-4 text-[#E2D8EC] text-[16px] text-center">Value Delivered by Lendous</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-24 h-24 bg-[#7030A0] rounded-full flex items-center justify-center">
+                  <span className="text-[#FFFFFF] text-[24px] font-bold">4+ Years</span>
+                </div>
+                <p className="mt-4 text-[#E2D8EC] text-[16px] text-center">Supporting African SMEs</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-24 h-24 bg-[#7030A0] rounded-full flex items-center justify-center">
+                  <span className="text-[#FFFFFF] text-[24px] font-bold">30+ Years</span>
+                </div>
+                <p className="mt-4 text-[#E2D8EC] text-[16px] text-center">Leadership Experience</p>
+              </div>
+            </motion.div>
+          )}
+          <div className="mt-12 flex justify-center">
+            <motion.button
+              onClick={() => scrollToSection('services')}
+              whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold transition duration-300 shadow-lg text-[16px]"
+            >
+              Explore Services
+            </motion.button>
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85"></div>
-        <Navbar />
-        <div className="relative z-10 max-w-6xl mx-auto text-center px-4 sm:px-6 py-8">
-          <h1 className="text-[36px] sm:text-[40px] md:text-[52px] font-extrabold tracking-tight drop-shadow-lg">
-            Ready to Be The Next Big Thing in Africa?
-          </h1>
-          <p className="text-[24px] sm:text-[26px] md:text-[30px] mt-6 italic text-[#F0E8FF] drop-shadow-md font-light">
-            Grow with Lendous
-          </p>
-          <div className="mt-10 flex justify-center">
-            <Link href="/solutions">
-              <motion.button
-                whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold transition duration-300 shadow-lg text-[16px]"
-              >
-                Explore Solutions
-              </motion.button>
-            </Link>
-          </div>
-        </div>
+        <button
+          onClick={handlePrevSlide}
+          className="absolute left-4 bottom-8 z-5 bg-black bg-opacity-50 text-[#FFFFFF] rounded-full p-3 opacity-50 hover:opacity-100 hover:bg-opacity-75 transition duration-300"
+        >
+          <ChevronLeft size={32} />
+        </button>
+        <button
+          onClick={handleNextSlide}
+          className="absolute right-4 bottom-8 z-5 bg-black bg-opacity-50 text-[#FFFFFF] rounded-full p-3 opacity-50 hover:opacity-100 hover:bg-opacity-75 transition duration-300"
+        >
+          <ChevronRight size={32} />
+        </button>
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
         >
@@ -100,91 +238,19 @@ const Home: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Problems We Solve Section with Stats */}
-      <SlideInSection direction="left" className="py-20 sm:py-24 px-4 sm:px-6 bg-[#FFFFFF]">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-[32px] sm:text-[36px] md:text-[40px] font-extrabold text-[#27408F] leading-tight">
-            Starting & Growing a Business is Hard.
-            <br />
-            We are Here to Make it Easier
-          </h2>
-          {/* Stats as Circular Badges */}
-          <div className="mt-10 flex flex-wrap justify-center gap-6 sm:gap-8">
-            {[
-              { value: '$300M+', label: 'Value Delivered by Lendous Leaders' },
-              { value: '4+ Years', label: 'Supporting African SMEs' },
-              { value: '30+ Years', label: 'Leadership Experience' },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.2, duration: 0.5 }}
-                className="flex flex-col items-center"
-              >
-                <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-[#7030A0] to-[#27408F] rounded-full flex items-center justify-center text-[#FFFFFF] font-bold text-[16px] sm:text-[20px] shadow-lg px-4 text-center leading-tight">
-                  {stat.value}
-                </div>
-                <p className="text-[16px] mt-3 text-gray-700 max-w-[120px]">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-          {/* Steps with Icons */}
-          <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 sm:gap-10">
-            {[
-              { icon: <svg className="w-8 h-8 sm:w-10 sm:h-10 text-[#7030A0]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>, title: 'Select Service(s)', desc: 'Explore our range of services & pick the preferred.' },
-              { icon: <svg className="w-8 h-8 sm:w-10 sm:h-10 text-[#7030A0]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2m-4 0H7a Bateman2 2 0 01-2-2v-6a2 2 0 012-2h2m4 0V6a2 2 0 00-2-2H7a2 2 0 00-2 2v2" /></svg>, title: 'Get a Free Consultation', desc: 'We ensure your selection(s) are solving the problems at your current stage.' },
-              { icon: <svg className="w-8 h-8 sm:w-10 sm:h-10 text-[#7030A0]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2zm0 8c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" /></svg>, title: 'Receive an Online Quote', desc: 'We share with you the best quote for what you need.' },
-              { icon: <svg className="w-8 h-8 sm:w-10 sm:h-10 text-[#7030A0]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>, title: 'Your Solution Gets Deployed', desc: 'We deliver your solution in record time and stay close to support on your next need.' },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.05, rotate: 2, boxShadow: '0 0 15px rgba(112, 48, 160, 0.3)' }}
-                className={`relative ${stepGradients[index]} p-4 sm:p-6 rounded-xl shadow-lg transition-transform duration-300 group border border-gray-100 hover:border-[#1AF866]`}
-              >
-                <div className="flex justify-center">{item.icon}</div>
-                <h3 className="text-[32px] font-semibold text-[#27408F] mt-4 text-center">{item.title}</h3>
-                <p className="text-[16px] text-gray-700 mt-3 text-center font-light">{item.desc}</p>
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#1AF866] rounded-xl transition duration-300"></div>
-              </motion.div>
-            ))}
-          </div>
-          <div className="mt-12 sm:mt-16">
-            <Link href="/services">
-              <motion.button
-                whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold transition duration-300 shadow-lg text-[16px]"
-              >
-                Explore Services
-              </motion.button>
-            </Link>
-          </div>
-        </div>
-      </SlideInSection>
+      
 
-      {/* Pre-Footer Section: Ready to Grow Your Business */}
-      <SlideInSection direction="down" className="bg-[#7030A0] text-[#FFFFFF] py-12 sm:py-16 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
-          <div className="text-center sm:text-left">
-            <h2 className="text-[32px] sm:text-[36px] md:text-[40px] font-extrabold">
-              Ready to Grow Your Business?
-            </h2>
-          </div>
-          <Link href="/contact">
-            <motion.button
-              whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(255, 255, 255, 0.5)' }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 sm:px-8 sm:py-3 bg-transparent border-2 border-[#FFFFFF] text-[#FFFFFF] rounded-full font-semibold transition duration-300 flex items-center gap-2 text-[16px]"
-            >
-              Get in Touch
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </motion.button>
-          </Link>
-        </div>
-      </SlideInSection>
+      <ServicesSection />
+      
+      <SolutionsSection />
+      
+      <AboutSection />
+
+      <TrainingProgramsSection />
+
+      <FAQSection />
+
+      
     </div>
   );
 };

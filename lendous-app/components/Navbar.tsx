@@ -1,110 +1,72 @@
-"use client";
-
 import React, { useState } from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { Menu, X } from 'lucide-react';
 
-const Navbar: React.FC = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+interface NavbarProps {
+  scrollToSection: (sectionId: string) => void;
+}
 
-  // Toggle mobile menu
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <motion.nav
-      className="fixed top-0 left-0 w-full z-[1000] font-poppins transition-all duration-300"
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      {/* Pseudo-element for navbar background */}
-      <div
-        className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-20 z-[-1]"
-      ></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo Placeholder */}
-          <div className="flex-shrink-0 w-32 h-10 flex items-center justify-center">
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/footer-logo.png"
-                alt="Lendous Logo"
-                width={50}
-                height={32}
-              />
-              <p className="text-transparent bg-clip-text bg-gradient-to-r from-[#C4A7E7] to-[#A3BFFA] text-[36px] font-bold ml-2">Lendous</p>
-            </Link>
-          </div>
-
-          {/* Desktop Navigation Links */}
-          <div className="hidden sm:flex sm:items-center sm:space-x-8">
-            {['Home', 'Services', 'Solutions', 'About', 'Contact'].map((item) => (
-              <Link
-                key={item}
-                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                className="text-[#FFFFFF] hover:text-[#1AF866] text-[16px] font-bold transition-colors duration-200"
-              >
-                {item}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="sm:hidden">
-            <button
-              onClick={toggleMobileMenu}
-              className="text-[#FFFFFF] hover:text-[#1AF866] focus:outline-none"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d={isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
-                />
-              </svg>
-            </button>
-          </div>
+    <nav className="fixed top-0 left-0 w-full z-20">
+      {/* Background Layer with Opacity */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-45 z-0"></div>
+      {/* Content Layer - Fully Opaque */}
+      <div className="relative z-10 flex items-center justify-between px-4 sm:px-6 py-4">
+        <div className="flex items-center">
+          <Image
+            src="/footer-logo.png"
+            alt="Lendous Logo"
+            width={40}
+            height={40}
+            className="mr-2 sm:mr-4"
+          />
+          <span className="text-[#1AF866] text-[36px] font-bold">Lendous</span>
         </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <motion.div
-            className="sm:hidden relative"
-            initial={{ height: 0 }}
-            animate={{ height: 'auto' }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Pseudo-element for mobile menu background */}
-            <div
-              className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-75 z-[-1]"
-            ></div>
-            <div className="flex flex-col space-y-4 py-4 px-4">
-              {['Home', 'Services', 'Solutions', 'About', 'Contact'].map((item) => (
-                <Link
-                  key={item}
-                  href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                  className="text-[#FFFFFF] hover:text-[#1AF866] text-[16px] font-bold transition-colors duration-200"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
+        {/* Menu Icon for Mobile */}
+        <button
+          className="md:hidden text-[#FFFFFF] hover:text-[#1AF866] transition-colors duration-300"
+          onClick={toggleMenu}
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+        {/* Navigation Links */}
+        <div
+          className={`${
+            isMenuOpen ? 'flex' : 'hidden'
+          } md:flex flex-col md:flex-row absolute md:static top-16 left-0 w-full md:w-auto ${
+            isMenuOpen ? 'bg-gradient-to-r from-[#7030A0] to-[#27408F]' : ''
+          } md:bg-transparent opacity-90 md:opacity-100 z-10 md:space-x-4 sm:space-x-6 px-4 py-4 md:p-0`}
+        >
+          {[
+            { label: 'Home', section: 'hero-section' },
+            { label: 'Services', section: 'services' },
+            { label: 'Solutions', section: 'solutions' },
+            { label: 'About', section: 'about' },
+            { label: 'Training Programs', section: 'training-programs' },
+            { label: 'FAQ', section: 'faq' },
+            { label: 'Contact', section: 'contact' },
+          ].map((item) => (
+            <button
+              key={item.label}
+              onClick={() => {
+                scrollToSection(item.section);
+                setIsMenuOpen(false); // Close the menu on link click
+              }}
+              className="text-[#FFFFFF] hover:text-[#1AF866] text-[16px] sm:text-[18px] font-medium transition-colors duration-300 py-2 md:py-0"
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 
