@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaLaptopCode, FaUsers, FaMoneyBillWave, FaHandshake } from 'react-icons/fa';
@@ -9,19 +9,18 @@ import Navbar from '../../../components/Navbar';
 
 const Services: React.FC = () => {
   const baseSlides = [
-    '/hero-bg1.jpg', // Black businessman working on laptop
-    '/hero-bg2.jpg', // Nigerian marketplace
-    '/hero-bg3.jpg', // Black business team meeting
-    '/hero-bg4.jpg', // Sunrise over African savanna
+    '/hero-bg1.jpg',
+    '/hero-bg2.jpg',
+    '/hero-bg3.jpg',
+    '/hero-bg4.jpg',
   ];
 
-  // Duplicate the first slide at the end for seamless looping
   const slides = [...baseSlides, baseSlides[0]];
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Preload images to improve loading performance
   useEffect(() => {
     const preloadImages = async () => {
       const promises = baseSlides.map((src) => {
@@ -29,7 +28,7 @@ const Services: React.FC = () => {
           const img = new Image();
           img.src = src;
           img.onload = resolve;
-          img.onerror = resolve; // Resolve even if an image fails to load
+          img.onerror = resolve;
         });
       });
       await Promise.all(promises);
@@ -39,17 +38,14 @@ const Services: React.FC = () => {
     preloadImages();
   }, []);
 
-  // Slideshow logic with seamless looping
   useEffect(() => {
-    if (!imagesLoaded) return; // Wait until images are loaded before starting slideshow
+    if (!imagesLoaded) return;
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => {
         const next = prev + 1;
-        // When reaching the last slide (the duplicated one), reset to 0
         if (next === slides.length - 1) {
-          // Use a timeout to allow the transition to finish before resetting
-          setTimeout(() => setCurrentSlide(0), 1000); // Match the transition duration
+          setTimeout(() => setCurrentSlide(0), 1000);
           return next;
         }
         return next;
@@ -59,13 +55,11 @@ const Services: React.FC = () => {
     return () => clearInterval(interval);
   }, [slides.length, imagesLoaded]);
 
-  // Calculate the transform for the slideshow
   const transformStyle = {
     transform: `translateX(-${currentSlide * (100 / slides.length)}%)`,
     transition: currentSlide === 0 ? 'none' : 'transform 1s ease-in-out',
   };
 
-  // Function to handle smooth scrolling to the Services section
   const scrollToServices = () => {
     const servicesSection = document.getElementById('services');
     if (servicesSection) {
@@ -73,7 +67,6 @@ const Services: React.FC = () => {
     }
   };
 
-  // Map icons to service categories
   const serviceIcons = {
     'Lendous Tech': <FaLaptopCode className="w-6 h-6 text-[#27408F]" />,
     'Lendous People': <FaUsers className="w-6 h-6 text-[#27408F]" />,
@@ -81,12 +74,82 @@ const Services: React.FC = () => {
     'Lendous Support': <FaHandshake className="w-6 h-6 text-[#27408F]" />,
   };
 
+  const cardGradients = [
+    'bg-gradient-to-br from-[#E2D8EC] to-[#F5F5FF]',
+    'bg-gradient-to-br from-[#F0E8FF] to-[#FAFAFF]',
+    'bg-gradient-to-br from-[#F5F5FF] to-[#E2D8EC]',
+    'bg-gradient-to-br from-[#FAFAFF] to-[#F0E8FF]',
+  ];
+
+  const serviceData = [
+    {
+      title: 'Lendous Tech',
+      services: [
+        'Development',
+        'Web',
+        'Business App Development',
+        'Dashboard Development',
+        'Data Analysis & Reporting',
+        'Business Systems Setup',
+        'Digital Transformation',
+        'Workflow Automation',
+        'Robotic Process Automation',
+        'Tech Tools Curation',
+        'Agents',
+        'CRM, ERPs, HRIS, BFMS, Apps, BI/Analytics Tools etc.',
+      ],
+    },
+    {
+      title: 'Lendous People',
+      services: [
+        'People Operations',
+        'Talent Acquisition',
+        'Outsourced Hiring',
+        'Rent a Resource (EaaS)',
+        'Learning & Development',
+        'Senior Leaders Training',
+        'Middle Managers Training',
+        'New Managers Training',
+        'Operational Teams’ Training (HR, Sales, Systems & Process, Customer Service etc.)',
+      ],
+    },
+    {
+      title: 'Lendous Capital',
+      services: [
+        'Funding Readiness Support',
+        'Pitch deck development',
+        'Investor/Lender Introduction',
+        'Grant & Loan application',
+        'Credit & Financial Health Advisory',
+        'SME credit risk analysis',
+        'Financial health improvement plans',
+        'Debt/Equity guidance for growth financing',
+      ],
+    },
+    {
+      title: 'Lendous Support',
+      services: [
+        'Advisory',
+        'Across all Areas of Expertise',
+        'Sales & Expansion',
+        'In-Country Expansion',
+        'Africa Expansion (East & West Africa)',
+        'Market Research & Analysis',
+        'Solution Delivery',
+        'Project Management',
+        'Process Management',
+        'Change Management',
+        'Continuous Improvement',
+        'Business Compliance',
+      ],
+    },
+  ];
+
   return (
     <div className="bg-[#E2D8EC] font-poppins">
       {/* Hero Section */}
       <div id="hero-section" className="relative h-screen flex items-center justify-center text-[#FFFFFF] overflow-hidden">
         <div className="absolute inset-0 z-0">
-          {/* Fallback gradient while images are loading */}
           {!imagesLoaded && (
             <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85"></div>
           )}
@@ -110,15 +173,12 @@ const Services: React.FC = () => {
           </div>
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85 z-0"></div>
-
-        {/* Navbar placed directly on the Hero section */}
         <Navbar />
-
         <div className="relative z-10 max-w-6xl mx-auto text-center px-4 sm:px-6 py-8">
           <h1 className="text-[36px] sm:text-[40px] md:text-[52px] font-extrabold tracking-tight drop-shadow-lg">
             Comprehensive Services for African SMEs
           </h1>
-          <p className="text-[22px] sm:text-[26px] md:text-[30px] mt-6 italic text-[#F0E8FF] drop-shadow-md font-light">
+          <p className="text-[24px] sm:text-[26px] md:text-[30px] mt-6 italic text-[#F0E8FF] drop-shadow-md font-light">
             We’ve Got You Covered
           </p>
           <div className="mt-10 flex justify-center">
@@ -126,7 +186,7 @@ const Services: React.FC = () => {
               onClick={scrollToServices}
               whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold transition duration-300 shadow-lg"
+              className="px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold transition duration-300 shadow-lg text-[16px]"
             >
               Explore Services
             </motion.button>
@@ -143,114 +203,55 @@ const Services: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Services Section with Wrapper Div for ID */}
+      {/* Services Section */}
       <div id="services">
-        <SlideInSection direction="left" className="py-20 sm:py-24 px-4 sm:px-6 bg-[#FFFFFF]">
+        <SlideInSection direction="left" className="py-20 sm:py-24 px-4 sm:px-6 bg-[#FFFFFF] relative">
           <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-extrabold text-[#27408F] leading-tight">
+            <h2 className="text-[32px] sm:text-[36px] md:text-[40px] font-extrabold text-[#27408F] leading-tight">
               Services
             </h2>
-            <p className="text-[16px] sm:text-[18px] mt-4 text-gray-700 font-light">
+            <p className="text-[24px] mt-4 text-gray-700 font-light">
               We blend our combined expertise across the following service areas to give you solutions.
             </p>
-            <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-6">
-              {[
-                {
-                  title: 'Lendous Tech',
-                  services: [
-                    'Development',
-                    'Web',
-                    'Business App Development',
-                    'Dashboard Development',
-                    'Data Analysis & Reporting',
-                    'Business Systems Setup',
-                    'Digital Transformation',
-                    'Workflow Automation',
-                    'Robotic Process Automation',
-                    'Tech Tools Curation',
-                    'Agents',
-                    'CRM, ERPs, HRIS, BFMS, Apps, BI/Analytics Tools etc.',
-                  ],
-                },
-                {
-                  title: 'Lendous People',
-                  services: [
-                    'People Operations',
-                    'Talent Acquisition',
-                    'Outsourced Hiring',
-                    'Rent a Resource (EaaS)',
-                    'Learning & Development',
-                    'Senior Leaders Training',
-                    'Middle Managers Training',
-                    'New Managers Training',
-                    'Operational Teams’ Training (HR, Sales, Systems & Process, Customer Service etc.)',
-                  ],
-                },
-                {
-                  title: 'Lendous Capital',
-                  services: [
-                    'Funding Readiness Support',
-                    'Pitch deck development',
-                    'Investor/Lender Introduction',
-                    'Grant & Loan application',
-                    'Credit & Financial Health Advisory',
-                    'SME credit risk analysis',
-                    'Financial health improvement plans',
-                    'Debt/Equity guidance for growth financing',
-                  ],
-                },
-                {
-                  title: 'Lendous Support',
-                  services: [
-                    'Advisory',
-                    'Across all Areas of Expertise',
-                    'Sales & Expansion',
-                    'In-Country Expansion',
-                    'Africa Expansion (East & West Africa)',
-                    'Market Research & Analysis',
-                    'Solution Delivery',
-                    'Project Management',
-                    'Process Management',
-                    'Change Management',
-                    'Continuous Improvement',
-                    'Business Compliance',
-                  ],
-                },
-              ].map((category, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.02, boxShadow: '0 0 15px rgba(112, 48, 160, 0.3)' }}
-                  className="p-6 rounded-xl shadow-md transition-transform duration-300 bg-gradient-to-r from-[#F5F5FF] to-[#FAFAFF] border border-gray-200"
-                >
-                  <div className="flex items-center mb-4">
-                    {serviceIcons[category.title as keyof typeof serviceIcons]}
-                    <h3 className="text-[20px] font-semibold text-[#27408F] ml-3">{category.title}</h3>
-                  </div>
-                  {/* Vertical ordered list for small screens */}
-                  <ol className="sm:hidden list-decimal list-inside text-[16px] text-gray-700 font-medium space-y-2">
-                    {category.services.map((service, idx) => (
-                      <li key={idx}>{service}</li>
-                    ))}
-                  </ol>
-                  {/* Horizontal list with bullets for larger screens */}
-                  <div className="hidden sm:flex sm:flex-wrap sm:gap-4 text-[16px] text-gray-700 font-medium">
-                    {category.services.map((service, idx) => (
-                      <span key={idx} className="flex items-center">
-                        <span className="text-[#7030A0] text-[14px] mr-2 font-bold">•</span>
-                        {service}
-                        {idx < category.services.length - 1 && ' '}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
+            <div className="mt-12 sm:mt-16 relative">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+                {serviceData.map((category, index) => (
+                  <motion.div
+                    key={index}
+                    ref={(el) => {
+                      cardRefs.current[index] = el;
+                    }}
+                    whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(112, 48, 160, 0.4)' }}
+                    className={`p-6 rounded-2xl shadow-lg transition-transform duration-300 ${cardGradients[index]} border border-gray-100 relative z-10 hover:border-[#1AF866]`}
+                  >
+                    <div className="flex items-center mb-4">
+                      {serviceIcons[category.title as keyof typeof serviceIcons]}
+                      <h3 className="text-[32px] font-semibold text-[#27408F] ml-3">{category.title}</h3>
+                    </div>
+                    <ol className="sm:hidden list-decimal list-inside text-[16px] text-gray-700 font-medium space-y-2">
+                      {category.services.map((service, idx) => (
+                        <li key={idx}>{service}</li>
+                      ))}
+                    </ol>
+                    <div className="hidden sm:flex sm:flex-wrap sm:gap-4 text-[16px] text-gray-700 font-medium">
+                      {category.services.map((service, idx) => (
+                        <span key={idx} className="flex items-center">
+                          <span className="text-[#7030A0] text-[14px] mr-2 font-bold">•</span>
+                          {service}
+                          {idx < category.services.length - 1 && ' '}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
             <div className="mt-12 sm:mt-16">
               <Link href="/solutions">
                 <motion.button
                   whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold transition duration-300 shadow-lg"
+                  className="px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold transition duration-300 shadow-lg text-[16px]"
                 >
                   Explore Solutions
                 </motion.button>

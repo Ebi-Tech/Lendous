@@ -29,15 +29,15 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo Placeholder */}
           <div className="flex-shrink-0 w-32 h-10 flex items-center justify-center">
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/footer-logo.png"
-              alt="Lendous Logo"
-              width={50}
-              height={32}
-            />
-           <p className="text-transparent bg-clip-text bg-gradient-to-r from-[#C4A7E7] to-[#A3BFFA] text-[20px] font-bold ml-2">Lendous</p>
-          </Link>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/footer-logo.png"
+                alt="Lendous Logo"
+                width={50}
+                height={32}
+              />
+              <p className="text-transparent bg-clip-text bg-gradient-to-r from-[#C4A7E7] to-[#A3BFFA] text-[36px] font-bold ml-2">Lendous</p>
+            </Link>
           </div>
 
           {/* Desktop Navigation Links */}
