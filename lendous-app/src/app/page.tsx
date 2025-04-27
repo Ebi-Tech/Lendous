@@ -1,10 +1,8 @@
 "use client";
-import AboutSection from "./about/page";
-import FAQSection from "./faq/page";
+
+
 import Navbar from "../../components/Navbar";
-import ServicesSection from "./services/page";
-import SolutionsSection from "./solutions/page";
-import TrainingProgramsSection from "./training-programs/page";
+
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -178,7 +176,7 @@ const Home: React.FC = () => {
           )}
           <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
-        <Navbar scrollToSection={scrollToSection} />
+       
         <div className="relative z-10 max-w-6xl mx-auto text-center px-8 sm:px-10 pt-20 sm:pt-24 pb-10 sm:pb-16">
           <motion.h1
             key={`title-${currentSlide}`}
@@ -287,63 +285,7 @@ const Home: React.FC = () => {
         </motion.div>
       </div>
 
-      <ServicesSection />
-      <SolutionsSection />
-      <AboutSection />
-      <TrainingProgramsSection />
-      <FAQSection />
-
-      {/* Contact Section */}
-      <section
-        id="contact"
-        className="py-16 sm:py-24 px-8 sm:px-10 bg-[#E2D8EC]"
-      >
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-[32px] sm:text-[40px] font-extrabold font-aptos text-[#27408F] leading-tight tracking-tight">
-            Contact Us
-          </h2>
-          <p className="mt-6 sm:mt-8 text-[20px] sm:text-[24px] text-gray-700 font-light font-aptos leading-relaxed">
-            Get in touch with us to learn more about how we can help your business
-            grow.
-          </p>
-          <div className="mt-10 sm:mt-12">
-            <div className="max-w-md mx-auto space-y-6">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full p-4 rounded-lg border border-gray-300 focus:border-[#1AF866] focus:ring-2 focus:ring-[#1AF866] outline-none text-gray-700 text-[16px] font-normal font-aptos transition-all duration-200 hover:border-[#1AF866] hover:scale-[1.01]"
-                required
-              />
-              <input
-                type="email"
-                placeholder="Your Email"
-                className="w-full p-4 rounded-lg border border-gray-300 focus:border-[#1AF866] focus:ring-2 focus:ring-[#1AF866] outline-none text-gray-700 text-[16px] font-normal font-aptos transition-all duration-200 hover:border-[#1AF866] hover:scale-[1.01]"
-                required
-              />
-              <textarea
-                placeholder="Your Message"
-                rows={5}
-                className="w-full p-4 rounded-lg border border-gray-300 focus:border-[#1AF866] focus:ring-2 focus:ring-[#1AF866] outline-none text-gray-700 text-[16px] font-normal font-aptos resize-none transition-all duration-200 hover:border-[#1AF866] hover:scale-[1.01]"
-                required
-              />
-              <motion.button
-                type="submit"
-                whileHover={{
-                  scale: 1.15,
-                  backgroundColor: "#FFFFFF",
-                  color: "#7030A0",
-                  boxShadow: "0 0 25px rgba(26, 248, 102, 0.7)",
-                }}
-                whileTap={{ scale: 0.9 }}
-                className="w-full px-10 py-4 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold font-aptos text-[18px] shadow-lg transition-all duration-300 hover:shadow-2xl"
-              >
-                Send Message
-              </motion.button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+  </div>
   );
 };
 

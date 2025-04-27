@@ -1,12 +1,11 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-interface NavbarProps {
-  scrollToSection: (sectionId: string) => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
+const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -14,7 +13,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-20 bg-gradient-to-r from-[#7030A0]/80 to-[#27408F]/80 shadow-md backdrop-blur-sm">
+    <nav className="fixed top-0 left-0 w-full z-20 bg-gradient-to-r from-[#7030A0]/80 to-[#27408F]/80 shadow-md backdrop-blur-sm font-aptos antialiased">
       <div className="relative z-10 flex items-center justify-between px-4 sm:px-8 py-4 max-w-7xl mx-auto">
         {/* Logo and Brand Name */}
         <div className="flex items-center">
@@ -74,25 +73,23 @@ const Navbar: React.FC<NavbarProps> = ({ scrollToSection }) => {
             {/* Menu Items */}
             <div className="flex flex-col md:flex-row md:space-x-8 space-y-6 md:space-y-0">
               {[
-                { label: "Home", section: "hero-section" },
-                { label: "Services", section: "services" },
-                { label: "Solutions", section: "solutions" },
-                { label: "About", section: "about" },
-                { label: "Training Programs", section: "training-programs" },
-                { label: "FAQ", section: "faq" },
-                { label: "Contact", section: "contact" },
+                { label: "Home", href: "/" },
+                { label: "Services", href: "/services" },
+                { label: "Solutions", href: "/solutions" },
+                { label: "Training Programs", href: "/training-programs" },
+                { label: "FAQ", href: "/faq" },
+                { label: "About", href: "/about" },
+                { label: "Contact", href: "/contact" },
               ].map((item) => (
-                <button
+                <Link
                   key={item.label}
-                  onClick={() => {
-                    scrollToSection(item.section);
-                    setIsMenuOpen(false);
-                  }}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
                   className="text-[#FFFFFF] text-[18px] font-semibold font-aptos transition-all duration-300 text-left md:text-center relative group hover:text-[#1AF866]"
                 >
                   {item.label}
                   <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#1AF866] transition-all duration-300 group-hover:w-full"></span>
-                </button>
+                </Link>
               ))}
             </div>
             {/* Footer Content for Mobile Menu */}

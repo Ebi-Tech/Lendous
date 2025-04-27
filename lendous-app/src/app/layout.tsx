@@ -1,5 +1,6 @@
 import "./globals.css";
 import Footer from "../../components/footer";
+import Navbar from "../../components/Navbar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -20,7 +21,9 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
+      
       <body className="font-aptos antialiased">
+      <Navbar />
         {children}
         <Footer />
       </body>
