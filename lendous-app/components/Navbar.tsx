@@ -13,10 +13,10 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-20 bg-gradient-to-r from-[#7030A0]/80 to-[#27408F]/80 shadow-md backdrop-blur-sm font-aptos antialiased">
+    <nav className="fixed top-0 left-0 w-full z-20 bg-gradient-to-r from-[#FFFFFF] to-[#E6D8F0] shadow-lg" style={{ boxShadow: "0 4px 15px rgba(112, 48, 160, 0.2)" }}>
       <div className="relative z-10 flex items-center justify-between px-4 sm:px-8 py-4 max-w-7xl mx-auto">
         {/* Logo and Brand Name */}
-        <div className="flex items-center">
+        <div className="text-[36px] font-bold  flex items-center">
           <Image
             src="/footer-logo.png"
             alt="Lendous Logo"
@@ -24,13 +24,13 @@ const Navbar: React.FC = () => {
             height={48}
             className="mr-3"
           />
-          <span className="text-[#1AF866] text-[36px] font-bold font-aptos">
+          <span className="text-transparent opacity bg-clip-text bg-gradient-to-r from-[#8563ad] to-[#758cbd]">
             Lendous
           </span>
         </div>
         {/* Hamburger Menu for Mobile */}
         <button
-          className="md:hidden text-[#FFFFFF] hover:text-[#1AF866] transition-transform duration-300 ease-in-out"
+          className="md:hidden text-[#333333] hover:text-[#1AF866] transition-transform duration-300 ease-in-out"
           onClick={toggleMenu}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
@@ -42,9 +42,9 @@ const Navbar: React.FC = () => {
         </button>
         {/* Navigation Links */}
         <div
-          className={`${isMenuOpen ? "flex" : "hidden"
-            } md:flex flex-col md:flex-row fixed md:static inset-0 md:inset-auto w-full md:w-auto h-screen md:h-auto bg-gradient-to-r from-[#7030A0]/95 to-[#27408F]/95 md:bg-transparent transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-            } md:space-x-8 px-6 py-6 md:p-0 md:shadow-none md:items-center shadow-lg`}
+          className={`${isMenuOpen ? "flex" : "hidden"}
+            md:flex flex-col md:flex-row fixed md:static inset-0 md:inset-auto w-full md:w-auto h-screen md:h-auto bg-white md:bg-transparent transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+            md:space-x-8 px-6 py-6 md:p-0 md:shadow-none shadow-lg`}
         >
           <div className="flex flex-col h-full">
             {/* Logo for Mobile Menu */}
@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
                 height={48}
                 className="mr-3"
               />
-              <span className="text-[#1AF866] text-[36px] font-bold font-aptos">
+              <span className="text-[#1AF866] text-[36px] font-bold">
                 Lendous
               </span>
             </div>
@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
             <div className="flex justify-end md:hidden mb-6">
               <button
                 onClick={toggleMenu}
-                className="text-[#FFFFFF] hover:text-[#1AF866]"
+                className="text-[#333333] hover:text-[#1AF866]"
                 aria-label="Close menu"
               >
                 <X size={28} />
@@ -74,18 +74,17 @@ const Navbar: React.FC = () => {
             <div className="flex flex-col md:flex-row md:space-x-8 space-y-6 md:space-y-0">
               {[
                 { label: "Home", href: "/" },
-                { label: "Services", href: "/services" },
+                { label: "About", href: "/about" },
                 { label: "Solutions", href: "/solutions" },
                 { label: "Training Programs", href: "/training-programs" },
                 { label: "FAQ", href: "/faq" },
-                { label: "About", href: "/about" },
                 { label: "Contact", href: "/contact" },
               ].map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-[#FFFFFF] text-[18px] font-semibold font-aptos transition-all duration-300 text-left md:text-center relative group hover:text-[#1AF866]"
+                  className="text-[#333333] text-[18px] font-semibold transition-all duration-300 text-left md:text-center relative group hover:text-[#1AF866] bg-transparent"
                 >
                   {item.label}
                   <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#1AF866] transition-all duration-300 group-hover:w-full"></span>
@@ -93,7 +92,7 @@ const Navbar: React.FC = () => {
               ))}
             </div>
             {/* Footer Content for Mobile Menu */}
-            <div className="mt-auto pt-8 text-[#FFFFFF]/50 text-[14px] font-aptos md:hidden">
+            <div className="mt-auto pt-8 text-[#333333]/50 text-[14px] md:hidden">
               <p>© 2025 Lendous</p>
               <p>Lendous Inc.</p>
             </div>
