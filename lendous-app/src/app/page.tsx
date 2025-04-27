@@ -1,31 +1,44 @@
 "use client";
-
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Navbar from '../../components/Navbar';
-import AboutSection from './about/page';
-import ServicesSection from './services/page';
-import SolutionsSection from './solutions/page';
-import TrainingProgramsSection from './training-programs/page';
-import FAQSection from './faq/page';
+import AboutSection from "./about/page";
+import FAQSection from "./faq/page";
+import Navbar from "../../components/Navbar";
+import ServicesSection from "./services/page";
+import SolutionsSection from "./solutions/page";
+import TrainingProgramsSection from "./training-programs/page";
+import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Home: React.FC = () => {
   const baseSlides = [
     {
-      background: '/hero-bg1.jpg',
-      title: 'Ready to Be The Next Big Thing in Africa?',
-      subtitle: 'Grow with Lendous',
+      background: "/hero-bg1.jpg",
+      title: "Ready to Be The Next Big Thing in Africa?",
+      subtitle: "Grow with Lendous",
     },
     {
-      background: '/hero-bg2.jpg',
-      title: 'Starting & Growing a Business is Hard. We are Here to Make it Easier',
-      subtitle: 'Select service(s) to explore our range, get a free consultation to ensure solutions fit your stage, receive an online quote, and see your solution deployed with ongoing support.',
+      background: "/hero-bg2.jpg",
+      title: (
+        <>
+          Starting & Growing a Business
+          <br className="block sm:hidden" />
+          <br className="hidden sm:block" />
+          is Hard. We are Here to Make it Easier.
+        </>
+      ),
+      subtitle:
+        "Select service(s) to explore our range, get a free consultation to ensure solutions fit your stage, receive an online quote, and see your solution deployed with ongoing support.",
     },
     {
-      background: '/hero-bg3.jpg',
-      title: 'The Lendous Assurance: You Will Never Work Alone!',
-      subtitle: 'Whenever your business needs anything, think Lendous first',
+      background: "/hero-bg3.jpg",
+      title: (
+        <>
+          The Lendous Assurance:
+          <br />
+          You Will Never Work Alone!
+        </>
+      ),
+      subtitle: "Whenever your business needs anything, think Lendous first",
     },
   ];
 
@@ -60,7 +73,9 @@ const Home: React.FC = () => {
         setImagesLoaded(true);
       } else {
         setImageLoadError(true);
-        console.error('All hero background images failed to load. Please ensure the images are in the public directory (e.g., public/hero-bg1.jpg).');
+        console.error(
+          "All hero background images failed to load. Please ensure the images are in the public directory (e.g., public/hero-bg1.jpg)."
+        );
       }
     };
 
@@ -86,13 +101,13 @@ const Home: React.FC = () => {
 
   const transformStyle = {
     transform: `translateX(-${currentSlide * (100 / slides.length)}%)`,
-    transition: currentSlide === 0 ? 'none' : 'transform 1s ease-in-out',
+    transition: currentSlide === 0 ? "none" : "transform 1s ease-in-out",
   };
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+      section.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -124,12 +139,20 @@ const Home: React.FC = () => {
   return (
     <div className="bg-[#E2D8EC] font-aptos overflow-x-hidden">
       {/* Hero Section with Slider */}
-      <div id="hero-section" className="relative min-h-screen flex items-center justify-center text-[#FFFFFF] overflow-hidden">
+      <div
+        id="hero-section"
+        className="relative min-h-[calc(100vh-70px)] sm:min-h-[calc(100vh-80px)] flex items-center justify-center text-[#FFFFFF] overflow-hidden"
+      >
         <div className="absolute inset-0 z-0">
           {imageLoadError ? (
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-[#FFFFFF] text-[16px] bg-black bg-opacity-50 z-10">
-              <p>Failed to load hero background images. Please check image paths.</p>
-              <p className="mt-2 text-[14px]">Images should be in the public directory (e.g., public/hero-bg1.jpg).</p>
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-[#FFFFFF] text-[16px] font-aptos bg-black bg-opacity-50 z-10 px-4">
+              <p className="text-center">
+                Failed to load hero background images. Please check image paths.
+              </p>
+              <p className="mt-2 text-[14px] font-aptos text-center">
+                Images should be in the public directory (e.g.,
+                public/hero-bg1.jpg).
+              </p>
             </div>
           ) : (
             <div
@@ -141,75 +164,91 @@ const Home: React.FC = () => {
             >
               {slides.map((slide, index) => (
                 <div
-                  key={index}
+                  key={`slide-${index}`}
                   className="h-full bg-cover bg-center"
                   style={{
-                    backgroundImage: imagesLoaded ? `url(${slide.background})` : 'none',
+                    backgroundImage: imagesLoaded
+                      ? `url(${slide.background})`
+                      : "none",
                     width: `${100 / slides.length}%`,
                   }}
                 ></div>
               ))}
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85 z-1"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
         <Navbar scrollToSection={scrollToSection} />
-        <div className="relative z-10 max-w-6xl mx-auto text-center px-4 sm:px-6 py-4">
+        <div className="relative z-10 max-w-6xl mx-auto text-center px-8 sm:px-10 pt-20 sm:pt-24 pb-10 sm:pb-16">
           <motion.h1
-            key={slides[currentSlide].title}
+            key={`title-${currentSlide}`}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 1, ease: 'easeInOut' }}
-            className="text-[#FFFFFF] text-[32px] font-extrabold tracking-tight drop-shadow-lg break-words"
+            transition={{ duration: 1, ease: "easeInOut" }}
+            className="text-[#FFFFFF] text-[30px] sm:text-[38px] md:text-[44px] font-extrabold font-aptos tracking-tight drop-shadow-lg leading-tight sm:leading-snug"
           >
             {slides[currentSlide].title}
           </motion.h1>
           <motion.p
-            key={slides[currentSlide].subtitle}
+            key={`subtitle-${currentSlide}`}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 1, ease: 'easeInOut', delay: 0.2 }}
-            className="mt-8 italic text-[#E2D8EC] drop-shadow-md font-light break-words leading-tight text-[24px]"
+            transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
+            className="mt-6 sm:mt-10 text-[#E2D8EC] text-[18px] sm:text-[20px] md:text-[22px] font-light italic font-aptos drop-shadow-md leading-relaxed max-w-3xl mx-auto"
           >
             {slides[currentSlide].subtitle}
           </motion.p>
-          {/* Stats Cards Above the Button */}
+          {/* Stats List */}
           {currentSlide === 2 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="mt-10 max-w-4xl mx-auto flex flex-row flex-wrap justify-between space-x-4"
+            <motion.ul
+              className="mt-8 sm:mt-12 max-w-3xl mx-auto bg-[#FFFFFF]/10 backdrop-blur-sm rounded-xl p-6 sm:p-8 flex flex-col sm:flex-row sm:flex-wrap justify-center gap-4 sm:gap-6 text-[#E2D8EC] text-[16px] sm:text-[18px] font-aptos shadow-xl"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.2,
+                  },
+                },
+              }}
             >
-              <div className="flex flex-col items-center">
-                <div className="w-24 h-24 bg-[#7030A0] rounded-full flex items-center justify-center">
-                  <span className="text-[#FFFFFF] text-[24px] font-bold">$300M+</span>
-                </div>
-                <p className="mt-4 text-[#E2D8EC] text-[16px] text-center">Value Delivered by Lendous</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-24 h-24 bg-[#7030A0] rounded-full flex items-center justify-center">
-                  <span className="text-[#FFFFFF] text-[24px] font-bold">4+ Years</span>
-                </div>
-                <p className="mt-4 text-[#E2D8EC] text-[16px] text-center">Supporting African SMEs</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <div className="w-24 h-24 bg-[#7030A0] rounded-full flex items-center justify-center">
-                  <span className="text-[#FFFFFF] text-[24px] font-bold">30+ Years</span>
-                </div>
-                <p className="mt-4 text-[#E2D8EC] text-[16px] text-center">Leadership Experience</p>
-              </div>
-            </motion.div>
+              {[
+                "$300M+ Value Delivered by Lendous",
+                "4+ Years Supporting African SMEs",
+                "30+ Years Leadership Experience",
+              ].map((stat, index) => (
+                <motion.li
+                  key={`stat-${index}`}
+                  className="flex items-center"
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                  }}
+                >
+                  <span className="text-[#1AF866] mr-2">•</span>
+                  <span>
+                    <strong className="font-bold">{stat.split(" ")[0]}</strong>{" "}
+                    {stat.split(" ").slice(1).join(" ")}
+                  </span>
+                </motion.li>
+              ))}
+            </motion.ul>
           )}
-          <div className="mt-12 flex justify-center">
+          <div className="mt-10 sm:mt-14 flex justify-center">
             <motion.button
-              onClick={() => scrollToSection('services')}
-              whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold transition duration-300 shadow-lg text-[16px]"
+              onClick={() => scrollToSection("services")}
+              whileHover={{
+                scale: 1.15,
+                backgroundColor: "#FFFFFF",
+                color: "#7030A0",
+                boxShadow: "0 0 25px rgba(26, 248, 102, 0.7)",
+              }}
+              whileTap={{ scale: 0.9 }}
+              className="px-10 sm:px-12 py-4 sm:py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold font-aptos text-[18px] sm:text-[20px] shadow-lg transition-all duration-300 hover:shadow-2xl"
             >
               Explore Services
             </motion.button>
@@ -217,83 +256,90 @@ const Home: React.FC = () => {
         </div>
         <button
           onClick={handlePrevSlide}
-          className="absolute left-4 bottom-8 z-5 bg-black bg-opacity-50 text-[#FFFFFF] rounded-full p-3 opacity-50 hover:opacity-100 hover:bg-opacity-75 transition duration-300"
+          className="absolute left-4 sm:left-6 bottom-32 sm:bottom-16 z-10 bg-black bg-opacity-50 text-[#FFFFFF] rounded-full p-4 sm:p-5 opacity-70 hover:opacity-100 hover:bg-opacity-75 transition-all duration-300 hover:scale-110"
         >
-          <ChevronLeft size={32} />
+          <ChevronLeft size={28} className="sm:w-10 sm:h-10" />
         </button>
         <button
           onClick={handleNextSlide}
-          className="absolute right-4 bottom-8 z-5 bg-black bg-opacity-50 text-[#FFFFFF] rounded-full p-3 opacity-50 hover:opacity-100 hover:bg-opacity-75 transition duration-300"
+          className="absolute right-4 sm:right-6 bottom-32 sm:bottom-16 z-10 bg-black bg-opacity-50 text-[#FFFFFF] rounded-full p-4 sm:p-5 opacity-70 hover:opacity-100 hover:bg-opacity-75 transition-all duration-300 hover:scale-110"
         >
-          <ChevronRight size={32} />
+          <ChevronRight size={28} className="sm:w-10 sm:h-10" />
         </button>
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
-          animate={{ y: [0, 10, 0] }}
+          className="absolute bottom-10 sm:bottom-14 left-1/2 transform -translate-x-1/2 z-10"
+          animate={{ y: [0, 12, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
         >
-          <svg className="w-8 h-8 text-[#1AF866]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          <svg
+            className="w-10 h-10 sm:w-12 sm:h-12 text-[#1AF866]"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
           </svg>
         </motion.div>
       </div>
 
       <ServicesSection />
-      
       <SolutionsSection />
-
       <AboutSection />
-      
       <TrainingProgramsSection />
-
       <FAQSection />
 
-      
-
       {/* Contact Section */}
-      <section id="contact" className="py-20 sm:py-24 px-4 sm:px-6 bg-[#E2D8EC]">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-[32px] sm:text-[36px] md:text-[40px] font-extrabold text-[#27408F] leading-tight">
+      <section
+        id="contact"
+        className="py-16 sm:py-24 px-8 sm:px-10 bg-[#E2D8EC]"
+      >
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-[32px] sm:text-[40px] font-extrabold font-aptos text-[#27408F] leading-tight tracking-tight">
             Contact Us
           </h2>
-          <p className="text-[24px] mt-8 text-gray-700 font-light">
-            Get in touch with us to learn more about how we can help your business grow.
+          <p className="mt-6 sm:mt-8 text-[20px] sm:text-[24px] text-gray-700 font-light font-aptos leading-relaxed">
+            Get in touch with us to learn more about how we can help your business
+            grow.
           </p>
-          <div className="mt-12 sm:mt-16">
-            <form className="max-w-md mx-auto space-y-6">
-              <div>
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full p-3 rounded-lg border border-gray-300 focus:border-[#1AF866] focus:ring-2 focus:ring-[#1AF866] outline-none text-gray-700"
-                  required
-                />
-              </div>
-              <div>
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="w-full p-3 rounded-lg border border-gray-300 focus:border-[#1AF866] focus:ring-2 focus:ring-[#1AF866] outline-none text-gray-700"
-                  required
-                />
-              </div>
-              <div>
-                <textarea
-                  placeholder="Your Message"
-                  rows={5}
-                  className="w-full p-3 rounded-lg border border-gray-300 focus:border-[#1AF866] focus:ring-2 focus:ring-[#1AF866] outline-none text-gray-700 resize-none"
-                  required
-                />
-              </div>
+          <div className="mt-10 sm:mt-12">
+            <div className="max-w-md mx-auto space-y-6">
+              <input
+                type="text"
+                placeholder="Your Name"
+                className="w-full p-4 rounded-lg border border-gray-300 focus:border-[#1AF866] focus:ring-2 focus:ring-[#1AF866] outline-none text-gray-700 text-[16px] font-normal font-aptos transition-all duration-200 hover:border-[#1AF866] hover:scale-[1.01]"
+                required
+              />
+              <input
+                type="email"
+                placeholder="Your Email"
+                className="w-full p-4 rounded-lg border border-gray-300 focus:border-[#1AF866] focus:ring-2 focus:ring-[#1AF866] outline-none text-gray-700 text-[16px] font-normal font-aptos transition-all duration-200 hover:border-[#1AF866] hover:scale-[1.01]"
+                required
+              />
+              <textarea
+                placeholder="Your Message"
+                rows={5}
+                className="w-full p-4 rounded-lg border border-gray-300 focus:border-[#1AF866] focus:ring-2 focus:ring-[#1AF866] outline-none text-gray-700 text-[16px] font-normal font-aptos resize-none transition-all duration-200 hover:border-[#1AF866] hover:scale-[1.01]"
+                required
+              />
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold transition duration-300 shadow-lg text-[16px]"
+                whileHover={{
+                  scale: 1.15,
+                  backgroundColor: "#FFFFFF",
+                  color: "#7030A0",
+                  boxShadow: "0 0 25px rgba(26, 248, 102, 0.7)",
+                }}
+                whileTap={{ scale: 0.9 }}
+                className="w-full px-10 py-4 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold font-aptos text-[18px] shadow-lg transition-all duration-300 hover:shadow-2xl"
               >
                 Send Message
               </motion.button>
-            </form>
+            </div>
           </div>
         </div>
       </section>
