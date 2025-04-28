@@ -3,75 +3,30 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
-// Mock SlideInSection component for Homepage
-const SlideInSection: React.FC<{
-  direction: "left" | "right";
-  children: React.ReactNode;
-  className?: string;
-}> = ({ direction, children, className }) => {
-  const variants = {
-    hidden: { opacity: 0, x: direction === "left" ? -50 : 50 },
-    visible: { opacity: 1, x: 0 },
-  };
-
-  return (
-    <motion.section
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      transition={{ duration: 1, ease: "easeInOut" }}
-      variants={variants}
-      className={className}
-    >
-      {children}
-    </motion.section>
-  );
-};
+import SlideInSection from "../../components/SlideInSection";
 
 const Home: React.FC = () => {
-  const sections = [
-    {
-      title: "Ready to Be The Next Big Thing in Africa?",
-      subtitle: "Grow with Lendous",
-      image: "/hero-bg1.jpg",
-    },
-    {
-      title: (
-        <>
-          Starting & Growing a Business
-          <br className="block sm:hidden" />
-          <br className="hidden sm:block" />
-          is Hard. We are Here to Make it Easier.
-        </>
-      ),
-      subtitle:
-        "Select service(s) to explore our range, get a free consultation to ensure solutions fit your stage, receive an online quote, and see your solution deployed with ongoing support.",
-      image: "/hero-bg2.jpg",
-    },
-    {
-      title: (
-        <>
-          The Lendous Assurance:
-          <br />
-          You Will Never Work Alone!
-        </>
-      ),
-      subtitle: "Whenever your business needs anything, think Lendous first",
-      image: "/hero-bg3.jpg",
-    },
-  ];
-
   const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [imageLoadError, setImageLoadError] = useState(false);
+  const [viewportHeight, setViewportHeight] = useState(0);
+
+  useEffect(() => {
+    const updateViewportHeight = () => {
+      setViewportHeight(window.innerHeight);
+    };
+    
+    updateViewportHeight();
+    window.addEventListener('resize', updateViewportHeight);
+    return () => window.removeEventListener('resize', updateViewportHeight);
+  }, []);
 
   useEffect(() => {
     const preloadImages = async () => {
       let hasLoadedAtLeastOne = false;
-      const promises = sections.map((section) => {
+      const imageUrls = ["/hero-bg1.jpg", "/hero-bg2.jpg", "/hero-bg3.jpg"];
+      const promises = imageUrls.map((url) => {
         return new Promise((resolve) => {
           const img = new window.Image();
-          img.src = section.image || "";
+          img.src = url || "";
           img.onload = () => {
             hasLoadedAtLeastOne = true;
             resolve(true);
@@ -82,13 +37,12 @@ const Home: React.FC = () => {
         });
       });
 
-      const results = await Promise.all(promises);
+      await Promise.all(promises);
       setImagesLoaded(hasLoadedAtLeastOne);
-      setImageLoadError(!hasLoadedAtLeastOne);
     };
 
     preloadImages();
-  }, [sections]);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -98,64 +52,77 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#E2D8EC] overflow-x-hidden">
+    <main className="font-poppins">
       {/* Section 1: Hero Section */}
-      <SlideInSection
-        direction="left"
-        className="relative min-h-screen flex items-center justify-center text-white overflow-hidden snap-start"
+      <div
+        id="hero-section"
+        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        style={{ 
+          minHeight: '700px',
+          marginTop: '128px'
+        }}
       >
         <div className="absolute inset-0 z-0">
-          {imageLoadError ? (
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-base bg-black bg-opacity-50 z-10 px-4">
-              <p>Failed to load images. Please check image paths.</p>
-              <p className="mt-2 text-sm">
-                Images should be in the public directory (e.g., public/hero-bg1.jpg).
-              </p>
-            </div>
-          ) : (
-            <div className="h-full bg-[#F5F5F5]"></div>
-          )}
+          <div className="h-full bg-[#F5F5F5]"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#E0E0E0] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-          <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6 px-4 sm:px-0">
+        <SlideInSection
+          direction="left"
+          className="py-12 sm:py-16 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-6 sm:gap-8"
+        >
+          <div className="w-full lg:w-1/2 text-center lg:text-left space-y-4 sm:space-y-6 px-4 sm:px-0">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-gray-800 text-4xl sm:text-5xl font-extrabold leading-tight sm:leading-snug"
+              className="text-[#27408F] text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug"
             >
-              {sections[0].title}
+              Ready to Be The Next Big Thing in Africa?
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-gray-600 text-lg sm:text-xl font-medium italic"
+              className="text-black text-[16px] sm:text-[18px] font-medium italic"
             >
-              {sections[0].subtitle}
+              Grow with Lendous
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start"
             >
-              <button
+              <motion.button
                 onClick={() => scrollToSection("services")}
-                className="px-8 py-3 sm:px-10 sm:py-4 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: "#FFFFFF",
+                  color: "#7030A0",
+                  boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
               >
                 Explore Solutions
-              </button>
-              <button
+              </motion.button>
+              <motion.button
                 onClick={() => scrollToSection("consultation")}
-                className="px-8 py-3 sm:px-10 sm:py-4 bg-transparent border-2 border-[#1AF866] text-[#1AF866] rounded-lg font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: "#FFFFFF",
+                  color: "#7030A0",
+                  boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+                  borderColor: "#7030A0",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-transparent border-2 border-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
               >
                 Free Consultation
-              </button>
+              </motion.button>
             </motion.div>
           </div>
 
@@ -163,56 +130,54 @@ const Home: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-            className="w-full lg:w-1/2 flex justify-center"
+            className="w-full lg:w-1/2 flex justify-center mt-4 sm:mt-6 lg:mt-0"
           >
             <div className="relative w-full max-w-xl aspect-video rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src={sections[0].image || "/placeholder.jpg"}
+                src="/hero-bg1.jpg"
                 alt="Hero Image"
                 fill
-                className="object-cover"
+                className="object-cover max-h-[400px] sm:max-h-[450px] md:max-h-[500px]"
                 priority
               />
             </div>
           </motion.div>
-        </div>
-      </SlideInSection>
+        </SlideInSection>
+      </div>
 
       {/* Section 2 */}
-      <SlideInSection
-        direction="right"
-        className="relative min-h-screen flex items-center justify-center overflow-hidden snap-start bg-[#7030A0]"
+      <div
+        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        style={{ 
+          minHeight: '700px'
+        }}
       >
         <div className="absolute inset-0 z-0">
-          {imageLoadError && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-base bg-black bg-opacity-50 z-10 px-4">
-              <p>Failed to load images. Please check image paths.</p>
-              <p className="mt-2 text-sm">
-                Images should be in the public directory (e.g., public/hero-bg2.jpg).
-              </p>
-            </div>
-          )}
+          <div className="h-full bg-[#7030A0]"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-          <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6 px-4 sm:px-0">
+        <SlideInSection
+          direction="right"
+          className="py-16 sm:py-20 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-6 sm:gap-8"
+        >
+          <div className="pt-10 w-full lg:w-1/2 text-center lg:text-left space-y-4 sm:space-y-6 px-4 sm:px-0">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-white text-4xl sm:text-5xl font-extrabold leading-tight sm:leading-snug"
+              className="text-white text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug"
             >
-              {sections[1].title}
+              Starting & Growing a Business<br className="block sm:hidden" /><br className="hidden sm:block" />is Hard. We are Here to Make it Easier.
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-[#E2D8EC] text-lg sm:text-xl font-medium italic"
+              className="text-[#E2D8EC] text-[16px] sm:text-[18px] font-medium italic"
             >
-              {sections[1].subtitle}
+              Select service(s) to explore our range, get a free consultation to ensure solutions fit your stage, receive an online quote, and see your solution deployed with ongoing support.
             </motion.p>
 
             <motion.div
@@ -221,12 +186,19 @@ const Home: React.FC = () => {
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
               className="flex justify-center lg:justify-start"
             >
-              <button
+              <motion.button
                 onClick={() => scrollToSection("services")}
-                className="px-8 py-3 sm:px-10 sm:py-4 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: "#FFFFFF",
+                  color: "#7030A0",
+                  boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
               >
                 Explore Solutions
-              </button>
+              </motion.button>
             </motion.div>
           </div>
 
@@ -234,109 +206,126 @@ const Home: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-            className="w-full lg:w-1/2 flex justify-center"
+            className="w-full lg:w-1/2 flex justify-center mt-4 sm:mt-6 lg:mt-0"
           >
             <div className="relative w-full max-w-xl aspect-video rounded-xl overflow-hidden shadow-2xl">
               <Image
-                src={sections[1].image || "/placeholder.jpg"}
+                src="/hero-bg2.jpg"
                 alt="Section 2 Image"
                 fill
-                className="object-cover"
+                className="object-cover max-h-[400px] sm:max-h-[450px] md:max-h-[500px]"
               />
             </div>
           </motion.div>
-        </div>
-      </SlideInSection>
+        </SlideInSection>
+      </div>
 
       {/* Section 3 */}
-      <SlideInSection
-        direction="left"
-        className="relative min-h-screen flex items-center justify-center overflow-hidden snap-start bg-[#F5F5F5]"
+      <div
+        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        style={{ 
+          minHeight: '700px'
+        }}
       >
         <div className="absolute inset-0 z-0">
-          {imageLoadError && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-base bg-black bg-opacity-50 z-10 px-4">
-              <p>Failed to load images. Please check image paths.</p>
-              <p className="mt-2 text-sm">
-                Images should be in the public directory (e.g., public/hero-bg3.jpg).
-              </p>
-            </div>
-          )}
+          <div className="h-full bg-[#F5F5F5]"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#E0E0E0] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-          <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6 px-4 sm:px-0">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-gray-800 text-4xl sm:text-5xl font-extrabold leading-tight sm:leading-snug"
-            >
-              {sections[2].title}
-            </motion.h1>
+        <SlideInSection
+          direction="up"
+          className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center gap-6 sm:gap-8 px-4 sm:px-6 lg:px-8"
+        >
+          <div className="w-full flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
+            <div className="w-full lg:w-3/5 text-center lg:text-left space-y-4 sm:space-y-6 px-4 sm:px-0 order-0 lg:order-none">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="text-gray-800 text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug"
+              >
+                The Lendous Assurance:<br />You Will Never Work Alone!
+              </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-gray-600 text-lg sm:text-xl font-medium italic"
-            >
-              {sections[2].subtitle}
-            </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                className="text-gray-600 text-[16px] sm:text-[18px] font-medium italic"
+              >
+                Whenever your business needs anything, think Lendous first
+              </motion.p>
+            </div>
 
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+              className="w-full lg:w-2/5 flex justify-center mt-4 sm:mt-6 lg:mt-0 order-1 lg:order-none"
+            >
+              <div className="relative w-full max-w-md aspect-video rounded-xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/hero-bg3.jpg"
+                  alt="Section 3 Image"
+                  fill
+                  className="object-cover max-h-[300px] sm:max-h-[350px] md:max-h-[400px]"
+                />
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="w-full px-4 sm:px-0 order-2 lg:order-none">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-4"
             >
               {[
                 { value: "$300M+", label: "Value Delivered by Lendous" },
                 { value: "4+", label: "Years Supporting African SMEs" },
                 { value: "30+", label: "Years Leadership Experience" },
               ].map((stat, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="bg-white p-6 rounded-lg shadow-lg border-2 border-transparent hover:border-[#1AF866] transition-all duration-300"
+                  className="bg-white p-4 rounded-lg shadow-lg border-2 border-transparent transition-all duration-300"
+                  whileHover={{
+                    rotateX: 5,
+                    rotateY: 5,
+                    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
+                    borderColor: "#1AF866",
+                  }}
+                  transition={{ type: "spring", stiffness: 100 }}
                 >
-                  <h3 className="text-gray-800 text-2xl sm:text-3xl font-bold">{stat.value}</h3>
-                  <p className="text-gray-600 mt-2 text-base">{stat.label}</p>
-                </div>
+                  <h3 className="text-gray-800 text-[24px] sm:text-[28px] font-bold">{stat.value}</h3>
+                  <p className="text-gray-600 mt-1 text-[14px]">{stat.label}</p>
+                </motion.div>
               ))}
             </motion.div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-            className="w-full lg:w-1/2 flex justify-center"
-          >
-            <div className="relative w-full max-w-xl aspect-video rounded-xl overflow-hidden shadow-2xl">
-              <Image
-                src={sections[2].image || "/placeholder.jpg"}
-                alt="Section 3 Image"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </motion.div>
-        </div>
-      </SlideInSection>
+        </SlideInSection>
+      </div>
 
       {/* Footer Banner */}
-      <SlideInSection direction="right" className="bg-[#7030A0] text-white py-12">
+      <SlideInSection
+        direction="down"
+        className="bg-[#7030A0] text-white py-12 sm:py-16 snap-start"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
           <div className="text-center sm:text-left">
-            <h2 className="text-4xl sm:text-5xl font-extrabold">Ready to Grow Your Business?</h2>
-            <p className="mt-2 text-lg sm:text-xl font-medium italic">
+            <h2 className="text-[36px] sm:text-[40px] font-extrabold">Ready to Grow Your Business?</h2>
+            <p className="mt-2 text-[16px] sm:text-[18px] font-medium italic">
               Let's discuss how our STARS approach can transform your business.
             </p>
           </div>
-          <button
+          <motion.button
             onClick={() => scrollToSection("consultation")}
-            className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center gap-2"
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
           >
             Get in Touch
             <svg
@@ -353,10 +342,10 @@ const Home: React.FC = () => {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </button>
+          </motion.button>
         </div>
       </SlideInSection>
-    </div>
+    </main>
   );
 };
 

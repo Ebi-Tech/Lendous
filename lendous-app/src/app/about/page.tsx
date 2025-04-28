@@ -6,10 +6,21 @@ import { motion } from 'framer-motion';
 import { FaLinkedin, FaHandshake, FaLaptopCode, FaMoneyBillWave, FaUsers } from 'react-icons/fa';
 import { Plus, Minus } from 'lucide-react';
 import SlideInSection from '../../../components/SlideInSection';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const AboutSection: React.FC = () => {
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
+  const [viewportHeight, setViewportHeight] = useState(0);
+
+  useEffect(() => {
+    const updateViewportHeight = () => {
+      setViewportHeight(window.innerHeight);
+    };
+    
+    updateViewportHeight();
+    window.addEventListener('resize', updateViewportHeight);
+    return () => window.removeEventListener('resize', updateViewportHeight);
+  }, []);
 
   const toggleSection = (sectionKey: string) => {
     setOpenSections((prev) => ({
@@ -72,7 +83,7 @@ const AboutSection: React.FC = () => {
             "Senior Leaders Training",
             "Middle Managers Training",
             "New Managers Training",
-            "Operational Teams’ Training (HR, Sales, Systems & Process, Customer Service etc.)",
+            "Operational Teams' Training (HR, Sales, Systems & Process, Customer Service etc.)",
           ],
         },
       ],
@@ -154,67 +165,81 @@ const AboutSection: React.FC = () => {
   };
 
   return (
-    <>
+    <main className="font-poppins">
       {/* Hero Section */}
       <div
         id="hero-section"
-        className="relative h-screen flex items-center text-[#FFFFFF] overflow-hidden"
+        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        style={{ 
+          minHeight: '700px',
+          marginTop: '128px'
+        }}
       >
         <div className="absolute inset-0 z-0">
           <div className="h-full bg-[#F5F5F5]"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#E0E0E0] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 flex flex-col md:flex-row items-center gap-12">
-          <div className="md:w-1/2 text-center md:text-left">
+        <div className="py-12 sm:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8 sm:gap-12">
+          <div className="md:w-2/5 text-center md:text-left">
             <motion.h1
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut" }}
-              className="text-[#333333] text-4xl sm:text-5xl font-extrabold tracking-tight drop-shadow-lg leading-tight sm:leading-snug"
+              className="text-[#27408F] text-[36px] sm:text-[40px] font-extrabold tracking-tight leading-tight sm:leading-snug"
             >
               Who We Are
             </motion.h1>
-            <div className="mt-10 sm:mt-14 flex justify-center md:justify-start gap-4">
+            <motion.p
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
+              className="mt-4 sm:mt-6 text-black text-[16px] sm:text-[18px] font-medium leading-relaxed"
+            >
+              Lendous powers business growth with technology, talent, and finance.
+            </motion.p>
+            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center md:justify-start gap-3 sm:gap-4">
               <motion.button
                 onClick={() => scrollToSection("team-section")}
                 whileHover={{
-                  scale: 1.15,
+                  scale: 1.05,
                   backgroundColor: "#FFFFFF",
                   color: "#7030A0",
-                  boxShadow: "0 0 25px rgba(26, 248, 102, 0.7)",
+                  boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
                 }}
-                whileTap={{ scale: 0.9 }}
-                className="px-10 sm:px-12 py-4 sm:py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg transition-all duration-300 hover:shadow-2xl"
+                whileTap={{ scale: 0.95 }}
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
               >
                 Meet the Team
               </motion.button>
               <motion.button
                 onClick={() => scrollToSection("services-section")}
                 whileHover={{
-                  scale: 1.15,
+                  scale: 1.05,
                   backgroundColor: "#FFFFFF",
                   color: "#7030A0",
-                  boxShadow: "0 0 25px rgba(26, 248, 102, 0.7)",
+                  boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+                  borderColor: "#7030A0",
                 }}
-                whileTap={{ scale: 0.9 }}
-                className="px-10 sm:px-12 py-4 sm:py-5 bg-transparent border-2 border-[#1AF866] text-[#1AF866] rounded-lg font-semibold text-base shadow-lg transition-all duration-300 hover:shadow-2xl"
+                whileTap={{ scale: 0.95 }}
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-transparent border-2 border-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
               >
                 Explore Services
               </motion.button>
             </div>
           </div>
-          <div className="md:w-1/2 mt-10 md:mt-0">
+          <div className="md:w-3/5 mt-8 sm:mt-6 md:mt-0 flex items-center justify-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
+              className="w-full max-w-md lg:max-w-2xl"
             >
               <Image
                 src="/hero-bg4.jpg"
                 alt="Hero Image"
-                width={600}
-                height={400}
-                className="object-cover rounded-lg shadow-2xl"
+                width={1200}
+                height={800}
+                className="object-cover rounded-lg shadow-2xl w-full h-auto max-h-[250px] sm:max-h-[1000px] md:max-h-[350px] lg:max-h-[500px]"
               />
             </motion.div>
           </div>
@@ -222,73 +247,83 @@ const AboutSection: React.FC = () => {
       </div>
 
       {/* Team Section */}
-      <section id="team-section">
-        <SlideInSection direction="right" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#FFFFFF]">
-          <div className="max-w-7xl mx-auto text-center">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-[#27408F] leading-tight">
-              Meet Our Leadership Team
-            </h2>
-            <p className="text-lg sm:text-xl mt-8 text-gray-700 font-medium italic">
-              Our leaders bring decades of experience to help your business thrive.
-            </p>
-            <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  name: 'Charles Charles',
-                  role: 'Co-Founder & Lead, Lendous Tech & Support',
-                  image: '/team-charles.jpg',
-                  linkedin: 'https://linkedin.com/in/charlescharles',
-                },
-                {
-                  name: 'Patience Anoh',
-                  role: 'Co-Founder & Lead, Lendous People',
-                  image: '/team-patience.jpg',
-                  linkedin: 'https://linkedin.com/in/patienceanoh',
-                },
-                {
-                  name: 'Peter Abasiano',
-                  role: 'Business Lead, Lendous Capital',
-                  image: '/team-peter.jpg',
-                  linkedin: 'https://linkedin.com/in/peterabasiano',
-                },
-              ].map((member, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="relative flex flex-col items-center p-6 rounded-2xl bg-[#E2D8EC] shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#1AF866]"
+      <section
+        id="team-section"
+        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        style={{ minHeight: '700px' }}
+      >
+        <div className="absolute inset-0 z-0">
+          <div className="h-full bg-[#E2D8EC]"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] opacity-85 z-1 backdrop-blur-sm"></div>
+        </div>
+        <SlideInSection
+          direction="right"
+          className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto text-center"
+        >
+          <h2 className="text-[32px] sm:text-[36px] font-extrabold text-[#27408F] leading-tight mt-10">
+            Meet Our Leadership Team
+          </h2>
+          <p className="text-[16px] sm:text-[18px] mt-8 text-black font-medium italic">
+            Our leaders bring decades of experience to help your business thrive.
+          </p>
+          <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                name: 'Charles Charles',
+                role: 'Co-Founder & Lead, Lendous Tech & Support',
+                image: '/team-charles.jpg',
+                linkedin: 'https://linkedin.com/in/charlescharles',
+              },
+              {
+                name: 'Patience Anoh',
+                role: 'Co-Founder & Lead, Lendous People',
+                image: '/team-patience.jpg',
+                linkedin: 'https://linkedin.com/in/patienceanoh',
+              },
+              {
+                name: 'Peter Abasiano',
+                role: 'Business Lead, Lendous Capital',
+                image: '/team-peter.jpg',
+                linkedin: 'https://linkedin.com/in/peterabasiano',
+              },
+            ].map((member, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                className="relative flex flex-col items-center p-4 rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#1AF866]"
+              >
+                <div className="relative">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    width={120}
+                    height={120}
+                    className="rounded-full border-4 border-[#7030A0]"
+                    onError={(e) => {
+                      e.currentTarget.src = '/placeholder-team-member.jpg';
+                    }}
+                  />
+                  <motion.div
+                    className="absolute inset-0 rounded-full border-2 border-[#1AF866] opacity-0"
+                    whileHover={{ opacity: 1, scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </div>
+                <h3 className="text-[20px] font-semibold text-[#27408F] mt-4">{member.name}</h3>
+                <p className="text-[14px] text-gray-700 mt-1 text-center">{member.role}</p>
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
                 >
-                  <div className="relative">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      width={150}
-                      height={150}
-                      className="rounded-full border-4 border-[#7030A0]"
-                      onError={(e) => {
-                        e.currentTarget.src = '/placeholder-team-member.jpg';
-                      }}
-                    />
-                    <motion.div
-                      className="absolute inset-0 rounded-full border-2 border-[#1AF866] opacity-0"
-                      whileHover={{ opacity: 1, scale: 1.1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </div>
-                  <h3 className="text-[24px] font-semibold text-[#27408F] mt-6">{member.name}</h3>
-                  <p className="text-base text-gray-700 mt-2 text-center">{member.role}</p>
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
-                  >
-                    <FaLinkedin className="w-6 h-6" />
-                  </a>
-                </motion.div>
-              ))}
-            </div>
+                  <FaLinkedin className="w-5 h-5" />
+                </a>
+              </motion.div>
+            ))}
           </div>
         </SlideInSection>
       </section>
@@ -296,43 +331,51 @@ const AboutSection: React.FC = () => {
       {/* Services Section */}
       <div
         id="services-section"
-        className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] overflow-hidden snap-start"
+        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        style={{ minHeight: '700px' }}
       >
         <div className="absolute inset-0 z-0">
-          <div className="h-full bg-[#E2D8EC]"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] opacity-85 z-1 backdrop-blur-sm"></div>
+          <div className="h-full bg-[#F5F5F5]"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#f0f0f0] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="md:w-1/2">
+        <SlideInSection
+          direction="up"
+          className="py-12 sm:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        >
+          <div className="pt-10 flex flex-col md:flex-row items-center gap-12">
+            <div className="md:w-1/2 flex justify-center mt-4 sm:mt-6 lg:mt-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: "easeInOut" }}
+                className="w-full max-w-md lg:max-w-2xl"
               >
                 <Image
                   src="/hero-bg3.jpg"
                   alt="Services Image"
                   width={600}
                   height={400}
-                  className="object-cover rounded-lg shadow-2xl"
+                  className="object-cover rounded-lg w-full h-auto max-h-[250px] sm:max-h-[1000px] md:max-h-[350px] lg:max-h-[500px]"
                 />
               </motion.div>
             </div>
             <div className="md:w-1/2 text-center md:text-left">
-              <motion.h1
+              <motion.h2
                 initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 1, ease: "easeInOut" }}
-                className="text-[#333333] text-4xl sm:text-5xl font-extrabold tracking-tight drop-shadow-lg leading-tight sm:leading-snug"
+                className="text-[#27408F] text-[32px] sm:text-[36px] font-extrabold tracking-tight leading-tight sm:leading-snug"
               >
                 Our Services
-              </motion.h1>
+              </motion.h2>
               <motion.p
                 initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-                className="mt-6 sm:mt-10 text-[#666666] text-lg sm:text-xl font-medium italic drop-shadow-md leading-relaxed max-w-3xl mx-auto md:mx-0"
+                className="mt-6 sm:mt-10 text-black text-[16px] sm:text-[18px] font-medium italic drop-shadow-md leading-relaxed max-w-3xl mx-auto md:mx-0"
               >
                 We blend our expertise across key service areas to deliver tailored solutions for your business.
               </motion.p>
@@ -344,11 +387,12 @@ const AboutSection: React.FC = () => {
                 key={category.title}
                 custom={index}
                 initial="hidden"
-                animate="visible"
+                whileInView="visible"
+                viewport={{ once: true }}
                 variants={cardVariants}
                 whileHover={{
-                  scale: 1.05,
-                  translateY: -8,
+                  scale: 1.02,
+                  translateY: -5,
                   backgroundColor: "rgba(255, 255, 255, 0.2)",
                   boxShadow: "0 0 20px rgba(26, 248, 102, 0.4)",
                 }}
@@ -361,7 +405,7 @@ const AboutSection: React.FC = () => {
                   >
                     {serviceIcons[category.title as keyof typeof serviceIcons]}
                   </motion.span>
-                  <h3 className="text-[24px] sm:text-[28px] font-semibold text-[#27408F] ml-3">
+                  <h3 className="text-[24px] sm:text-[28px] font-semibold text-[#27408F] ml-3 flex-1">
                     {category.title}
                   </h3>
                 </div>
@@ -370,12 +414,14 @@ const AboutSection: React.FC = () => {
                   const isOpen = openSections[sectionKey] || false;
                   return (
                     <div key={group.subheading} className="mb-4 last:mb-0">
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-base font-semibold text-[#27408F] mb-2">
+                      <div 
+                        className="flex items-center justify-between cursor-pointer p-2 hover:bg-white/30 rounded-lg transition-colors duration-200"
+                        onClick={() => toggleSection(sectionKey)}
+                      >
+                        <h4 className="text-[16px] font-semibold text-[#27408F] mb-0">
                           {group.subheading}
                         </h4>
                         <button
-                          onClick={() => toggleSection(sectionKey)}
                           className="text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
                         >
                           {isOpen ? (
@@ -392,9 +438,9 @@ const AboutSection: React.FC = () => {
                           opacity: isOpen ? 1 : 0,
                         }}
                         transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
+                        className="overflow-hidden ml-2"
                       >
-                        <ul className="list-disc pl-5">
+                        <ul className="list-disc pl-5 pt-2">
                           {group.services.map((service, idx) => (
                             <motion.li
                               key={`${group.subheading}-${idx}`}
@@ -402,7 +448,7 @@ const AboutSection: React.FC = () => {
                               initial="hidden"
                               animate="visible"
                               variants={badgeVariants}
-                              className="text-base text-gray-700 font-medium mt-1"
+                              className="text-[16px] text-gray-700 font-medium mt-1"
                             >
                               {service}
                             </motion.li>
@@ -415,25 +461,60 @@ const AboutSection: React.FC = () => {
               </motion.div>
             ))}
           </div>
-          <div className="mt-12 sm:mt-16 text-center">
+          <div className="mt-12 sm:mt-16 text-center mb-12">
             <Link href="/solutions">
               <motion.button
                 whileHover={{
-                  scale: 1.15,
+                  scale: 1.05,
                   backgroundColor: "#FFFFFF",
                   color: "#7030A0",
-                  boxShadow: "0 0 25px rgba(26, 248, 102, 0.7)",
+                  boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
                 }}
-                whileTap={{ scale: 0.9 }}
+                whileTap={{ scale: 0.95 }}
                 className="w-full sm:w-auto px-12 py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg transition-all duration-300 hover:shadow-2xl"
               >
                 Explore Solutions
               </motion.button>
             </Link>
           </div>
-        </div>
+        </SlideInSection>
       </div>
-    </>
+
+      {/* Footer Banner */}
+      <SlideInSection
+        direction="down"
+        className="bg-[#7030A0] text-white py-12 sm:py-16 snap-start"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
+          <div className="text-center sm:text-left">
+            <h2 className="text-[36px] sm:text-[40px] font-extrabold">Ready to Grow Your Business?</h2>
+            <p className="mt-2 text-[16px] sm:text-[18px] font-medium italic">
+              Let's discuss how our STARS approach can transform your business.
+            </p>
+          </div>
+          <button
+            onClick={() => scrollToSection("consultation")}
+            className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center gap-2"
+          >
+            Get in Touch
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </div>
+      </SlideInSection>
+    </main>
   );
 };
 

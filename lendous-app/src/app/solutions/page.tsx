@@ -5,6 +5,31 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 
+// Mock SlideInSection component (as used in Home/About)
+const SlideInSection: React.FC<{
+  direction: "left" | "right";
+  children: React.ReactNode;
+  className?: string;
+}> = ({ direction, children, className }) => {
+  const variants = {
+    hidden: { opacity: 0, x: direction === "left" ? -50 : 50 },
+    visible: { opacity: 1, x: 0 },
+  };
+
+  return (
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      transition={{ duration: 1, ease: "easeInOut" }}
+      variants={variants}
+      className={className}
+    >
+      {children}
+    </motion.section>
+  );
+};
+
 // Define the shape of a service item
 interface Service {
   title: string;
@@ -442,157 +467,208 @@ const SolutionsSection: React.FC = () => {
   };
 
   return (
-    <section className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#FFFFFF]">
-      <div className="max-w-7xl mx-auto">
-        {/* Hero Section */}
-        <div className="flex flex-col md:flex-row items-center gap-12 mb-12">
-          <div className="md:w-1/2 text-center md:text-left">
+    <main
+      className="bg-[#E2D8EC] overflow-x-hidden overflow-y-auto"
+      style={{
+        scrollSnapType: "y proximity",
+        height: "100vh",
+      }}
+    >
+      {/* Hero Section */}
+      <SlideInSection
+        direction="left"
+        className="relative min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden snap-start"
+      >
+        <div className="absolute inset-0 z-0">
+          <div className="h-full bg-[#F5F5F5]"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#E0E0E0] opacity-85 z-1 backdrop-blur-sm"></div>
+        </div>
+        <div className="py-12 sm:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8 sm:gap-12">
+          <div className="md:w-2/5 text-center md:text-left">
             <motion.h2
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut" }}
-              className="text-4xl sm:text-5xl font-extrabold text-[#27408F] leading-tight"
+              className="text-4xl font-extrabold text-[#27408F] leading-tight drop-shadow-lg"
             >
               Solutions for Every Stage
             </motion.h2>
             <motion.p
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-              className="mt-6 text-lg sm:text-xl font-medium italic text-gray-700 max-w-4xl mx-auto md:mx-0"
+              className="mt-4 sm:mt-6 text-base font-medium italic text-gray-700 drop-shadow-md leading-relaxed"
             >
               From launching your business to scaling across markets, we’ve got you covered.
             </motion.p>
           </div>
-          <div className="md:w-1/2 mt-10 md:mt-0">
+          <div className="md:w-3/5 mt-8 sm:mt-6 md:mt-0 flex items-center justify-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
+              className="w-full max-w-md lg:max-w-2xl"
             >
               <Image
                 src="/hero-bg3.jpg"
                 alt="Solutions Image"
-                width={600}
-                height={400}
-                className="object-cover rounded-lg shadow-2xl"
+                width={1200}
+                height={800}
+                className="object-cover rounded-lg shadow-2xl w-full h-auto max-h-[250px] sm:max-h-[1000px] md:max-h-[350px] lg:max-h-[500px]"
               />
             </motion.div>
           </div>
         </div>
+      </SlideInSection>
 
-        {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {tabs.map((tab) => (
-            <motion.button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className={`px-6 py-3 rounded-lg font-semibold text-base transition-all duration-300 ${
-                activeTab === tab
-                  ? 'bg-[#1AF866] text-[#27408F] shadow-lg'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              {tab}
-            </motion.button>
-          ))}
+      {/* Tabs Section */}
+      <SlideInSection
+        direction="right"
+        className="relative pt-12 sm:pt-16 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden snap-start bg-[#E2D8EC]"
+      >
+        <div className="absolute inset-0 z-0">
+          <div className="h-full bg-[#E2D8EC]"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
-
-        {/* Tab Content */}
-        <div className="bg-[#E2D8EC] rounded-lg p-6 sm:p-8 shadow-lg">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center md:text-left"
-          >
-            <h3 className="text-2xl sm:text-3xl font-semibold text-[#27408F]">
-              Stage: {tabContent[activeTab].stage}
-            </h3>
-            <p className="mt-4 text-lg sm:text-xl font-medium italic text-gray-700">
-              <span className="font-semibold">Goal:</span> {tabContent[activeTab].goal}
-            </p>
-            <p className="mt-2 text-lg sm:text-xl font-medium italic text-gray-700">
-              <span className="font-semibold">Value:</span> {tabContent[activeTab].value}
-            </p>
-          </motion.div>
-
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {tabContent[activeTab].content.map((category, index) => (
-              <motion.div
-                key={category.category}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-6 bg-white rounded-lg shadow-lg border border-gray-100 hover:border-[#1AF866] transition-all duration-300"
+        <div className="relative z-10 max-w-7xl mx-auto">
+          {/* Tabs */}
+          <div className="flex flex-wrap justify-center gap-4 mb-6 sm:mb-8">
+            {tabs.map((tab) => (
+              <motion.button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className={`px-6 py-3 rounded-lg font-semibold text-base transition-all duration-300 ${
+                  activeTab === tab
+                    ? 'bg-[#1AF866] text-[#27408F] shadow-lg'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
               >
-                <h4 className="text-base font-semibold text-[#27408F] uppercase">
-                  {category.category}
-                </h4>
-                <h5 className="text-xl font-semibold text-[#27408F] mt-2">
-                  {category.title}
-                </h5>
-                {category.services.map((service, serviceIdx) => {
-                  const sectionKey = `${activeTab}-${category.category}-${service.title}`;
-                  const isOpen = openSections[sectionKey] || false;
-                  return (
-                    <div key={service.title} className="mt-4">
-                      <div className="flex items-center justify-between">
-                        <h6 className="text-base font-medium text-[#27408F]">
-                          {service.title}
-                        </h6>
-                        {service.items.length > 0 && (
-                          <button
-                            onClick={() => toggleSection(sectionKey)}
-                            className="text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
-                          >
-                            {isOpen ? (
-                              <Minus className="w-5 h-5" />
-                            ) : (
-                              <Plus className="w-5 h-5" />
-                            )}
-                          </button>
-                        )}
-                      </div>
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{
-                          height: isOpen ? 'auto' : 0,
-                          opacity: isOpen ? 1 : 0,
-                        }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
-                      >
-                        <ul className="mt-2 list-disc pl-5">
-                          {service.items.map((item, itemIdx) => (
-                            <li key={itemIdx} className="text-base text-gray-700">
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </motion.div>
-                    </div>
-                  );
-                })}
-              </motion.div>
+                {tab}
+              </motion.button>
             ))}
           </div>
-        </div>
 
-        {/* CTA Button */}
-        <div className="mt-12 text-center">
+          {/* Tab Content */}
+          <div className="bg-[#E2D8EC] rounded-lg p-6 sm:p-8 shadow-lg">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-center md:text-left"
+            >
+              <h3 className="text-[32px] font-semibold text-[#27408F]">
+                Stage: {tabContent[activeTab].stage}
+              </h3>
+              <p className="mt-4 text-base font-medium italic text-gray-700">
+                <span className="font-semibold">Goal:</span> {tabContent[activeTab].goal}
+              </p>
+              <p className="mt-2 text-base font-medium italic text-gray-700">
+                <span className="font-semibold">Value:</span> {tabContent[activeTab].value}
+              </p>
+            </motion.div>
+
+            <div className="mt-4 sm:mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+              {tabContent[activeTab].content.map((category, index) => (
+                <motion.div
+                  key={category.category}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="p-6 bg-white rounded-lg shadow-lg border border-gray-100 hover:border-[#1AF866] transition-all duration-300"
+                >
+                  <h4 className="text-base font-semibold text-[#27408F] uppercase">
+                    {category.category}
+                  </h4>
+                  <h5 className="text-2xl font-semibold text-[#27408F] mt-2">
+                    {category.title}
+                  </h5>
+                  {category.services.map((service, serviceIdx) => {
+                    const sectionKey = `${activeTab}-${category.category}-${service.title}`;
+                    const isOpen = openSections[sectionKey] || false;
+                    return (
+                      <div key={service.title} className="mt-4">
+                        <div className="flex items-center justify-between">
+                          <h6 className="text-2xl font-medium text-[#27408F]">
+                            {service.title}
+                          </h6>
+                          {service.items.length > 0 && (
+                            <button
+                              onClick={() => toggleSection(sectionKey)}
+                              className="text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
+                            >
+                              {isOpen ? (
+                                <Minus className="w-5 h-5" />
+                              ) : (
+                                <Plus className="w-5 h-5" />
+                              )}
+                            </button>
+                          )}
+                        </div>
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{
+                            height: isOpen ? 'auto' : 0,
+                            opacity: isOpen ? 1 : 0,
+                          }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <ul className="mt-2 list-disc pl-5">
+                            {service.items.map((item, itemIdx) => (
+                              <li key={itemIdx} className="text-base text-gray-700">
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </motion.div>
+                      </div>
+                    );
+                  })}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </SlideInSection>
+
+      {/* CTA Section */}
+      <SlideInSection
+        direction="left"
+        className="bg-[#7030A0] text-white py-12 sm:py-16 snap-start"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
+          <div className="text-center sm:text-left">
+            <h2 className="text-[32px] font-extrabold">Ready to Grow Your Business?</h2>
+            <p className="mt-2 text-base font-medium italic">
+              Let's discuss how our STARS approach can transform your business.
+            </p>
+          </div>
           <motion.button
-            whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
+            whileHover={{ scale: 1.05, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg transition duration-300"
+            className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-base shadow-lg transition-all duration-300 hover:shadow-xl flex items-center gap-2"
           >
             Get a Free Consultation
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
           </motion.button>
         </div>
-      </div>
-    </section>
+      </SlideInSection>
+    </main>
   );
 };
 

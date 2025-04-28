@@ -21,9 +21,9 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className="bg-white">
+      <body className="">
         <Navbar />
-        <div className="pt-16 sm:pt-20">
+        <div className="">
           {children}
         </div>
         <Footer />

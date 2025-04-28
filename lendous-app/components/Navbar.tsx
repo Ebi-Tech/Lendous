@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,6 +11,11 @@ const Navbar: React.FC = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Debug log to check menu state
+  useEffect(() => {
+    console.log("Mobile menu open:", isMenuOpen);
+  }, [isMenuOpen]);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-[#FFFFFF] to-[#E6D8F0] shadow-lg" style={{ boxShadow: "0 4px 15px rgba(112, 48, 160, 0.2)" }}>
