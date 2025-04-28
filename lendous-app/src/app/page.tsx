@@ -1,9 +1,33 @@
 "use client";
 
-import Navbar from "../../components/Navbar";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+
+// Mock SlideInSection component for Homepage
+const SlideInSection: React.FC<{
+  direction: "left" | "right";
+  children: React.ReactNode;
+  className?: string;
+}> = ({ direction, children, className }) => {
+  const variants = {
+    hidden: { opacity: 0, x: direction === "left" ? -50 : 50 },
+    visible: { opacity: 1, x: 0 },
+  };
+
+  return (
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      transition={{ duration: 1, ease: "easeInOut" }}
+      variants={variants}
+      className={className}
+    >
+      {children}
+    </motion.section>
+  );
+};
 
 const Home: React.FC = () => {
   const sections = [
@@ -74,10 +98,10 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#E2D8EC] overflow-x-hidden font-sans">
+    <div className="bg-[#E2D8EC] overflow-x-hidden">
       {/* Section 1: Hero Section */}
-      <div
-        id="hero-section"
+      <SlideInSection
+        direction="left"
         className="relative min-h-screen flex items-center justify-center text-white overflow-hidden snap-start"
       >
         <div className="absolute inset-0 z-0">
@@ -94,22 +118,22 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#E0E0E0] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6 px-4 sm:px-0">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-gray-800 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-snug"
+              className="text-gray-800 text-4xl sm:text-5xl font-extrabold leading-tight sm:leading-snug"
             >
               {sections[0].title}
             </motion.h1>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-gray-600 text-lg sm:text-xl md:text-2xl font-medium italic"
+              className="text-gray-600 text-lg sm:text-xl font-medium italic"
             >
               {sections[0].subtitle}
             </motion.p>
@@ -122,13 +146,13 @@ const Home: React.FC = () => {
             >
               <button
                 onClick={() => scrollToSection("services")}
-                className="px-8 py-3 sm:px-10 sm:py-4 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="px-8 py-3 sm:px-10 sm:py-4 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Explore Solutions
               </button>
               <button
                 onClick={() => scrollToSection("consultation")}
-                className="px-8 py-3 sm:px-10 sm:py-4 bg-transparent border-2 border-[#1AF866] text-[#1AF866] rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="px-8 py-3 sm:px-10 sm:py-4 bg-transparent border-2 border-[#1AF866] text-[#1AF866] rounded-lg font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Free Consultation
               </button>
@@ -152,11 +176,11 @@ const Home: React.FC = () => {
             </div>
           </motion.div>
         </div>
-      </div>
+      </SlideInSection>
 
       {/* Section 2 */}
-      <div
-        id="section-2"
+      <SlideInSection
+        direction="right"
         className="relative min-h-screen flex items-center justify-center overflow-hidden snap-start bg-[#7030A0]"
       >
         <div className="absolute inset-0 z-0">
@@ -171,22 +195,22 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6 px-4 sm:px-0">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-white text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-snug"
+              className="text-white text-4xl sm:text-5xl font-extrabold leading-tight sm:leading-snug"
             >
               {sections[1].title}
             </motion.h1>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-[#E2D8EC] text-lg sm:text-xl md:text-2xl font-medium italic"
+              className="text-[#E2D8EC] text-lg sm:text-xl font-medium italic"
             >
               {sections[1].subtitle}
             </motion.p>
@@ -199,7 +223,7 @@ const Home: React.FC = () => {
             >
               <button
                 onClick={() => scrollToSection("services")}
-                className="px-8 py-3 sm:px-10 sm:py-4 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="px-8 py-3 sm:px-10 sm:py-4 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Explore Solutions
               </button>
@@ -222,11 +246,11 @@ const Home: React.FC = () => {
             </div>
           </motion.div>
         </div>
-      </div>
+      </SlideInSection>
 
       {/* Section 3 */}
-      <div
-        id="section-3"
+      <SlideInSection
+        direction="left"
         className="relative min-h-screen flex items-center justify-center overflow-hidden snap-start bg-[#F5F5F5]"
       >
         <div className="absolute inset-0 z-0">
@@ -241,22 +265,22 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#E0E0E0] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6 px-4 sm:px-0">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-gray-800 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight sm:leading-snug"
+              className="text-gray-800 text-4xl sm:text-5xl font-extrabold leading-tight sm:leading-snug"
             >
               {sections[2].title}
             </motion.h1>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-gray-600 text-lg sm:text-xl md:text-2xl font-medium italic"
+              className="text-gray-600 text-lg sm:text-xl font-medium italic"
             >
               {sections[2].subtitle}
             </motion.p>
@@ -277,7 +301,7 @@ const Home: React.FC = () => {
                   className="bg-white p-6 rounded-lg shadow-lg border-2 border-transparent hover:border-[#1AF866] transition-all duration-300"
                 >
                   <h3 className="text-gray-800 text-2xl sm:text-3xl font-bold">{stat.value}</h3>
-                  <p className="text-gray-600 mt-2 text-base sm:text-lg">{stat.label}</p>
+                  <p className="text-gray-600 mt-2 text-base">{stat.label}</p>
                 </div>
               ))}
             </motion.div>
@@ -299,20 +323,20 @@ const Home: React.FC = () => {
             </div>
           </motion.div>
         </div>
-      </div>
+      </SlideInSection>
 
       {/* Footer Banner */}
-      <div className="bg-[#7030A0] text-white py-12">
+      <SlideInSection direction="right" className="bg-[#7030A0] text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
           <div className="text-center sm:text-left">
-            <h2 className="text-2xl sm:text-3xl font-bold">Ready to Grow Your Business?</h2>
-            <p className="mt-2 text-lg">
+            <h2 className="text-4xl sm:text-5xl font-extrabold">Ready to Grow Your Business?</h2>
+            <p className="mt-2 text-lg sm:text-xl font-medium italic">
               Let's discuss how our STARS approach can transform your business.
             </p>
           </div>
           <button
             onClick={() => scrollToSection("consultation")}
-            className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center gap-2"
+            className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center gap-2"
           >
             Get in Touch
             <svg
@@ -331,7 +355,7 @@ const Home: React.FC = () => {
             </svg>
           </button>
         </div>
-      </div>
+      </SlideInSection>
     </div>
   );
 };

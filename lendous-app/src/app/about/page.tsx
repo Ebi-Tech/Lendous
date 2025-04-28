@@ -164,13 +164,13 @@ const AboutSection: React.FC = () => {
           <div className="h-full bg-[#F5F5F5]"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#E0E0E0] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-8 sm:px-10 pt-20 sm:pt-24 pb-10 sm:pb-16 flex flex-col md:flex-row items-center gap-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/2 text-center md:text-left">
             <motion.h1
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut" }}
-              className="text-[#333333] text-[30px] sm:text-[38px] md:text-[44px] font-extrabold tracking-tight drop-shadow-lg leading-tight sm:leading-snug"
+              className="text-[#333333] text-4xl sm:text-5xl font-extrabold tracking-tight drop-shadow-lg leading-tight sm:leading-snug"
             >
               Who We Are
             </motion.h1>
@@ -184,7 +184,7 @@ const AboutSection: React.FC = () => {
                   boxShadow: "0 0 25px rgba(26, 248, 102, 0.7)",
                 }}
                 whileTap={{ scale: 0.9 }}
-                className="px-10 sm:px-12 py-4 sm:py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-[18px] sm:text-[20px] shadow-lg transition-all duration-300 hover:shadow-2xl"
+                className="px-10 sm:px-12 py-4 sm:py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg transition-all duration-300 hover:shadow-2xl"
               >
                 Meet the Team
               </motion.button>
@@ -197,7 +197,7 @@ const AboutSection: React.FC = () => {
                   boxShadow: "0 0 25px rgba(26, 248, 102, 0.7)",
                 }}
                 whileTap={{ scale: 0.9 }}
-                className="px-10 sm:px-12 py-4 sm:py-5 bg-transparent border-2 border-[#1AF866] text-[#1AF866] rounded-lg font-semibold text-[18px] sm:text-[20px] shadow-lg transition-all duration-300 hover:shadow-2xl"
+                className="px-10 sm:px-12 py-4 sm:py-5 bg-transparent border-2 border-[#1AF866] text-[#1AF866] rounded-lg font-semibold text-base shadow-lg transition-all duration-300 hover:shadow-2xl"
               >
                 Explore Services
               </motion.button>
@@ -223,12 +223,12 @@ const AboutSection: React.FC = () => {
 
       {/* Team Section */}
       <section id="team-section">
-        <SlideInSection direction="right" className="py-20 sm:py-24 px-4 sm:px-6 bg-[#FFFFFF]">
-          <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-[32px] sm:text-[36px] md:text-[40px] font-extrabold text-[#27408F] leading-tight">
+        <SlideInSection direction="right" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#FFFFFF]">
+          <div className="max-w-7xl mx-auto text-center">
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-[#27408F] leading-tight">
               Meet Our Leadership Team
             </h2>
-            <p className="text-[24px] mt-8 text-gray-700 font-light">
+            <p className="text-lg sm:text-xl mt-8 text-gray-700 font-medium italic">
               Our leaders bring decades of experience to help your business thrive.
             </p>
             <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -277,7 +277,7 @@ const AboutSection: React.FC = () => {
                     />
                   </div>
                   <h3 className="text-[24px] font-semibold text-[#27408F] mt-6">{member.name}</h3>
-                  <p className="text-[16px] text-gray-700 mt-2 text-center">{member.role}</p>
+                  <p className="text-base text-gray-700 mt-2 text-center">{member.role}</p>
                   <a
                     href={member.linkedin}
                     target="_blank"
@@ -296,7 +296,7 @@ const AboutSection: React.FC = () => {
       {/* Services Section */}
       <div
         id="services-section"
-        className="relative py-20 sm:py-24 px-4 sm:px-6 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] overflow-hidden snap-start"
+        className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] overflow-hidden snap-start"
       >
         <div className="absolute inset-0 z-0">
           <div className="h-full bg-[#E2D8EC]"></div>
@@ -324,7 +324,7 @@ const AboutSection: React.FC = () => {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, ease: "easeInOut" }}
-                className="text-[#333333] text-[30px] sm:text-[38px] md:text-[44px] font-extrabold tracking-tight drop-shadow-lg leading-tight sm:leading-snug"
+                className="text-[#333333] text-4xl sm:text-5xl font-extrabold tracking-tight drop-shadow-lg leading-tight sm:leading-snug"
               >
                 Our Services
               </motion.h1>
@@ -332,7 +332,7 @@ const AboutSection: React.FC = () => {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-                className="mt-6 sm:mt-10 text-[#666666] text-[18px] sm:text-[20px] md:text-[22px] font-light italic drop-shadow-md leading-relaxed max-w-3xl mx-auto md:mx-0"
+                className="mt-6 sm:mt-10 text-[#666666] text-lg sm:text-xl font-medium italic drop-shadow-md leading-relaxed max-w-3xl mx-auto md:mx-0"
               >
                 We blend our expertise across key service areas to deliver tailored solutions for your business.
               </motion.p>
@@ -371,7 +371,7 @@ const AboutSection: React.FC = () => {
                   return (
                     <div key={group.subheading} className="mb-4 last:mb-0">
                       <div className="flex items-center justify-between">
-                        <h4 className="text-[16px] font-semibold text-[#27408F] mb-2">
+                        <h4 className="text-base font-semibold text-[#27408F] mb-2">
                           {group.subheading}
                         </h4>
                         <button
@@ -402,7 +402,7 @@ const AboutSection: React.FC = () => {
                               initial="hidden"
                               animate="visible"
                               variants={badgeVariants}
-                              className="text-[16px] text-gray-700 font-medium mt-1"
+                              className="text-base text-gray-700 font-medium mt-1"
                             >
                               {service}
                             </motion.li>
@@ -425,7 +425,7 @@ const AboutSection: React.FC = () => {
                   boxShadow: "0 0 25px rgba(26, 248, 102, 0.7)",
                 }}
                 whileTap={{ scale: 0.9 }}
-                className="w-full sm:w-auto px-12 py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-[17px] shadow-lg transition-all duration-300 hover:shadow-2xl"
+                className="w-full sm:w-auto px-12 py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg transition-all duration-300 hover:shadow-2xl"
               >
                 Explore Solutions
               </motion.button>

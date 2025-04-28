@@ -420,11 +420,19 @@ const SolutionsSection: React.FC = () => {
               ]
             },
             {
-              title: "Teams & Reporting Lines",
+              title: "Hiring for Key Positions",
               items: [
-                "Outsourced Hiring or Rent a Resource",
-                "Expand profit-centre teams and only slightly expand the Systems & Process Team",
-                "Champion functional reporting structure (to preserve domain expertise over hierarchical)"
+                "Scale Up Systems & Process Team (to match expansion)",
+                "Outsource Senior-Level Recruitment",
+                "Employment as a Service (Rent a Resource for Specialized Roles)"
+              ]
+            },
+            {
+              title: "Funding Support",
+              items: [
+                "Pitch Deck Development for Investors",
+                "Investor/Lender Introductions",
+                "Guidance on Equity vs. Debt Financing"
               ]
             }
           ]
@@ -433,39 +441,27 @@ const SolutionsSection: React.FC = () => {
     }
   };
 
-  const badgeVariants = {
-    hidden: { opacity: 0, x: -10 },
-    visible: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.3, delay: i * 0.05 },
-    }),
-  };
-
   return (
-    <section id="solutions" className="pt-24 sm:pt-28 pb-16 sm:pb-20 px-4 sm:px-6 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <div className="h-full bg-[#E2D8EC]"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] opacity-85 z-1 backdrop-blur-sm"></div>
-      </div>
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center gap-12 mb-10 sm:mb-12">
+    <section className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#FFFFFF]">
+      <div className="max-w-7xl mx-auto">
+        {/* Hero Section */}
+        <div className="flex flex-col md:flex-row items-center gap-12 mb-12">
           <div className="md:w-1/2 text-center md:text-left">
             <motion.h2
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut" }}
-              className="text-[#333333] text-[30px] sm:text-[38px] md:text-[44px] font-extrabold tracking-tight drop-shadow-lg leading-tight sm:leading-snug"
+              className="text-4xl sm:text-5xl font-extrabold text-[#27408F] leading-tight"
             >
-              Solutions
+              Solutions for Every Stage
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-              className="mt-6 sm:mt-10 text-[#666666] text-[18px] sm:text-[20px] md:text-[22px] font-light italic drop-shadow-md leading-relaxed max-w-3xl mx-auto md:mx-0"
+              className="mt-6 text-lg sm:text-xl font-medium italic text-gray-700 max-w-4xl mx-auto md:mx-0"
             >
-              We have tailored solutions to fit your business need. Find your current business stage, and select your solution (one service, multiple, or the entire bundle).
+              From launching your business to scaling across markets, we’ve got you covered.
             </motion.p>
           </div>
           <div className="md:w-1/2 mt-10 md:mt-0">
@@ -486,118 +482,114 @@ const SolutionsSection: React.FC = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8">
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           {tabs.map((tab) => (
-            <button
+            <motion.button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 sm:px-8 py-2 sm:py-3 text-[14px] sm:text-[16px] font-semibold rounded-md transition-all duration-200 ${
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-6 py-3 rounded-lg font-semibold text-base transition-all duration-300 ${
                 activeTab === tab
-                  ? 'bg-gradient-to-r from-[#7030A0] to-[#27408F] text-[#FFFFFF] shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-100 hover:scale-105 hover:underline underline-offset-4'
+                  ? 'bg-[#1AF866] text-[#27408F] shadow-lg'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
             >
               {tab}
-            </button>
+            </motion.button>
           ))}
         </div>
 
-        {/* Active Tab Content */}
-        <div className="bg-white rounded-lg shadow-lg p-6 sm:p-8">
-          <div className="mb-6 sm:mb-8">
-            <p className="text-gray-700 text-[14px] sm:text-[16px] font-normal mb-2">
-              <span className="font-semibold">STAGE:</span> {tabContent[activeTab].stage}
+        {/* Tab Content */}
+        <div className="bg-[#E2D8EC] rounded-lg p-6 sm:p-8 shadow-lg">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center md:text-left"
+          >
+            <h3 className="text-2xl sm:text-3xl font-semibold text-[#27408F]">
+              Stage: {tabContent[activeTab].stage}
+            </h3>
+            <p className="mt-4 text-lg sm:text-xl font-medium italic text-gray-700">
+              <span className="font-semibold">Goal:</span> {tabContent[activeTab].goal}
             </p>
-            <p className="text-gray-700 text-[14px] sm:text-[16px] font-normal mb-2">
-              <span className="font-semibold">GOAL:</span> {tabContent[activeTab].goal}
+            <p className="mt-2 text-lg sm:text-xl font-medium italic text-gray-700">
+              <span className="font-semibold">Value:</span> {tabContent[activeTab].value}
             </p>
-            <p className="text-gray-700 text-[14px] sm:text-[16px] font-normal">
-              <span className="font-semibold">VALUE OFFERED:</span> {tabContent[activeTab].value}
-            </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             {tabContent[activeTab].content.map((category, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg p-4 sm:p-6 shadow-md">
-                <h3 className="text-[18px] sm:text-[20px] font-bold text-[#27408F] mb-2">
+              <motion.div
+                key={category.category}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="p-6 bg-white rounded-lg shadow-lg border border-gray-100 hover:border-[#1AF866] transition-all duration-300"
+              >
+                <h4 className="text-base font-semibold text-[#27408F] uppercase">
                   {category.category}
-                </h3>
-                <h4 className="text-[16px] sm:text-[18px] font-medium text-gray-700 mb-4">
-                  {category.title}
                 </h4>
-                <div className="space-y-4 sm:space-y-6">
-                  {category.services.map((service, serviceIndex) => {
-                    const sectionKey = `${activeTab}-${category.category}-${service.title}`;
-                    const isOpen = openSections[sectionKey] || false;
-                    return (
-                      <div key={serviceIndex}>
-                        <div className="flex items-center justify-between">
-                          <p className="font-medium text-gray-800 text-[14px] sm:text-[16px] mb-2">
-                            {serviceIndex + 1}. {service.title}
-                          </p>
-                          {service.items && service.items.length > 0 && (
-                            <button
-                              onClick={() => toggleSection(sectionKey)}
-                              className="text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
-                            >
-                              {isOpen ? (
-                                <Minus className="w-5 h-5" />
-                              ) : (
-                                <Plus className="w-5 h-5" />
-                              )}
-                            </button>
-                          )}
-                        </div>
-                        {service.items && service.items.length > 0 && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{
-                              height: isOpen ? "auto" : 0,
-                              opacity: isOpen ? 1 : 0,
-                            }}
-                            transition={{ duration: 0.3 }}
-                            className="overflow-hidden"
+                <h5 className="text-xl font-semibold text-[#27408F] mt-2">
+                  {category.title}
+                </h5>
+                {category.services.map((service, serviceIdx) => {
+                  const sectionKey = `${activeTab}-${category.category}-${service.title}`;
+                  const isOpen = openSections[sectionKey] || false;
+                  return (
+                    <div key={service.title} className="mt-4">
+                      <div className="flex items-center justify-between">
+                        <h6 className="text-base font-medium text-[#27408F]">
+                          {service.title}
+                        </h6>
+                        {service.items.length > 0 && (
+                          <button
+                            onClick={() => toggleSection(sectionKey)}
+                            className="text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
                           >
-                            <ul className="list-disc pl-6 space-y-1">
-                              {service.items.map((item, itemIndex) => (
-                                <motion.li
-                                  key={itemIndex}
-                                  custom={itemIndex}
-                                  initial="hidden"
-                                  animate="visible"
-                                  variants={badgeVariants}
-                                  className="text-gray-600 text-[14px] sm:text-[16px] font-normal"
-                                >
-                                  {item}
-                                </motion.li>
-                              ))}
-                            </ul>
-                          </motion.div>
+                            {isOpen ? (
+                              <Minus className="w-5 h-5" />
+                            ) : (
+                              <Plus className="w-5 h-5" />
+                            )}
+                          </button>
                         )}
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{
+                          height: isOpen ? 'auto' : 0,
+                          opacity: isOpen ? 1 : 0,
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <ul className="mt-2 list-disc pl-5">
+                          {service.items.map((item, itemIdx) => (
+                            <li key={itemIdx} className="text-base text-gray-700">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    </div>
+                  );
+                })}
+              </motion.div>
             ))}
           </div>
+        </div>
 
-          <div className="mt-6 sm:mt-8 text-center">
-            {activeTab === 'Scale' ? (
-              <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-                <button className="px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-[#7030A0] to-[#27408F] text-[#FFFFFF] rounded-lg font-semibold transition-all duration-200 shadow-lg text-[14px] sm:text-[16px] hover:scale-105 hover:underline underline-offset-4">
-                  Request Solution
-                </button>
-                <button className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold transition-all duration-200 shadow-lg text-[14px] sm:text-[16px] hover:scale-105 hover:underline underline-offset-4">
-                  Not Sure What You Need?<br className="sm:hidden" />Get a Free Consultation
-                </button>
-              </div>
-            ) : (
-              <button className="px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-[#7030A0] to-[#27408F] text-[#FFFFFF] rounded-lg font-semibold transition-all duration-200 shadow-lg text-[14px] sm:text-[16px] hover:scale-105 hover:underline underline-offset-4">
-                Request Solution
-              </button>
-            )}
-          </div>
+        {/* CTA Button */}
+        <div className="mt-12 text-center">
+          <motion.button
+            whileHover={{ scale: 1.1, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg transition duration-300"
+          >
+            Get a Free Consultation
+          </motion.button>
         </div>
       </div>
     </section>
