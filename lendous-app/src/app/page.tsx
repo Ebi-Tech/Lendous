@@ -45,21 +45,21 @@ const Home: React.FC = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
     <main className="font-poppins">
       {/* Section 1: Hero Section */}
-      <div
+      <section
         id="hero-section"
-        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        className="relative flex flex-col justify-center"
         style={{ 
           minHeight: '700px',
-          marginTop: '128px'
+          
         }}
       >
         <div className="absolute inset-0 z-0">
@@ -67,35 +67,17 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#E0E0E0] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
 
-        <SlideInSection
-          direction="left"
-          className="py-12 sm:py-16 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-6 sm:gap-8"
-        >
+        <div className="py-12 sm:py-16 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
           <div className="w-full lg:w-1/2 text-center lg:text-left space-y-4 sm:space-y-6 px-4 sm:px-0">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-[#27408F] text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug"
-            >
+            <h1 className="text-[#27408F] text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug">
               Ready to Be The Next Big Thing in Africa?
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-black text-[16px] sm:text-[18px] font-medium italic"
-            >
+            <p className="text-black text-[16px] sm:text-[18px] font-medium italic">
               Grow with Lendous
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start"
-            >
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
               <motion.button
                 onClick={() => scrollToSection("services")}
                 whileHover={{
@@ -123,15 +105,10 @@ const Home: React.FC = () => {
               >
                 Free Consultation
               </motion.button>
-            </motion.div>
+            </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-            className="w-full lg:w-1/2 flex justify-center mt-4 sm:mt-6 lg:mt-0"
-          >
+          <div className="w-full lg:w-1/2 flex justify-center mt-4 sm:mt-6 lg:mt-0">
             <div className="relative w-full max-w-xl aspect-video rounded-xl overflow-hidden shadow-2xl">
               <Image
                 src="/hero-bg1.jpg"
@@ -141,13 +118,13 @@ const Home: React.FC = () => {
                 priority
               />
             </div>
-          </motion.div>
-        </SlideInSection>
-      </div>
+          </div>
+        </div>
+      </section>
 
       {/* Section 2 */}
-      <div
-        className="relative flex flex-col justify-center overflow-hidden snap-start"
+      <section
+        className="relative flex flex-col justify-center"
         style={{ 
           minHeight: '700px'
         }}
@@ -161,7 +138,7 @@ const Home: React.FC = () => {
           direction="right"
           className="py-16 sm:py-20 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-6 sm:gap-8"
         >
-          <div className="pt-10 w-full lg:w-1/2 text-center lg:text-left space-y-4 sm:space-y-6 px-4 sm:px-0">
+          <div className="pt-5 w-full lg:w-1/2 text-center lg:text-left space-y-4 sm:space-y-6 px-4 sm:px-0">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -218,11 +195,11 @@ const Home: React.FC = () => {
             </div>
           </motion.div>
         </SlideInSection>
-      </div>
+      </section>
 
       {/* Section 3 */}
-      <div
-        className="relative flex flex-col justify-center overflow-hidden snap-start"
+      <section
+        className="pb-10 relative flex flex-col justify-center"
         style={{ 
           minHeight: '700px'
         }}
@@ -237,12 +214,12 @@ const Home: React.FC = () => {
           className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center gap-6 sm:gap-8 px-4 sm:px-6 lg:px-8"
         >
           <div className="w-full flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
-            <div className="w-full lg:w-3/5 text-center lg:text-left space-y-4 sm:space-y-6 px-4 sm:px-0 order-0 lg:order-none">
+            <div className="mt-5 w-full lg:w-3/5 text-center lg:text-left space-y-4 sm:space-y-6 px-4 sm:px-0 order-0 lg:order-none">
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-gray-800 text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug"
+                className="text-gray-800 text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug mt-10"
               >
                 The Lendous Assurance:<br />You Will Never Work Alone!
               </motion.h1>
@@ -304,15 +281,12 @@ const Home: React.FC = () => {
             </motion.div>
           </div>
         </SlideInSection>
-      </div>
+      </section>
 
       {/* Footer Banner */}
-      <SlideInSection
-        direction="down"
-        className="bg-[#7030A0] text-white py-12 sm:py-16 snap-start"
-      >
+      <section className="bg-[#7030A0] text-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div className="text-center sm:text-left">
+          <div className="mt-10 text-center sm:text-left">
             <h2 className="text-[36px] sm:text-[40px] font-extrabold">Ready to Grow Your Business?</h2>
             <p className="mt-2 text-[16px] sm:text-[18px] font-medium italic">
               Let's discuss how our STARS approach can transform your business.
@@ -344,7 +318,7 @@ const Home: React.FC = () => {
             </svg>
           </motion.button>
         </div>
-      </SlideInSection>
+      </section>
     </main>
   );
 };

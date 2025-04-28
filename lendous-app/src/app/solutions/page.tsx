@@ -489,8 +489,8 @@ const SolutionsSection: React.FC = () => {
       {/* Hero Section */}
       <div
         id="hero-section"
-        className="relative flex flex-col justify-center overflow-hidden snap-start"
-        style={{ minHeight: '700px', marginTop: '128px' }}
+        className="relative flex flex-col justify-center overflow-hidden   "
+        style={{ minHeight: '700px' }}
       >
         <div className="absolute inset-0 z-0">
           <div className="h-full bg-[#F5F5F5]"></div>
@@ -540,7 +540,7 @@ const SolutionsSection: React.FC = () => {
       {/* Tabs Section */}
       <div
         id="tabs-section"
-        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        className="relative flex flex-col justify-center overflow-hidden   "
         style={{ minHeight: '700px' }}
       >
         <div className="absolute inset-0 z-0">
@@ -656,7 +656,7 @@ const SolutionsSection: React.FC = () => {
       {/* CTA Section */}
       <SlideInSection
         direction="left"
-        className="bg-[#7030A0] text-white py-12 sm:py-16 snap-start"
+        className="bg-[#7030A0] text-white py-12 sm:py-16   "
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
           <div className="text-center sm:text-left">

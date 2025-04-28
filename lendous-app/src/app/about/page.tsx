@@ -169,10 +169,10 @@ const AboutSection: React.FC = () => {
       {/* Hero Section */}
       <div
         id="hero-section"
-        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        className="relative flex flex-col justify-center overflow-hidden   "
         style={{ 
           minHeight: '700px',
-          marginTop: '128px'
+          
         }}
       >
         <div className="absolute inset-0 z-0">
@@ -249,7 +249,7 @@ const AboutSection: React.FC = () => {
       {/* Team Section */}
       <section
         id="team-section"
-        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        className="relative flex flex-col justify-center overflow-hidden   "
         style={{ minHeight: '700px' }}
       >
         <div className="absolute inset-0 z-0">
@@ -260,13 +260,13 @@ const AboutSection: React.FC = () => {
           direction="right"
           className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto text-center"
         >
-          <h2 className="text-[32px] sm:text-[36px] font-extrabold text-[#27408F] leading-tight mt-10">
+          <h2 className="text-[32px] sm:text-[36px] font-extrabold text-[#27408F] leading-tight mt-5">
             Meet Our Leadership Team
           </h2>
           <p className="text-[16px] sm:text-[18px] mt-8 text-black font-medium italic">
             Our leaders bring decades of experience to help your business thrive.
           </p>
-          <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="mt-5 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 name: 'Charles Charles',
@@ -331,7 +331,7 @@ const AboutSection: React.FC = () => {
       {/* Services Section */}
       <div
         id="services-section"
-        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        className="relative flex flex-col justify-center overflow-hidden   "
         style={{ minHeight: '700px' }}
       >
         <div className="absolute inset-0 z-0">
@@ -342,7 +342,7 @@ const AboutSection: React.FC = () => {
           direction="up"
           className="py-12 sm:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         >
-          <div className="pt-10 flex flex-col md:flex-row items-center gap-12">
+          <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2 flex justify-center mt-4 sm:mt-6 lg:mt-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -461,7 +461,7 @@ const AboutSection: React.FC = () => {
               </motion.div>
             ))}
           </div>
-          <div className="mt-12 sm:mt-16 text-center mb-12">
+          <div className="mt-12 sm:mt-16 text-center ">
             <Link href="/solutions">
               <motion.button
                 whileHover={{
@@ -483,7 +483,7 @@ const AboutSection: React.FC = () => {
       {/* Footer Banner */}
       <SlideInSection
         direction="down"
-        className="bg-[#7030A0] text-white py-12 sm:py-16 snap-start"
+        className="bg-[#7030A0] text-white py-12 sm:py-16   "
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
           <div className="text-center sm:text-left">
