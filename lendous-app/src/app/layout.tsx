@@ -2,15 +2,6 @@ import "./globals.css";
 import Footer from "../../components/footer";
 import Navbar from "../../components/Navbar";
 import type { Metadata } from "next";
-import { Poppins } from 'next/font/google';
-
-// Define the Poppins font with desired weights and subsets
-const poppins = Poppins({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-  variable: '--font-poppins',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: "Lendous",
@@ -26,14 +17,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable}`}>
+    <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      
-      <body className="bg-white font-sans">
+      <body className="bg-white">
         <Navbar />
-        {children}
+        <div className="pt-5 sm:pt-5">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

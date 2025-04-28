@@ -217,45 +217,25 @@ const SolutionsSection: React.FC = () => {
         },
         {
           category: "RESOURCES",
-          title: "Founding Team Training or Access to Training Library",
+          title: "Support for Growth",
           services: [
             {
-              title: "Bookkeeping & Accounting",
-              items: []
+              title: "Founding Team Training or Access to Training Library",
+              items: [
+                "Bookkeeping & Accounting",
+                "Inventory Management",
+                "Sales & Order Fulfillment",
+                "Customer Support",
+                "HR Lite"
+              ]
             },
             {
-              title: "Inventory Management",
-              items: []
-            },
-            {
-              title: "Sales & Order Fulfillment",
-              items: []
-            },
-            {
-              title: "Customer Support",
-              items: []
-            },
-            {
-              title: "HR Lite",
-              items: []
-            }
-          ]
-        },
-        {
-          category: "RESOURCES",
-          title: "Hiring for Key Positions",
-          services: [
-            {
-              title: "Early Phase: 30 AI Bots (No subscription) – Customer Service, HR, Digital Marketing",
-              items: []
-            },
-            {
-              title: "Traction Phase: Outsource Roles or Outsource the Process",
-              items: []
-            },
-            {
-              title: "Outsource Systems & People Lead to keep costs low",
-              items: []
+              title: "Hiring for Key Positions",
+              items: [
+                "Early Phase: 30 AI Bots (No subscription) – Customer Service, HR, Digital Marketing",
+                "Traction Phase: Outsource Roles or Outsource the hiring",
+                "Outsource Systems & Process Lead to keep costs low"
+              ]
             }
           ]
         }
@@ -333,33 +313,22 @@ const SolutionsSection: React.FC = () => {
         },
         {
           category: "RESOURCES",
-          title: "HR: Learning & Development",
+          title: "Support for Growth",
           services: [
             {
-              title: "Middle Managers Training",
-              items: []
+              title: "Learning & Development",
+              items: [
+                "Middle Managers Training",
+                "New Managers Training (First-Time People Managers)"
+              ]
             },
             {
-              title: "New Managers Training (First-Time People Managers)",
-              items: []
-            }
-          ]
-        },
-        {
-          category: "RESOURCES",
-          title: "HR: Hiring for Key Positions",
-          services: [
-            {
-              title: "Outsourced Hiring (Talent Acquisition)",
-              items: []
-            },
-            {
-              title: "Employment as a Service (Rent a Resource)",
-              items: []
-            },
-            {
-              title: "Set Up a Systems & Process Team (Start with 1-2 people)",
-              items: []
+              title: "Hiring for Key Positions",
+              items: [
+                "Outsourced Hiring (Talent Acquisition)",
+                "Employment as a Service (Rent a Resource)",
+                "Set Up a Systems & Process Team (Start with 1-2 people)"
+              ]
             }
           ]
         }
@@ -440,37 +409,23 @@ const SolutionsSection: React.FC = () => {
         },
         {
           category: "RESOURCES",
-          title: "HR: Learning & Development Academy",
+          title: "Support for Expansion",
           services: [
             {
-              title: "Set up in-house Academy",
-              items: []
+              title: "Learning & Development Academy",
+              items: [
+                "Set up in-house Academy",
+                "Co-design Learning Programs",
+                "Train the Trainer(s) to empower for internal delivery"
+              ]
             },
             {
-              title: "Co-design Learning Programs",
-              items: []
-            },
-            {
-              title: "Train the Trainer(s) to empower for internal delivery",
-              items: []
-            }
-          ]
-        },
-        {
-          category: "RESOURCES",
-          title: "HR: Teams & Reporting Lines",
-          services: [
-            {
-              title: "Outsourced Hiring or Rent a Resource",
-              items: []
-            },
-            {
-              title: "Expand profit-centre teams and only slightly expand the Systems & Process Team",
-              items: []
-            },
-            {
-              title: "Champion functional reporting structure (to preserve domain expertise over hierarchical)",
-              items: []
+              title: "Teams & Reporting Lines",
+              items: [
+                "Outsourced Hiring or Rent a Resource",
+                "Expand profit-centre teams and only slightly expand the Systems & Process Team",
+                "Champion functional reporting structure (to preserve domain expertise over hierarchical)"
+              ]
             }
           ]
         }
@@ -488,7 +443,7 @@ const SolutionsSection: React.FC = () => {
   };
 
   return (
-    <section id="solutions" className="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] overflow-hidden snap-start">
+    <section id="solutions" className="pt-24 sm:pt-28 pb-16 sm:pb-20 px-4 sm:px-6 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] overflow-hidden">
       <div className="absolute inset-0 z-0">
         <div className="h-full bg-[#E2D8EC]"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] opacity-85 z-1 backdrop-blur-sm"></div>

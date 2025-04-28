@@ -1,83 +1,83 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Aptos';
-  src: url('/Aptos/Aptos-Light.ttf') format('truetype');
-  font-weight: 300;
-  /* Light */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Aptos';
-  src: url('/Aptos/Aptos-Light-Italic.ttf') format('truetype');
-  font-weight: 300;
-  /* Light */
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Aptos';
-  src: url('/Aptos/Aptos-Regular.ttf') format('truetype');
+  font-family: 'Poppins';
+  src: url('/Poppins/Poppins-Regular.ttf') format('truetype');
   font-weight: 400;
-  /* Regular */
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Aptos';
-  src: url('/Aptos/Aptos-Italic.ttf') format('truetype');
+  font-family: 'Poppins';
+  src: url('/Poppins/Poppins-Italic.ttf') format('truetype');
   font-weight: 400;
-  /* Regular */
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Aptos';
-  src: url('/Aptos/Aptos-SemiBold.ttf') format('truetype');
+  font-family: 'Poppins';
+  src: url('/Poppins/Poppins-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/Poppins/Poppins-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/Poppins/Poppins-SemiBold.ttf') format('truetype');
   font-weight: 600;
-  /* SemiBold */
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Aptos';
-  src: url('/Aptos/Aptos-SemiBold-Italic.ttf') format('truetype');
+  font-family: 'Poppins';
+  src: url('/Poppins/Poppins-SemiBoldItalic.ttf') format('truetype');
   font-weight: 600;
-  /* SemiBold */
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Aptos';
-  src: url('/Aptos/Aptos-Bold.ttf') format('truetype');
+  font-family: 'Poppins';
+  src: url('/Poppins/Poppins-Bold.ttf') format('truetype');
   font-weight: 700;
-  /* Bold */
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Aptos';
-  src: url('/Aptos/Aptos-BoldItalic.ttf') format('truetype');
+  font-family: 'Poppins';
+  src: url('/Poppins/Poppins-BoldItalic.ttf') format('truetype');
   font-weight: 700;
-  /* Bold */
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Aptos';
-  src: url('/Aptos/Aptos-ExtraBold.ttf') format('truetype');
+  font-family: 'Poppins';
+  src: url('/Poppins/Poppins-ExtraBold.ttf') format('truetype');
   font-weight: 800;
-  /* ExtraBold */
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Aptos';
-  src: url('/Aptos/Aptos-ExtraBold-Italic.ttf') format('truetype');
+  font-family: 'Poppins';
+  src: url('/Poppins/Poppins-ExtraBoldItalic.ttf') format('truetype');
   font-weight: 800;
-  /* ExtraBold */
   font-style: italic;
+  font-display: swap;
 }
 
 :root {
@@ -102,11 +102,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Aptos', 'Calibri', 'Arial', sans-serif;
-}
-
-@layer utilities {
-  .font-aptos {
-    font-family: 'Aptos', 'Calibri', 'Arial', sans-serif;
-  }
+  font-family: 'Poppins', sans-serif;
 }

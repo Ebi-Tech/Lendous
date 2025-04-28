@@ -221,29 +221,45 @@ const TrainingProgramsSection: React.FC = () => {
   };
 
   return (
-    <section id="training-programs" className="py-16 px-4 bg-gray-100">
+    <section id="training-programs" className="pt-24 sm:pt-28 pb-16 px-4 bg-gray-100">
       <div className="max-w-6xl mx-auto">
-        {/* Title */}
-        <motion.h2
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUp}
-          className="text-5xl font-bold text-center text-black"
-        >
-          Trainings
-        </motion.h2>
-
-        {/* Subtitle */}
-        <motion.p
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUp}
-          transition={{ delay: 0.2 }}
-          className="mt-4 text-lg text-center text-gray-800 max-w-4xl mx-auto"
-        >
-          From Leadership Development to Operational Excellence, our programs address the most
-          critical skill gaps in African SMEs, including those yet to be identified.
-        </motion.p>
+        {/* Header, Subtitle, and Image */}
+        <div className="flex flex-col md:flex-row items-center gap-12 mb-10 sm:mb-12">
+          <div className="md:w-1/2 text-center md:text-left">
+            <motion.h2
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+              className="text-5xl font-bold text-black"
+            >
+              Trainings
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
+              className="mt-4 text-lg text-gray-800 max-w-4xl mx-auto md:mx-0"
+            >
+              From Leadership Development to Operational Excellence, our programs address the most
+              critical skill gaps in African SMEs, including those yet to be identified.
+            </motion.p>
+          </div>
+          <div className="md:w-1/2 mt-10 md:mt-0">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
+            >
+              <Image
+                src="/hero-bg3.jpg"
+                alt="Training Programs Image"
+                width={600}
+                height={400}
+                className="object-cover rounded-lg shadow-2xl"
+              />
+            </motion.div>
+          </div>
+        </div>
 
         {/* Tabs */}
         <div className="mt-12 flex flex-wrap justify-center gap-2">

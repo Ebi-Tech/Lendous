@@ -158,7 +158,7 @@ const AboutSection: React.FC = () => {
       {/* Hero Section */}
       <div
         id="hero-section"
-        className="relative h-screen flex items-center text-[#FFFFFF] overflow-hidden snap-start"
+        className="relative h-screen flex items-center text-[#FFFFFF] overflow-hidden"
       >
         <div className="absolute inset-0 z-0">
           <div className="h-full bg-[#F5F5F5]"></div>

@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
                 height={48}
                 className="mr-3"
               />
-              <span className="text-[#1AF866] text-[36px] font-bold">
+              <span className="text-transparent opacity bg-clip-text bg-gradient-to-r from-[#8563ad] to-[#758cbd] font-bold text-[36px]">
                 Lendous
               </span>
             </div>
