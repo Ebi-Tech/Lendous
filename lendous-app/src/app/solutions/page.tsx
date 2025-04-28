@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
@@ -65,12 +65,30 @@ type TabName = keyof TabContentMap;
 const SolutionsSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabName>('Launch');
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
+  const [viewportHeight, setViewportHeight] = useState(0);
+
+  useEffect(() => {
+    const updateViewportHeight = () => {
+      setViewportHeight(window.innerHeight);
+    };
+    
+    updateViewportHeight();
+    window.addEventListener('resize', updateViewportHeight);
+    return () => window.removeEventListener('resize', updateViewportHeight);
+  }, []);
 
   const toggleSection = (sectionKey: string) => {
     setOpenSections((prev) => ({
       ...prev,
       [sectionKey]: !prev[sectionKey],
     }));
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const tabs: TabName[] = ['Launch', 'Build', 'Grow', 'Scale'];
@@ -467,29 +485,27 @@ const SolutionsSection: React.FC = () => {
   };
 
   return (
-    <main
-      className="bg-[#E2D8EC] overflow-x-hidden overflow-y-auto"
-      style={{
-        scrollSnapType: "y proximity",
-        height: "100vh",
-      }}
-    >
+    <main className="bg-[#E2D8EC] font-poppins">
       {/* Hero Section */}
-      <SlideInSection
-        direction="left"
-        className="relative min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden snap-start"
+      <div
+        id="hero-section"
+        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        style={{ minHeight: '700px', marginTop: '128px' }}
       >
         <div className="absolute inset-0 z-0">
           <div className="h-full bg-[#F5F5F5]"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#E0E0E0] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
-        <div className="py-12 sm:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8 sm:gap-12">
+        <SlideInSection
+          direction="left"
+          className="py-12 sm:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8 sm:gap-12"
+        >
           <div className="md:w-2/5 text-center md:text-left">
             <motion.h2
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut" }}
-              className="text-4xl font-extrabold text-[#27408F] leading-tight drop-shadow-lg"
+              className="text-4xl font-extrabold text-[#27408F] leading-tight"
             >
               Solutions for Every Stage
             </motion.h2>
@@ -497,7 +513,7 @@ const SolutionsSection: React.FC = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-              className="mt-4 sm:mt-6 text-base font-medium italic text-gray-700 drop-shadow-md leading-relaxed"
+              className="mt-4 sm:mt-6 text-base font-medium italic text-black drop-shadow-md leading-relaxed"
             >
               From launching your business to scaling across markets, we’ve got you covered.
             </motion.p>
@@ -518,19 +534,23 @@ const SolutionsSection: React.FC = () => {
               />
             </motion.div>
           </div>
-        </div>
-      </SlideInSection>
+        </SlideInSection>
+      </div>
 
       {/* Tabs Section */}
-      <SlideInSection
-        direction="right"
-        className="relative pt-12 sm:pt-16 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden snap-start bg-[#E2D8EC]"
+      <div
+        id="tabs-section"
+        className="relative flex flex-col justify-center overflow-hidden snap-start"
+        style={{ minHeight: '700px' }}
       >
         <div className="absolute inset-0 z-0">
           <div className="h-full bg-[#E2D8EC]"></div>
           <div className="absolute inset-0 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] opacity-85 z-1 backdrop-blur-sm"></div>
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto">
+        <SlideInSection
+          direction="right"
+          className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto"
+        >
           {/* Tabs */}
           <div className="flex flex-wrap justify-center gap-4 mb-6 sm:mb-8">
             {tabs.map((tab) => (
@@ -551,7 +571,7 @@ const SolutionsSection: React.FC = () => {
           </div>
 
           {/* Tab Content */}
-          <div className="bg-[#E2D8EC] rounded-lg p-6 sm:p-8 shadow-lg">
+          <div className="bg-white rounded-lg p-6 sm:p-8 shadow-lg">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -630,8 +650,8 @@ const SolutionsSection: React.FC = () => {
               ))}
             </div>
           </div>
-        </div>
-      </SlideInSection>
+        </SlideInSection>
+      </div>
 
       {/* CTA Section */}
       <SlideInSection
@@ -646,6 +666,7 @@ const SolutionsSection: React.FC = () => {
             </p>
           </div>
           <motion.button
+            onClick={() => scrollToSection("consultation")}
             whileHover={{ scale: 1.05, backgroundColor: '#FFFFFF', color: '#7030A0', boxShadow: '0 0 15px rgba(26, 248, 102, 0.5)' }}
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-base shadow-lg transition-all duration-300 hover:shadow-xl flex items-center gap-2"
