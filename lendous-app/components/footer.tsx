@@ -56,7 +56,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
             {[
               { name: "Home", path: "/" },
               { name: "About Us", path: "/about" },
-              { name: "Services", path: "/services" },
+              { name: "Solutions", path: "/solutions" },
               { name: "Training Programs", path: "/training" },
               { name: "Contact Us", path: "/contact" }
             ].map((link, index) => (

@@ -356,7 +356,7 @@ const AboutSection: React.FC = () => {
                   alt="Services Image"
                   width={600}
                   height={400}
-                  className="object-cover rounded-lg w-full h-auto max-h-[250px] sm:max-h-[1000px] md:max-h-[350px] lg:max-h-[500px]"
+                  className="mt-10 object-cover rounded-lg w-full h-auto max-h-[250px] sm:max-h-[1000px] md:max-h-[350px] lg:max-h-[500px]"
                 />
               </motion.div>
             </div>

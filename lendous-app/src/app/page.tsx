@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import SlideInSection from "../../components/SlideInSection";
+import Link from "next/link";
 
 const Home: React.FC = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -69,7 +70,7 @@ const Home: React.FC = () => {
 
         <div className="py-12 sm:py-16 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
           <div className="w-full lg:w-1/2 text-center lg:text-left space-y-4 sm:space-y-6 px-4 sm:px-0">
-            <h1 className="text-[#27408F] text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug">
+            <h1 className="mt-10 text-[#27408F] text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug">
               Ready to Be The Next Big Thing in Africa?
             </h1>
 
@@ -78,6 +79,7 @@ const Home: React.FC = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+             <Link href="/solutions">
               <motion.button
                 onClick={() => scrollToSection("services")}
                 whileHover={{
@@ -91,6 +93,8 @@ const Home: React.FC = () => {
               >
                 Explore Solutions
               </motion.button>
+              </Link>
+              <Link href="/contact">
               <motion.button
                 onClick={() => scrollToSection("consultation")}
                 whileHover={{
@@ -105,6 +109,7 @@ const Home: React.FC = () => {
               >
                 Free Consultation
               </motion.button>
+              </Link>
             </div>
           </div>
 
@@ -163,6 +168,7 @@ const Home: React.FC = () => {
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
               className="flex justify-center lg:justify-start"
             >
+              <Link href="/solutions">
               <motion.button
                 onClick={() => scrollToSection("services")}
                 whileHover={{
@@ -176,6 +182,7 @@ const Home: React.FC = () => {
               >
                 Explore Solutions
               </motion.button>
+              </Link>
             </motion.div>
           </div>
 
