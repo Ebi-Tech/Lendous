@@ -147,16 +147,18 @@ const SolutionsSection: React.FC = () => {
   return (
     <main className="bg-white font-poppins">
       {/* Hero Section */}
+      {/* Hero Section */}
       <div
         id="hero-section"
-        className="relative flex flex-col justify-center overflow-hidden"
+        className="relative flex flex-col justify-center items-center overflow-hidden bg-gray-900 pt-16 sm:pt-20 lg:pt-24"
         style={{ minHeight: "80vh", maxHeight: "800px" }}
       >
+        {/* Background Image with Gradient Overlay */}
         <motion.div
           className="absolute inset-0 z-0"
-          initial={{ scale: 1 }}
-          whileInView={{ scale: 1.05 }}
-          transition={{ duration: 5, ease: "easeOut" }}
+          initial={{ scale: 1.1 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 6, ease: "easeOut" }}
         >
           <Image
             src="/hero-bg2.jpg"
@@ -165,28 +167,35 @@ const SolutionsSection: React.FC = () => {
             style={{ objectFit: "cover" }}
             priority
             sizes="100vw"
-            className="transition-transform duration-300"
+            className="transition-transform duration-500"
+            quality={85}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/20 z-1 backdrop-blur-sm"></div>
+          {/* Gradient Overlay for Better Text Readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-900/60 to-gray-900/30 z-1"></div>
         </motion.div>
+
+        {/* Hero Content */}
         <SlideInSection
           direction="left"
-          className="py-12 sm:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-4 sm:gap-6"
+          className="py-16 sm:py-20 lg:py-24 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-4 sm:gap-6"
         >
-          <div className="text-center max-w-xl">
+          <div className="text-center max-w-3xl">
+            {/* Main Headline */}
             <motion.h2
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight max-w-xl line-clamp-2 whitespace-normal"
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight [text-shadow:_0_2px_6px_rgba(0,0,0,0.4)]"
             >
               Solutions for Every Business Stage
             </motion.h2>
+
+            {/* Subheadline */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className="mt-4 sm:mt-6 text-sm sm:text-base font-medium text-gray-200 leading-relaxed bg-gray-900/30 px-2 py-1 max-w-md whitespace-nowrap inline-block"
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+              className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg font-medium text-gray-100 leading-relaxed max-w-2xl mx-auto"
             >
               From launching your business to scaling across markets, we’ve got you covered.
             </motion.p>

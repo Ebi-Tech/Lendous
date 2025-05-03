@@ -384,16 +384,18 @@ const TrainingProgramsSection: React.FC = () => {
   return (
     <div id="training-programs" className="bg-white font-sans">
       {/* Hero Section */}
+      {/* Hero Section */}
       <div
         id="hero-section"
-        className="relative flex flex-col justify-center overflow-hidden"
-        style={{ minHeight: "60vh", maxHeight: "700px" }}
+        className="relative flex flex-col justify-center items-center overflow-hidden bg-gray-900 pt-16 sm:pt-20 lg:pt-24"
+        style={{ minHeight: "80vh", maxHeight: "800px" }}
       >
+        {/* Background Image with Gradient Overlay */}
         <motion.div
           className="absolute inset-0 z-0"
-          initial={{ scale: 1 }}
-          animate={{ scale: 1.05 }}
-          transition={{ duration: 5, ease: "easeOut" }}
+          initial={{ scale: 1.1 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 6, ease: "easeOut" }}
         >
           <Image
             src="/hero-bg3.jpg"
@@ -402,30 +404,37 @@ const TrainingProgramsSection: React.FC = () => {
             style={{ objectFit: "cover" }}
             priority
             sizes="100vw"
-            className="transition-transform duration-300"
+            className="transition-transform duration-500"
+            quality={85}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-gray-900/10 z-1 backdrop-blur-sm"></div>
+          {/* Gradient Overlay for Better Text Readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-900/60 to-gray-900/30 z-1"></div>
         </motion.div>
+
+        {/* Hero Content */}
         <SlideInSection
           direction="left"
-          className="py-8 sm:py-12 lg:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-3 sm:gap-4"
+          className="py-16 sm:py-20 lg:py-24 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-4 sm:gap-6"
         >
-          <div className="text-center max-w-[600px]">
+          <div className="text-center max-w-3xl">
+            {/* Main Headline */}
             <motion.h2
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight tracking-tight max-w-[600px] line-clamp-2 whitespace-normal [text-shadow:_0_2px_4px_rgba(0,0,0,0.3)]"
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight [text-shadow:_0_2px_6px_rgba(0,0,0,0.4)]"
             >
-              Unlock Your Potential with Our Training Programs
+              Empower Your Future with World-Class Training
             </motion.h2>
+
+            {/* Subheadline */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className="mt-3 sm:mt-4 text-xs sm:text-sm lg:text-base font-medium text-gray-200 leading-relaxed bg-gray-900/30 px-2 py-1 max-w-[400px] line-clamp-2"
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+              className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg font-medium text-gray-100 leading-relaxed max-w-2xl mx-auto"
             >
-              From Leadership Development to Operational Excellence, our programs address critical skill gaps in African SMEs.
+              Discover transformative programs designed to bridge skill gaps and drive success for African SMEs in Leadership, Digital Transformation, and more.
             </motion.p>
           </div>
         </SlideInSection>
@@ -461,8 +470,8 @@ const TrainingProgramsSection: React.FC = () => {
                 }}
                 onKeyDown={(e) => handleKeyDown(e, tab)}
                 className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-semibold text-xs sm:text-sm transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${activeTab === tab
-                    ? "bg-indigo-600 text-white"
-                    : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
+                  ? "bg-indigo-600 text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
                   }`}
                 role="tab"
                 aria-selected={activeTab === tab}
