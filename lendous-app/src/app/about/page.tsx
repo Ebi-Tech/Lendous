@@ -1,6 +1,5 @@
 "use client";
 
-import Image from 'next/image';
 import Link from "next/link";
 import { motion } from 'framer-motion';
 import { FaLinkedin, FaHandshake, FaLaptopCode, FaMoneyBillWave, FaUsers } from 'react-icons/fa';
@@ -30,10 +29,10 @@ const AboutSection: React.FC = () => {
   };
 
   const serviceIcons = {
-    "Lendous Tech": <FaLaptopCode className="w-8 h-8 sm:w-10 sm:h-10 text-[#27408F]" />,
-    "Lendous People": <FaUsers className="w-8 h-8 sm:w-10 sm:h-10 text-[#27408F]" />,
-    "Lendous Capital": <FaMoneyBillWave className="w-8 h-8 sm:w-10 sm:h-10 text-[#27408F]" />,
-    "Lendous Support": <FaHandshake className="w-8 h-8 sm:w-10 sm:h-10 text-[#27408F]" />,
+    "Lendous Tech": <FaLaptopCode className="w-8 h-8 sm:w-10 sm:h-10 text-[#1AF866]" />,
+    "Lendous People": <FaUsers className="w-8 h-8 sm:w-10 sm:h-10 text-[#1AF866]" />,
+    "Lendous Capital": <FaMoneyBillWave className="w-8 h-8 sm:w-10 sm:h-10 text-[#1AF866]" />,
+    "Lendous Support": <FaHandshake className="w-8 h-8 sm:w-10 sm:h-10 text-[#1AF866]" />,
   };
 
   const serviceData = [
@@ -167,37 +166,42 @@ const AboutSection: React.FC = () => {
   return (
     <main className="font-poppins">
       {/* Hero Section */}
-      <div
+      <section
         id="hero-section"
-        className="relative flex flex-col justify-center overflow-hidden   "
+        className="relative flex flex-col justify-center bg-cover bg-center"
         style={{ 
           minHeight: '700px',
-          
+          backgroundImage: "url('/hero-bg4.jpg')"
         }}
       >
-        <div className="absolute inset-0 z-0">
-          <div className="h-full bg-[#F5F5F5]"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#E0E0E0] opacity-85 z-1 backdrop-blur-sm"></div>
-        </div>
-        <div className="py-12 sm:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8 sm:gap-12">
-          <div className="md:w-2/5 text-center md:text-left">
-            <motion.h1
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: "easeInOut" }}
-              className="text-[#27408F] text-[36px] sm:text-[40px] font-extrabold tracking-tight leading-tight sm:leading-snug"
-            >
-              Who We Are
-            </motion.h1>
+        <div className="absolute inset-0 bg-black opacity-80 z-0"></div>
+        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
+        <div className="py-12 sm:py-16 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 sm:gap-12 text-center">
+          <div className="space-y-6 sm:space-y-10 px-4 sm:px-0">
+            <div className="relative">
+              <motion.h1
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, ease: " FLAGS: [easeInOut]" }}
+                className="mt-12 text-white text-[36px] sm:text-[40px] font-extrabold font-caveat-brush leading-tight sm:leading-snug"
+              >
+                Who We Are
+              </motion.h1>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                <svg width="120" height="10" viewBox="0 0 120 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+            </div>
             <motion.p
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-              className="mt-4 sm:mt-6 text-black text-[16px] sm:text-[18px] font-medium leading-relaxed"
+              className="text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide mt-6"
             >
               Lendous powers business growth with technology, talent, and finance.
             </motion.p>
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center md:justify-start gap-3 sm:gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mt-8">
               <motion.button
                 onClick={() => scrollToSection("team-section")}
                 whileHover={{
@@ -209,7 +213,7 @@ const AboutSection: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
                 className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
               >
-                Meet the Team
+                <span className="font-poppins">Meet the Team</span>
               </motion.button>
               <motion.button
                 onClick={() => scrollToSection("services-section")}
@@ -223,150 +227,130 @@ const AboutSection: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
                 className="px-6 sm:px-8 py-2 sm:py-3 bg-transparent border-2 border-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
               >
-                Explore Services
+                <span className="font-poppins">Explore Services</span>
               </motion.button>
             </div>
           </div>
-          <div className="md:w-3/5 mt-8 sm:mt-6 md:mt-0 flex items-center justify-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
-              className="w-full max-w-md lg:max-w-2xl"
-            >
-              <Image
-                src="/hero-bg4.jpg"
-                alt="Hero Image"
-                width={1200}
-                height={800}
-                className="object-cover rounded-lg shadow-2xl w-full h-auto max-h-[250px] sm:max-h-[1000px] md:max-h-[350px] lg:max-h-[500px]"
-              />
-            </motion.div>
-          </div>
         </div>
-      </div>
+        <div className="absolute bottom-0 left-0 right-0 z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
+            <path d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z" fill="white" fillOpacity="0.1" />
+          </svg>
+        </div>
+      </section>
 
       {/* Team Section */}
       <section
         id="team-section"
-        className="relative flex flex-col justify-center overflow-hidden   "
-        style={{ minHeight: '700px' }}
+        className="relative flex flex-col justify-center overflow-hidden"
+        style={{ 
+          minHeight: '700px',
+          backgroundColor: '#E2D8EC'
+        }}
       >
         <div className="absolute inset-0 z-0">
-          <div className="h-full bg-[#E2D8EC]"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#E2D8EC] to-[#D9C8E6] opacity-85 z-1 backdrop-blur-sm"></div>
+          <div className="absolute inset-0 bg-transparent z-1 backdrop-blur-sm"></div>
         </div>
+        <div className="absolute top-0 left-0 bottom-0 w-2 bg-gradient-to-b from-[#1AF866] to-[#7030A0] z-10"></div>
         <SlideInSection
           direction="right"
-          className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto text-center"
+          className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto"
         >
-          <h2 className="text-[32px] sm:text-[36px] font-extrabold text-[#27408F] leading-tight mt-5">
-            Meet Our Leadership Team
-          </h2>
-          <p className="text-[16px] sm:text-[18px] mt-8 text-black font-medium italic">
-            Our leaders bring decades of experience to help your business thrive.
-          </p>
-          <div className="mt-5 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Charles Charles',
-                role: 'Co-Founder & Lead, Lendous Tech & Support',
-                image: '/team-charles.jpg',
-                linkedin: 'https://linkedin.com/in/charlescharles',
-              },
-              {
-                name: 'Patience Anoh',
-                role: 'Co-Founder & Lead, Lendous People',
-                image: '/team-patience.jpg',
-                linkedin: 'https://linkedin.com/in/patienceanoh',
-              },
-              {
-                name: 'Peter Abasiano',
-                role: 'Business Lead, Lendous Capital',
-                image: '/team-peter.jpg',
-                linkedin: 'https://linkedin.com/in/peterabasiano',
-              },
-            ].map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="relative flex flex-col items-center p-4 rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#1AF866]"
-              >
-                <div className="relative">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    width={120}
-                    height={120}
-                    className="rounded-full border-4 border-[#7030A0]"
-                    onError={(e) => {
-                      e.currentTarget.src = '/placeholder-team-member.jpg';
-                    }}
-                  />
-                  <motion.div
-                    className="absolute inset-0 rounded-full border-2 border-[#1AF866] opacity-0"
-                    whileHover={{ opacity: 1, scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </div>
-                <h3 className="text-[20px] font-semibold text-[#27408F] mt-4">{member.name}</h3>
-                <p className="text-[14px] text-gray-700 mt-1 text-center">{member.role}</p>
-                <a
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
+          <div className="flex flex-col lg:flex-row items-start gap-12">
+            <div className="lg:w-1/2 text-center lg:text-left">
+              <h2 className="text-[36px] sm:text-[40px] font-extrabold font-caveat-brush text-[#27408F] leading-tight mt-5">
+                About
+              </h2>
+              <p className="text-[16px] sm:text-[18px] mt-2 text-black font-poppins font-medium">
+                We are experienced professionals bringing our collective years of expertise to SMEs
+              </p>
+              <p className="text-[16px] sm:text-[18px] mt-8 text-black font-poppins font-medium">
+                Lendous is the Growth Partner for businesses in Africa. We help businesses grow sales, plug revenue leaks, and build structures to support expansion (scale).
+              </p>
+              <p className="text-[16px] sm:text-[18px] mt-4 text-black font-poppins font-medium">
+                We do this by providing them the Systems, Tools, Advisory, and Resources (STARS) they need to Launch, Grow, and Expand in Africa.
+              </p>
+              <p className="text-[16px] sm:text-[18px] mt-4 text-black font-poppins font-medium">
+                With a combined 40+ years of experience from the leadership team spanning various industries in Africa including; Retail, Financial Services, Oil & Gas, Renewable Energy, & Hospitality, we are committed to solving the problem of launching and growing in Africa, with clarity and precision in execution.
+              </p>
+            </div>
+            <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {[
+                { name: "Charles Charles", role: "CEO", image: "/team-charles.jpg", linkedin: "https://linkedin.com/in/charlescharles" },
+                { name: "Ossai Anoh", role: "COO", image: "/team-patience.jpg", linkedin: "https://linkedin.com/in/ossaianoh" },
+                { name: "Peter Abasiano", role: "Strategic Partnerships", image: "/team-peter.jpg", linkedin: "https://linkedin.com/in/peterabasiano" },
+                { name: "Fidel Castro", role: "CTO", image: "/team-fidel.jpg", linkedin: "https://linkedin.com/in/fidelcastro" },
+              ].map((member, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  className="flex flex-col items-center p-4 rounded-lg bg-white shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#1AF866]"
                 >
-                  <FaLinkedin className="w-5 h-5" />
-                </a>
-              </motion.div>
-            ))}
+                  <div className="relative">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      width={120}
+                      height={120}
+                      className="rounded-full border-4 border-[#7030A0]"
+                      onError={(e) => {
+                        e.currentTarget.src = '/placeholder-team-member.jpg';
+                      }}
+                    />
+                    <motion.div
+                      className="absolute inset-0 rounded-full border-2 border-[#1AF866] opacity-0"
+                      whileHover={{ opacity: 1, scale: 1.1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </div>
+                  <h3 className="text-[20px] font-semibold font-caveat-brush text-[#27408F] mt-4">{member.name}</h3>
+                  <p className="text-[14px] text-gray-700 mt-1 text-center font-poppins">{member.role}</p>
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
+                  >
+                    <FaLinkedin className="w-5 h-5" />
+                  </a>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </SlideInSection>
+        <div className="absolute bottom-0 left-0 right-0 z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
+            <path d="M0 0C240 48 480 48 720 48C960 48 1200 32 1440 0V48H0V0Z" fill="white" fillOpacity="0.1" />
+          </svg>
+        </div>
       </section>
 
       {/* Services Section */}
       <div
         id="services-section"
-        className="relative flex flex-col justify-center overflow-hidden   "
+        className="relative flex flex-col justify-center overflow-hidden"
         style={{ minHeight: '700px' }}
       >
         <div className="absolute inset-0 z-0">
-          <div className="h-full bg-[#F5F5F5]"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#f0f0f0] opacity-85 z-1 backdrop-blur-sm"></div>
+          <div className="h-full bg-[#5B2A86]"></div>
+          <div className="absolute inset-0 bg-black opacity-70 z-1 backdrop-blur-sm"></div>
         </div>
+        <div className="absolute top-0 right-0 bottom-0 w-2 bg-gradient-to-b from-[#7030A0] to-[#1AF866] z-10"></div>
         <SlideInSection
           direction="up"
           className="py-12 sm:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         >
           <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="md:w-1/2 flex justify-center mt-4 sm:mt-6 lg:mt-0">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, ease: "easeInOut" }}
-                className="w-full max-w-md lg:max-w-2xl"
-              >
-                <Image
-                  src="/hero-bg3.jpg"
-                  alt="Services Image"
-                  width={600}
-                  height={400}
-                  className="mt-10 object-cover rounded-lg w-full h-auto max-h-[250px] sm:max-h-[1000px] md:max-h-[350px] lg:max-h-[500px]"
-                />
-              </motion.div>
-            </div>
             <div className="md:w-1/2 text-center md:text-left">
               <motion.h2
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, ease: "easeInOut" }}
-                className="text-[#27408F] text-[32px] sm:text-[36px] font-extrabold tracking-tight leading-tight sm:leading-snug"
+                className="text-white text-[32px] sm:text-[36px] font-extrabold font-caveat-brush tracking-tight leading-tight sm:leading-snug"
               >
                 Our Services
               </motion.h2>
@@ -375,7 +359,7 @@ const AboutSection: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-                className="mt-6 sm:mt-10 text-black text-[16px] sm:text-[18px] font-medium italic drop-shadow-md leading-relaxed max-w-3xl mx-auto md:mx-0"
+                className="mt-6 sm:mt-10 text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide italic drop-shadow-md leading-relaxed max-w-3xl mx-auto md:mx-0"
               >
                 We blend our expertise across key service areas to deliver tailored solutions for your business.
               </motion.p>
@@ -405,7 +389,7 @@ const AboutSection: React.FC = () => {
                   >
                     {serviceIcons[category.title as keyof typeof serviceIcons]}
                   </motion.span>
-                  <h3 className="text-[24px] sm:text-[28px] font-semibold text-[#27408F] ml-3 flex-1">
+                  <h3 className="text-[24px] sm:text-[28px] font-semibold font-caveat-brush text-[#1AF866] ml-3 flex-1">
                     {category.title}
                   </h3>
                 </div>
@@ -418,11 +402,11 @@ const AboutSection: React.FC = () => {
                         className="flex items-center justify-between cursor-pointer p-2 hover:bg-white/30 rounded-lg transition-colors duration-200"
                         onClick={() => toggleSection(sectionKey)}
                       >
-                        <h4 className="text-[16px] font-semibold text-[#27408F] mb-0">
+                        <h4 className="text-[16px] font-semibold font-poppins text-white mb-0">
                           {group.subheading}
                         </h4>
                         <button
-                          className="text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
+                          className="text-white hover:text-[#1AF866] transition-colors duration-300"
                         >
                           {isOpen ? (
                             <Minus className="w-5 h-5" />
@@ -448,7 +432,7 @@ const AboutSection: React.FC = () => {
                               initial="hidden"
                               animate="visible"
                               variants={badgeVariants}
-                              className="text-[16px] text-gray-700 font-medium mt-1"
+                              className="text-[16px] text-white font-poppins font-medium mt-1"
                             >
                               {service}
                             </motion.li>
@@ -461,7 +445,7 @@ const AboutSection: React.FC = () => {
               </motion.div>
             ))}
           </div>
-          <div className="mt-12 sm:mt-16 text-center ">
+          <div className="mt-12 sm:mt-16 text-center">
             <Link href="/solutions">
               <motion.button
                 whileHover={{
@@ -471,30 +455,35 @@ const AboutSection: React.FC = () => {
                   boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full sm:w-auto px-12 py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg transition-all duration-300 hover:shadow-2xl"
+                className="w-full sm:w-auto px-12 py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base font-poppins shadow-lg transition-all duration-300 hover:shadow-2xl"
               >
                 Explore Solutions
               </motion.button>
             </Link>
           </div>
         </SlideInSection>
+        <div className="absolute bottom-0 left-0 right-0 z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
+            <path d="M0 0C240 48 480 48 720 48C960 48 1200 32 1440 0V48H0V0Z" fill="white" fillOpacity="0.1" />
+          </svg>
+        </div>
       </div>
 
       {/* Footer Banner */}
       <SlideInSection
         direction="down"
-        className="bg-[#7030A0] text-white py-12 sm:py-16   "
+        className="bg-[#7030A0] text-white py-12 sm:py-16"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
           <div className="text-center sm:text-left">
-            <h2 className="text-[36px] sm:text-[40px] font-extrabold">Ready to Grow Your Business?</h2>
-            <p className="mt-2 text-[16px] sm:text-[18px] font-medium italic">
+            <h2 className="text-[36px] sm:text-[40px] font-extrabold font-caveat-brush">Ready to <span className="text-[#1AF866]">Grow</span> Your Business?</h2>
+            <p className="mt-2 text-[20px] sm:text-[22px] font-caveat-brush tracking-wide italic">
               Let's discuss how our STARS approach can transform your business.
             </p>
           </div>
           <button
             onClick={() => scrollToSection("consultation")}
-            className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center gap-2"
+            className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[18px] font-caveat-brush shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center gap-2"
           >
             Get in Touch
             <svg
