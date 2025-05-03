@@ -1,14 +1,70 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import SlideInSection from "../../components/SlideInSection";
 import Link from "next/link";
 
+// Custom typewriter effect component using Framer Motion
+interface TypewriterTextProps {
+  text: string;
+  className?: string;
+  typingSpeed?: number;
+  onComplete?: () => void;
+}
+
+const TypewriterText: React.FC<TypewriterTextProps> = ({ text, className, typingSpeed = 50, onComplete = () => {} }) => {
+  const [displayText, setDisplayText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
+
+  useEffect(() => {
+    // Reset when text changes
+    setDisplayText("");
+    setCurrentIndex(0);
+    setIsComplete(false);
+  }, [text]);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prevIndex => prevIndex + 1);
+      }, typingSpeed);
+      
+      return () => clearTimeout(timeout);
+    } else if (!isComplete) {
+      setIsComplete(true);
+      onComplete();
+    }
+  }, [currentIndex, text, typingSpeed, isComplete, onComplete]);
+
+  return (
+    <span className={className}>
+      {displayText}
+      <motion.span
+        animate={{ opacity: [0, 1, 0] }}
+        transition={{ repeat: Infinity, duration: 0.8 }}
+        className="inline-block ml-0.5"
+      >
+        |
+      </motion.span>
+    </span>
+  );
+};
+
 const Home: React.FC = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [viewportHeight, setViewportHeight] = useState(0);
+  const [textIndex, setTextIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(true);
+  
+  // Array of texts to rotate through
+  const rotatingTexts = [
+    "Drive Sales",
+    "Plug Revenue Leaks",
+    "Build structures to expand"
+  ];
 
   useEffect(() => {
     const updateViewportHeight = () => {
@@ -19,6 +75,18 @@ const Home: React.FC = () => {
     window.addEventListener('resize', updateViewportHeight);
     return () => window.removeEventListener('resize', updateViewportHeight);
   }, []);
+
+  // Text rotation effect with delay for typewriter to complete
+  useEffect(() => {
+    if (!isTyping) {
+      const timeout = setTimeout(() => {
+        setIsTyping(true);
+        setTextIndex((prevIndex) => (prevIndex + 1) % rotatingTexts.length);
+      }, 2000); // Wait 2 seconds after typing completes before changing text
+      
+      return () => clearTimeout(timeout);
+    }
+  }, [isTyping, rotatingTexts.length]);
 
   useEffect(() => {
     const preloadImages = async () => {
@@ -57,222 +125,245 @@ const Home: React.FC = () => {
       {/* Section 1: Hero Section */}
       <section
         id="hero-section"
-        className="relative flex flex-col justify-center"
+        className="relative flex flex-col justify-center bg-cover bg-center"
         style={{ 
           minHeight: '700px',
-          
+          backgroundImage: "url('/hero-bg1.jpg')"
         }}
       >
-        <div className="absolute inset-0 z-0">
-          <div className="h-full bg-[#F5F5F5]"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#E0E0E0] opacity-85 z-1 backdrop-blur-sm"></div>
-        </div>
+        <div className="absolute inset-0 bg-black opacity-80 z-0"></div> {/* Reduced opacity to 30% */}
+        
+        {/* Accent Top Border */}
+        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
 
-        <div className="py-12 sm:py-16 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
-          <div className="w-full lg:w-1/2 text-center lg:text-left space-y-4 sm:space-y-6 px-4 sm:px-0">
-            <h1 className="mt-10 text-[#27408F] text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug">
-              Ready to Be The Next Big Thing in Africa?
-            </h1>
+        <div className="py-12 sm:py-16 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 sm:gap-12 text-center">
+          <div className="space-y-6 sm:space-y-10 px-4 sm:px-0">
+                        
+            <div className="relative">
+              <h1 className="mt-12 text-white text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug">
+                Ready to Be The Next Big Thing in Africa?
+              </h1>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                <svg width="120" height="10" viewBox="0 0 120 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+            </div>
 
-            <p className="text-black text-[16px] sm:text-[18px] font-medium italic">
-              Grow with Lendous
+            <p className="text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide mt-6">
+            Launch. <span className="text-[#1AF866]">Grow. </span>Expand. your business with Lendous
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-             <Link href="/solutions">
-              <motion.button
-                onClick={() => scrollToSection("services")}
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "#FFFFFF",
-                  color: "#7030A0",
-                  boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
-              >
-                Explore Solutions
-              </motion.button>
-              </Link>
-              <Link href="/contact">
-              <motion.button
-                onClick={() => scrollToSection("consultation")}
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "#FFFFFF",
-                  color: "#7030A0",
-                  boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
-                  borderColor: "#7030A0",
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-2 sm:py-3 bg-transparent border-2 border-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
-              >
-                Free Consultation
-              </motion.button>
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mt-8">
+              <Link href="/solutions">
+                <motion.button
+                  onClick={() => scrollToSection("services")}
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: "#FFFFFF",
+                    color: "#7030A0",
+                    boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
+                >
+                  <span className="font-poppins">Explore Solutions</span>
+                </motion.button>
               </Link>
             </div>
           </div>
-
-          <div className="w-full lg:w-1/2 flex justify-center mt-4 sm:mt-6 lg:mt-0">
-            <div className="relative w-full max-w-xl aspect-video rounded-xl overflow-hidden shadow-2xl">
-              <Image
-                src="/hero-bg1.jpg"
-                alt="Hero Image"
-                fill
-                className="object-cover max-h-[400px] sm:max-h-[450px] md:max-h-[500px]"
-                priority
-              />
-            </div>
-          </div>
+        </div>
+        
+        {/* Section Divider */}
+        <div className="absolute bottom-0 left-0 right-0 z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
+            <path d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z" fill="white" fillOpacity="0.1" />
+          </svg>
         </div>
       </section>
 
       {/* Section 2 */}
       <section
-        className="relative flex flex-col justify-center"
+        className="relative flex flex-col justify-center bg-cover bg-center"
         style={{ 
-          minHeight: '700px'
+          minHeight: '700px',
+          backgroundColor: '#5B2A86' // Solid purple background matching the image
         }}
       >
-        <div className="absolute inset-0 z-0">
-          <div className="h-full bg-[#7030A0]"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#7030A0] to-[#27408F] opacity-85 z-1 backdrop-blur-sm"></div>
-        </div>
+        <div className="absolute inset-0 bg-black opacity-70 z-0"></div> {/* Reduced opacity to 30% */}
+        
+        {/* Accent Side Border */}
+        <div className="absolute top-0 left-0 bottom-0 w-2 bg-gradient-to-b from-[#1AF866] to-[#7030A0] z-10"></div>
 
         <SlideInSection
           direction="right"
-          className="py-16 sm:py-20 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-6 sm:gap-8"
+          className="py-16 sm:py-20 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 sm:gap-12 text-center"
         >
-          <div className="pt-5 w-full lg:w-1/2 text-center lg:text-left space-y-4 sm:space-y-6 px-4 sm:px-0">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-white text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug"
+          <div className="pt-5 space-y-8 sm:space-y-12 px-4 sm:px-0">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              className="mb-10 inline-block bg-[#27408F]/80 px-6 py-2 rounded-full"
             >
-              Starting & Growing a Business<br className="block sm:hidden" /><br className="hidden sm:block" />is Hard. We are Here to Make it Easier.
-            </motion.h1>
+              <span className="text-white text-lg font-caveat-brush tracking-wider">Problem We Solve</span>
+            </motion.div>
+            
+            <div className="relative">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="text-white text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug font-poppins"
+              >
+                We remove the <span className="relative inline-block">
+                  <span className="relative z-10">Guesswork</span>
+                  <span className="absolute -bottom-1 left-0 right-0 h-3 bg-[#1AF866]/30 -rotate-1 z-0"></span>
+                </span> in Running Your Business<br className="block sm:hidden" /><br className="hidden sm:block" />
+                and Help You <span className="relative inline-block">
+                  <TypewriterText
+                    text={rotatingTexts[textIndex]}
+                    typingSpeed={40}
+                    onComplete={() => setIsTyping(false)}
+                    className="font-caveat-brush text-[#1AF866] text-[42px] sm:text-[46px] transform -rotate-2 inline-block"
+                  />
+                  <span className="absolute -bottom-1 left-0 right-0 h-1 bg-[#1AF866]"></span>
+                </span>
+              </motion.h1>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                
+              </div>
+            </div>
 
-            <motion.p
+            <motion.ol
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-[#E2D8EC] text-[16px] sm:text-[18px] font-medium italic"
+              className="text-[#E2D8EC] text-left text-[16px] sm:text-[18px] font-medium italic mt-8 space-y-8 list-decimal pl-6"
             >
-              Select service(s) to explore our range, get a free consultation to ensure solutions fit your stage, receive an online quote, and see your solution deployed with ongoing support.
-            </motion.p>
+              <li>
+                We offer <span className="text-[#7030A0] font-semibold">Free Consultation</span>
+                <br className="block" />
+                <span className="block mt-2">Tell us about your business, challenge, and needs.</span>
+              </li>
+              <li>
+                We build your <span className="text-[#7030A0] font-semibold">Solution Pack</span>
+                <br className="block" />
+                <span className="block mt-2">From our range of growth services, we build you a solution.</span>
+              </li>
+              <li>
+                We deliver the solution & <span className="text-[#7030A0] font-semibold">Support You</span>
+                <br className="block" />
+                <span className="block mt-2">Our solutions are Done-For-You, so you can focus on what you know how to do.</span>
+              </li>
+            </motion.ol>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-              className="flex justify-center lg:justify-start"
+              className="flex justify-center mt-10"
             >
               <Link href="/solutions">
-              <motion.button
-                onClick={() => scrollToSection("services")}
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "#FFFFFF",
-                  color: "#7030A0",
-                  boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
-              >
-                Explore Solutions
-              </motion.button>
+                <motion.button
+                  onClick={() => scrollToSection("services")}
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: "#FFFFFF",
+                    color: "#7030A0",
+                    boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
+                >
+                  <span className="font-poppins">Explore Solutions</span>
+                </motion.button>
               </Link>
             </motion.div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-            className="w-full lg:w-1/2 flex justify-center mt-4 sm:mt-6 lg:mt-0"
-          >
-            <div className="relative w-full max-w-xl aspect-video rounded-xl overflow-hidden shadow-2xl">
-              <Image
-                src="/hero-bg2.jpg"
-                alt="Section 2 Image"
-                fill
-                className="object-cover max-h-[400px] sm:max-h-[450px] md:max-h-[500px]"
-              />
-            </div>
-          </motion.div>
         </SlideInSection>
+        
+        {/* Section Divider */}
+        <div className="absolute bottom-0 left-0 right-0 z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
+            <path d="M0 0C240 48 480 48 720 48C960 48 1200 32 1440 0V48H0V0Z" fill="white" fillOpacity="0.1" />
+          </svg>
+        </div>
       </section>
 
       {/* Section 3 */}
       <section
-        className="pb-10 relative flex flex-col justify-center"
+        className="pb-10 relative flex flex-col justify-center bg-cover bg-center"
         style={{ 
-          minHeight: '700px'
+          minHeight: '700px',
+          backgroundColor: '#F5F5F5' // Solid background color as requested
         }}
       >
-        <div className="absolute inset-0 z-0">
-          <div className="h-full bg-[#F5F5F5]"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F5F5F5] to-[#E0E0E0] opacity-85 z-1 backdrop-blur-sm"></div>
-        </div>
+        <div className="absolute inset-0 bg-transparent z-0"></div> {/* Removed black overlay */}
+        
+        {/* Accent Right Border */}
+        <div className="absolute top-0 right-0 bottom-0 w-2 bg-gradient-to-b from-[#7030A0] to-[#1AF866] z-10"></div>
 
         <SlideInSection
           direction="up"
-          className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center gap-6 sm:gap-8 px-4 sm:px-6 lg:px-8"
+          className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center gap-8 sm:gap-12 px-4 sm:px-6 lg:px-8 text-center"
         >
-          <div className="w-full flex flex-col lg:flex-row items-center gap-6 sm:gap-8">
-            <div className="mt-5 w-full lg:w-3/5 text-center lg:text-left space-y-4 sm:space-y-6 px-4 sm:px-0 order-0 lg:order-none">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-gray-800 text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug mt-10"
+          <div className="w-full flex flex-col items-center gap-8 sm:gap-12">
+            <div className="mt-5 space-y-8 sm:space-y-12 px-4 sm:px-0">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                className="mb-8 inline-block bg-[#7030A0] px-6 py-2 rounded-full"
               >
-                The Lendous Assurance:<br />You Will Never Work Alone!
-              </motion.h1>
+                <span className="text-white text-lg font-caveat-brush tracking-wider font-bold">Why Lendous?</span>
+              </motion.div>
+              
+              <div className="relative">
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="text-black text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug font-poppins"
+                >
+                  The Lendous <span className="font-caveat-brush text-[#1AF866] text-[42px] sm:text-[46px] transform inline-block">Assurance</span>: YOU WILL 
+                  <span className="relative inline-block mx-2">
+                    <span className="font-caveat-brush text-[#1AF866] text-[42px] sm:text-[46px] transform inline-block">NEVER</span>
+                    <span className="absolute -bottom-1 left-0 right-0 h-2 bg-[#7030A0] z-0"></span>
+                  </span> 
+                  WORK ALONE!
+                </motion.h1>
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                  
+                </div>
+              </div>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                className="text-gray-600 text-[16px] sm:text-[18px] font-medium italic"
+                className="text-black text-[20px] font-caveat-brush tracking-wide mt-6"
               >
-                Whenever your business needs anything, think Lendous first
+                WHENEVER YOU HAVE A BUSINESS PROBLEM, CALL LENDOUS
               </motion.p>
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-              className="w-full lg:w-2/5 flex justify-center mt-4 sm:mt-6 lg:mt-0 order-1 lg:order-none"
-            >
-              <div className="relative w-full max-w-md aspect-video rounded-xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/hero-bg3.jpg"
-                  alt="Section 3 Image"
-                  fill
-                  className="object-cover max-h-[300px] sm:max-h-[350px] md:max-h-[400px]"
-                />
-              </div>
-            </motion.div>
           </div>
 
-          <div className="w-full px-4 sm:px-0 order-2 lg:order-none">
+          <div className="w-full px-4 sm:px-0 mt-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-6"
             >
               {[
-                { value: "$300M+", label: "Value Delivered by Lendous" },
-                { value: "4+", label: "Years Supporting African SMEs" },
-                { value: "30+", label: "Years Leadership Experience" },
+                { value: "40+", label: "Years Combined Experience" },
+                { value: "$300M+", label: "Revenue Delivered To-Date*" },
+                { value: "3+", label: "Countries in Sub-Saharan Africa" },
               ].map((stat, index) => (
                 <motion.div
                   key={index}
-                  className="bg-white p-4 rounded-lg shadow-lg border-2 border-transparent transition-all duration-300"
+                  className="bg-white/90 p-4 rounded-lg shadow-lg border-2 border-transparent transition-all duration-300"
                   whileHover={{
                     rotateX: 5,
                     rotateY: 5,
@@ -281,22 +372,25 @@ const Home: React.FC = () => {
                   }}
                   transition={{ type: "spring", stiffness: 100 }}
                 >
-                  <h3 className="text-gray-800 text-[24px] sm:text-[28px] font-bold">{stat.value}</h3>
-                  <p className="text-gray-600 mt-1 text-[14px]">{stat.label}</p>
+                  <h3 className="text-gray-800 text-[24px] sm:text-[28px] font-caveat-brush">{stat.value}</h3>
+                  <p className="text-gray-600 mt-2 text-[14px] font-poppins">{stat.label}</p>
                 </motion.div>
               ))}
             </motion.div>
           </div>
+          <p className="text-[12px] text-black mt-12 text-left w-full px-4 sm:px-6 lg:px-8">
+            * Impact delivered by Lendous leaders in the last 10 years
+          </p>
         </SlideInSection>
       </section>
 
       {/* Footer Banner */}
       <section className="bg-[#7030A0] text-white py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div className="mt-10 text-center sm:text-left">
-            <h2 className="text-[36px] sm:text-[40px] font-extrabold">Ready to Grow Your Business?</h2>
-            <p className="mt-2 text-[16px] sm:text-[18px] font-medium italic">
-              Let's discuss how our STARS approach can transform your business.
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
+          <div className="mt-0">
+            <h2 className="text-[36px] sm:text-[40px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[42px] sm:text-[46px]">Grow</span> Your Business?</h2>
+            <p className="mt-4 text-[18px] sm:text-[20px] font-caveat-brush tracking-wide">
+              Let's help you do the dirty work so you can focus on what you know how to do.
             </p>
           </div>
           <motion.button
@@ -308,7 +402,7 @@ const Home: React.FC = () => {
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
           >
-            Get in Touch
+            <span className="font-caveat-brush text-[18px]">Get in Touch</span>
             <svg
               className="w-5 h-5"
               fill="none"

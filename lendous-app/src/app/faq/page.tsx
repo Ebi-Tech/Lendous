@@ -10,7 +10,8 @@ import {
   ChevronDown, 
   ChevronUp,
   Building,
-  MessageSquare
+  MessageSquare,
+  Star
 } from "lucide-react";
 import { JSX, useState } from "react";
 
@@ -34,26 +35,31 @@ const FAQSection = () => {
     }
   };
 
-  const faqs = [
+  const faqs: FAQ[] = [
     {
-      question: 'What types of businesses do you support?',
-      answer: 'We specialize in supporting African SMEs across diverse sectors including technology startups, financial services, manufacturing, agriculture, retail, healthcare, and operational businesses. Our tailored solutions address industry-specific challenges while promoting sustainable growth and innovation.',
-      icon: <Building className="text-emerald-500" size={24} />
-    },
-    {
-      question: 'How can I schedule a complimentary consultation?',
-      answer: 'You can easily schedule a complimentary consultation through our online booking system. Simply visit our Services page, select the category that aligns with your business needs, and choose an available time slot that works for you. Our team will confirm your appointment within 24 hours.',
+      question: 'How quickly can you start working with us?',
+      answer: 'We can typically begin the initial assessment within 1-2 weeks of your first inquiry. For more complex engagements, we’ll provide a detailed timeline after our initial consultation.',
       icon: <Calendar className="text-blue-500" size={24} />
     },
     {
-      question: 'What is your process for developing customized quotes?',
-      answer: 'Following your initial consultation, our team conducts a comprehensive assessment of your specific business requirements. We then prepare a detailed, transparent quote outlining proposed solutions, implementation timeline, deliverables, and investment requirements. This personalized document is typically delivered within 3-5 business days.',
+      question: 'Do you work with businesses outside Nigeria?',
+      answer: 'Yes, we serve clients across multiple African countries. Our team has experience working with businesses in West, East, and Southern Africa, and we can accommodate remote consultations when needed.',
+      icon: <Building className="text-emerald-500" size={24} />
+    },
+    {
+      question: 'What industries do you specialize in?',
+      answer: 'While our methodologies are industry-agnostic, we have particular expertise in agriculture, manufacturing, retail, technology, and services sectors. Our team brings relevant experience across various industries common in African markets.',
       icon: <FileText className="text-purple-500" size={24} />
     },
     {
-      question: 'Do you provide post-implementation support services?',
-      answer: 'Absolutely. We offer comprehensive post-implementation support packages designed to ensure long-term success. Our dedicated support team provides technical assistance, maintenance services, system updates, and ongoing optimization recommendations. Support plans can be customized based on your specific operational requirements and budget considerations.',
+      question: 'How do you measure the success of your services?',
+      answer: 'We establish clear, measurable objectives at the beginning of each engagement. Depending on your goals, these might include revenue growth, cost reduction, improved efficiency metrics, or other relevant KPIs.',
       icon: <HeadphonesIcon className="text-orange-500" size={24} />
+    },
+    {
+      question: 'What makes your approach different from other consultants?',
+      answer: 'Our STARS framework is specifically designed for African business contexts. We combine global best practices with deep local knowledge, ensuring solutions that are both world-class and contextually relevant.',
+      icon: <Star className="text-yellow-500" size={24} />
     },
   ];
 

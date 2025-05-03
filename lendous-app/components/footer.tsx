@@ -104,7 +104,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
                 href="mailto:info@lendous.com" 
                 className="hover:text-[#1AF866] transition duration-300"
               >
-                info@lendous.com
+              info@lendousresources.com
               </a>
             </div>
             <div>
