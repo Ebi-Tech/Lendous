@@ -1,18 +1,7 @@
 "use client";
-
 import Image from "next/image";
-import { motion } from 'framer-motion';
-import { 
-  HelpCircle, 
-  Calendar, 
-  FileText, 
-  HeadphonesIcon, 
-  ChevronDown, 
-  ChevronUp,
-  Building,
-  MessageSquare,
-  Star
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
 import { JSX, useState } from "react";
 
 const FAQSection = () => {
@@ -21,165 +10,188 @@ const FAQSection = () => {
   interface FAQ {
     question: string;
     answer: string;
-    icon: JSX.Element;
   }
+
+  const faqs: FAQ[] = [
+    {
+      question: "How quickly can you start working with us?",
+      answer: "Immediately after your Free Consultation. Once we align on the right solutions to your business problems, work commences immediately per agreed terms.",
+    },
+    {
+      question: "What industries do you specialize in?",
+      answer: "Retail: Superstore, Electronic Store, Bakery, Boutique Restaurant: A la carte, Fast Food, Fine Dining Services: Hair Salon",
+    },
+    {
+      question: "Can you accommodate our budget constraints?",
+      answer: "We understand the budget realities of African SMEs and offer flexible engagement models. After understanding your specific needs, we'll propose solutions that align with your budget while delivering maximum value.",
+    },
+    {
+      question: "Do you work with businesses outside Nigeria?",
+      answer: "Yes, we serve clients across multiple African countries. Our team has experience working with businesses in West, East, and Southern Africa, and we can accommodate remote consultations when needed.",
+    },
+    {
+      question: "How do you measure the success of your services?",
+      answer: "We establish clear, measurable objectives at the beginning of each engagement. Depending on your goals, these might include revenue growth, cost reduction, improved efficiency metrics, customer satisfaction, or other relevant KPIs.",
+    },
+    {
+      question: "What makes your approach different from other consultancies?",
+      answer: "First we are not a mere consultancy, we are your Growth Partner, helping you address problems so you can shine. We take care of what you need but cannot handle by yourself. We handhold you through it all, and do not just sell tools like the others do, leaving you to figure it out",
+    },
+    {
+      question: "What types of businesses do you support?",
+      answer: "We specialize in supporting African SMEs across diverse sectors including technology startups, financial services, manufacturing, agriculture, retail, healthcare, and operational businesses. Our tailored solutions address industry-specific challenges while promoting sustainable growth and innovation.",
+    },
+    {
+      question: "How can I schedule a complimentary consultation?",
+      answer: "You can easily schedule a complimentary consultation through our online booking system. Simply visit our Services page, select the category that aligns with your business needs, and choose an available time slot that works for you. Our team will confirm your appointment within 24 hours.",
+    },
+    {
+      question: "What is your process for developing customized quotes?",
+      answer: "Following your initial consultation, our team conducts a comprehensive assessment of your specific business requirements. We then prepare a detailed, transparent quote outlining proposed solutions, implementation timeline, deliverables, and investment requirements. This personalized document is typically delivered within 3-5 business days.",
+    },
+    {
+      question: "Do you provide post-implementation support services?",
+      answer: "Absolutely. We offer comprehensive post-implementation support packages designed to ensure long-term success. Our dedicated support team provides technical assistance, maintenance services, system updates, and ongoing optimization recommendations. Support plans can be customized based on your specific operational requirements and budget considerations.",
+    },
+  ];
 
   const toggleFAQ = (index: number): void => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const faqs: FAQ[] = [
-    {
-      question: 'How quickly can you start working with us?',
-      answer: 'We can typically begin the initial assessment within 1-2 weeks of your first inquiry. For more complex engagements, we’ll provide a detailed timeline after our initial consultation.',
-      icon: <Calendar className="text-blue-500" size={24} />
-    },
-    {
-      question: 'Do you work with businesses outside Nigeria?',
-      answer: 'Yes, we serve clients across multiple African countries. Our team has experience working with businesses in West, East, and Southern Africa, and we can accommodate remote consultations when needed.',
-      icon: <Building className="text-emerald-500" size={24} />
-    },
-    {
-      question: 'What industries do you specialize in?',
-      answer: 'While our methodologies are industry-agnostic, we have particular expertise in agriculture, manufacturing, retail, technology, and services sectors. Our team brings relevant experience across various industries common in African markets.',
-      icon: <FileText className="text-purple-500" size={24} />
-    },
-    {
-      question: 'How do you measure the success of your services?',
-      answer: 'We establish clear, measurable objectives at the beginning of each engagement. Depending on your goals, these might include revenue growth, cost reduction, improved efficiency metrics, or other relevant KPIs.',
-      icon: <HeadphonesIcon className="text-orange-500" size={24} />
-    },
-    {
-      question: 'What makes your approach different from other consultants?',
-      answer: 'Our STARS framework is specifically designed for African business contexts. We combine global best practices with deep local knowledge, ensuring solutions that are both world-class and contextually relevant.',
-      icon: <Star className="text-yellow-500" size={24} />
-    },
-  ];
-
   return (
-    <section id="faq" className="py-20 px-4 lg:px-8 bg-white">
-      <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row items-center gap-12 mb-16">
-          <div className="md:w-1/2 text-center md:text-left">
+    <div>
+      {/* Hero Section */}
+      <div
+        id="faq-hero-section"
+        className="relative flex flex-col justify-center overflow-hidden"
+        style={{ minHeight: "80vh", maxHeight: "800px" }}
+      >
+        <motion.div
+          className="absolute inset-0 z-0"
+          initial={{ scale: 1 }}
+          whileInView={{ scale: 1.05 }}
+          transition={{ duration: 5, ease: "easeOut" }}
+        >
+          <Image
+            src="/hero-bg3.jpg"
+            alt="FAQ Hero Background"
+            fill
+            style={{ objectFit: "cover" }}
+            priority
+            sizes="100vw"
+            className="transition-transform duration-300"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/70 to-gray-900/30 z-1 backdrop-blur-[3px]"></div>
+        </motion.div>
+        <div className="py-16 sm:py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center md:items-start gap-6 sm:gap-8">
+          <div className="text-center md:text-left md:max-w-2xl">
+            <motion.h2
+              initial={{ opacity: 0, y: -30, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight"
+            >
+              Answers to Your Questions
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              className="mt-4 sm:mt-6 text-lg sm:text-xl font-medium text-gray-200 leading-relaxed bg-gray-900/50 p-4 sm:p-6 rounded-xl shadow-lg max-w-md"
+            >
+              Explore our FAQs to learn more about how we can support your business growth and address your unique challenges.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+              className="mt-6"
+            >
+              <button
+                onClick={() => scrollToSection("faq-content-section")}
+                className="px-6 sm:px-8 py-3 bg-indigo-600 text-white rounded-full font-semibold text-base shadow-md transition-all duration-300 hover:bg-indigo-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                aria-label="Explore FAQs"
+              >
+                Explore FAQs
+              </button>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ Content Section */}
+      <section id="faq-content-section" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          {/* Header Section */}
+          <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full mb-6">
               <HelpCircle size={18} className="text-blue-600" />
-              <span className="text-sm font-medium text-blue-600">Knowledge Base</span>
+              <span className="text-sm font-medium text-blue-600">Common Questions</span>
             </div>
-            
-            <h2 className="text-4xl font-bold text-gray-900 leading-tight">
-              Frequently Asked <span className="text-blue-600">Questions</span>
-            </h2>
-            
-            <p className="mt-6 text-lg text-gray-600 max-w-2xl">
-              Find comprehensive answers to common inquiries about our services, methodology, and commitment to empowering African businesses.
-            </p>
-          </div>
-          
-          <div className="md:w-1/2">
-            <div className="relative rounded-2xl overflow-hidden shadow-xl">
-              <Image
-                src="/hero-bg3.jpg"
-                alt="Business Consultation"
-                width={600}
-                height={320}
-                className="object-cover w-full h-80"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-6">
-                <span className="px-4 py-2 bg-emerald-500 text-white text-sm font-medium rounded-full">
-                  Expert Support
-                </span>
-                <h3 className="mt-2 text-2xl font-bold text-white">Empowering African Enterprises</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* FAQ Accordion */}
-        <div className="mt-12 space-y-6">
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
+            <motion.h2
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight tracking-tight"
+            >
+              Frequently Asked Questions
+            </motion.h2>
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all duration-300"
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto"
             >
-              <button 
-                onClick={() => toggleFAQ(index)}
-                aria-expanded={openIndex === index}
-                aria-controls={`faq-answer-${index}`}
-                className="flex items-center justify-between w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="p-3 rounded-full bg-gray-50">
-                    {faq.icon}
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">{faq.question}</h3>
-                </div>
-                <div>
-                  {openIndex === index ? 
-                    <ChevronUp size={20} className="text-gray-500" /> : 
-                    <ChevronDown size={20} className="text-gray-500" />
-                  }
-                </div>
-              </button>
-              
-              <div 
-                id={`faq-answer-${index}`}
-                className={`px-6 pb-6 overflow-hidden transition-all duration-300 ${
-                  openIndex === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                }`}
-              >
-                <div className="pl-12 pr-6 border-l-2 border-gray-100">
-                  <p className="text-gray-600">{faq.answer}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* CTA Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mt-16 p-8 bg-blue-50 rounded-2xl text-center"
-        >
-          <h3 className="text-2xl font-bold text-gray-900">Still have questions?</h3>
-          <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
-            Our team is ready to provide personalized assistance tailored to your specific business needs.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-sm hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <MessageSquare size={18} />
-              Contact Our Experts
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => scrollToSection("consultation")}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-white text-blue-600 font-medium rounded-lg shadow-sm border border-blue-200 hover:border-blue-300 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <Calendar size={18} />
-              Schedule a Consultation
-            </motion.button>
+              Find answers to common asked questions about our services and approach.
+            </motion.p>
           </div>
-        </motion.div>
-      </div>
-    </section>
+
+          {/* FAQ Accordion */}
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+              >
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  aria-expanded={openIndex === index}
+                  aria-controls={`faq-answer-${index}`}
+                  className="flex items-center justify-between w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <h3 className="text-xl font-semibold text-gray-900">{faq.question}</h3>
+                  <div>
+                    {openIndex === index ? (
+                      <ChevronUp size={20} className="text-gray-500" />
+                    ) : (
+                      <ChevronDown size={20} className="text-gray-500" />
+                    )}
+                  </div>
+                </button>
+                <div
+                  id={`faq-answer-${index}`}
+                  className={`px-6 pb-6 overflow-hidden transition-all duration-300 ${openIndex === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                    }`}
+                >
+                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
