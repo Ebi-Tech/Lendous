@@ -10,7 +10,7 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ className }) => {
   return (
     <footer className={`bg-[#1A2535] text-[#FFFFFF] py-10 sm:py-12 px-4 sm:px-6 ${className}`}>
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20 sm:gap-20">
         {/* Lendous Section */}
         <div className="sm:col-span-2 lg:col-span-1">
           <h3 className="text-[36px] font-bold flex items-center">
@@ -25,7 +25,7 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
               Lendous
             </span>
           </h3>
-          <p className="text-[16px] mt-4">
+          <p className="text-[12px] mt-4">
             Growth Partner for African SMEs, providing Systems, Tools, Advisory, and Resources to help businesses shine out of Africa.
           </p>
           <div className="flex gap-4 mt-4 sm:mt-6">
@@ -51,8 +51,8 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
 
         {/* Quick Links Section */}
         <div>
-          <h3 className="text-[24px] sm:text-[28px] font-bold mb-4">Quick Links</h3>
-          <ul className="space-y-3 text-[16px]">
+          <h3 className="text-[16px] sm:text-[20px] font-bold mb-4">Quick Links</h3>
+          <ul className="space-y-3 text-[12px]">
             {[
               { name: "Home", path: "/" },
               { name: "About Us", path: "/about" },
@@ -72,34 +72,12 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
           </ul>
         </div>
 
-        {/* Services Section */}
-        <div>
-          <h3 className="text-[24px] sm:text-[28px] font-bold mb-4">Services</h3>
-          <ul className="space-y-3 text-[16px]">
-            {[
-              "Business Advisory",
-              "Funding Solutions",
-              "Digital Transformation",
-              "Market Expansion",
-              "Talent Development"
-            ].map((service, index) => (
-              <li key={index} className="hover:text-[#1AF866] transition duration-300">
-                {service}
-              </li>
-            ))}
-          </ul>
-        </div>
-
         {/* Contact Us Section */}
         <div>
-          <h3 className="text-[24px] sm:text-[28px] font-bold mb-4">Contact Us</h3>
-          <address className="not-italic text-[16px] space-y-3">
-            <div>
-              <strong className="block">Address</strong>
-              <span>25 Business Avenue, Lagos, Nigeria</span>
-            </div>
-            <div>
-              <strong className="block">Email</strong>
+          <h3 className="text-[16px] sm:text-[20px] font-bold mb-4">Contact Us</h3>
+          <address className="not-italic text-[12px] space-y-3">
+          <div>
+              <strong className="block">Email:</strong>
               <a 
                 href="mailto:info@lendous.com" 
                 className="hover:text-[#1AF866] transition duration-300"
@@ -108,14 +86,22 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
               </a>
             </div>
             <div>
-              <strong className="block">Phone</strong>
-              <a 
-                href="tel:+2341234567890" 
+              <strong className="block">West Africa:</strong>
+              <span>Address: Zimar House, 13 Adegbenro Street, Gbagada, Lagos, Nigeria</span><br />
+              <span>
+                <a href="tel:+2348132108408" 
                 className="hover:text-[#1AF866] transition duration-300"
-              >
-                +234 123 456 7890
-              </a>
+              >WhatsApp: +234 813 210 8408</a></span>
             </div>
+            <div>
+              <strong className="block">East Africa:</strong>
+              <span>Address: 11 KG 203 Street, Gasabo District, Kigali, Rwanda</span><br />
+              <span>
+                <a href="tel:+2348132108408" 
+                className="hover:text-[#1AF866] transition duration-300"
+              >WhatsApp: +250 798 335 965</a></span>
+            </div>
+            
           </address>
         </div>
       </div>

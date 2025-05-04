@@ -166,42 +166,37 @@ const AboutSection: React.FC = () => {
   return (
     <main className="font-poppins">
       {/* Hero Section */}
-      <section
+      <div
         id="hero-section"
-        className="relative flex flex-col justify-center bg-cover bg-center"
+        className="relative flex flex-col justify-center overflow-hidden"
         style={{ 
           minHeight: '700px',
           backgroundImage: "url('/hero-bg4.jpg')"
         }}
       >
-        <div className="absolute inset-0 bg-black opacity-80 z-0"></div>
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[#7030A0]/100 opacity-85 z-1 backdrop-blur-sm"></div>
+        </div>
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
-        <div className="py-12 sm:py-16 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 sm:gap-12 text-center">
-          <div className="space-y-6 sm:space-y-10 px-4 sm:px-0">
-            <div className="relative">
-              <motion.h1
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, ease: " FLAGS: [easeInOut]" }}
-                className="mt-12 text-white text-[36px] sm:text-[40px] font-extrabold font-caveat-brush leading-tight sm:leading-snug"
-              >
-                Who We Are
-              </motion.h1>
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                <svg width="120" height="10" viewBox="0 0 120 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
-            </div>
+        <div className="py-12 sm:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 sm:gap-12">
+          <div className="text-center">
+            <motion.h1
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+              className="text-white text-[36px] sm:text-[40px] font-extrabold tracking-tight leading-tight sm:leading-snug"
+            >
+              Who We Are
+            </motion.h1>
             <motion.p
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
               className="text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide mt-6"
             >
-              Lendous powers business growth with technology, talent, and finance.
+              We are experienced professionals bringing our collective years of expertise to SMEs
             </motion.p>
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mt-8">
+            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
               <motion.button
                 onClick={() => scrollToSection("team-section")}
                 whileHover={{
@@ -213,7 +208,7 @@ const AboutSection: React.FC = () => {
                 whileTap={{ scale: 0.95 }}
                 className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
               >
-                <span className="font-poppins">Meet the Team</span>
+                Meet the Team
               </motion.button>
               <motion.button
                 onClick={() => scrollToSection("services-section")}
@@ -225,9 +220,9 @@ const AboutSection: React.FC = () => {
                   borderColor: "#7030A0",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-2 sm:py-3 bg-transparent border-2 border-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-transparent border-2 border-[#1AF866] text-[#FFFFFF] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
               >
-                <span className="font-poppins">Explore Services</span>
+                Explore Services
               </motion.button>
             </div>
           </div>
@@ -237,7 +232,7 @@ const AboutSection: React.FC = () => {
             <path d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z" fill="white" fillOpacity="0.1" />
           </svg>
         </div>
-      </section>
+      </div>
 
       {/* Team Section */}
       <section
@@ -257,22 +252,21 @@ const AboutSection: React.FC = () => {
           className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto"
         >
           <div className="flex flex-col lg:flex-row items-start gap-12">
-            <div className="lg:w-1/2 text-center lg:text-left">
-              <h2 className="text-[36px] sm:text-[40px] font-extrabold font-caveat-brush text-[#27408F] leading-tight mt-5">
+            <div className="md:w-1/2 text-center md:text-left">
+              <h2 className="text-center text-[36px] sm:text-[40px] font-extrabold font-caveat-brush text-[#27408F] leading-tight mt-5">
                 About
               </h2>
-              <p className="text-[16px] sm:text-[18px] mt-2 text-black font-poppins font-medium">
-                We are experienced professionals bringing our collective years of expertise to SMEs
+              
+              <p className="text-justify text-[12px] sm:text-[14px] mt-2 text-black font-normal leading-[40px]">
+                Lendous is the Growth Partner for businesses in Africa. 
+                We help businesses grow sales, plug revenue leaks, and build structures to support expansion (scale). 
+                We do this by providing them the Systems, Tools, Advisory, and Resources (STARS) they need to Launch, Grow, and Expand in Africa.  
+                With a combined 40+ years of experience from the leadership team spanning various 
+                industries in Africa including; Retail, Financial Services, Oil & Gas, Renewable Energy, & Hospitality, we are committed to solving 
+                the problem of launching and growing in Africa, with clarity and precision in execution.
               </p>
-              <p className="text-[16px] sm:text-[18px] mt-8 text-black font-poppins font-medium">
-                Lendous is the Growth Partner for businesses in Africa. We help businesses grow sales, plug revenue leaks, and build structures to support expansion (scale).
-              </p>
-              <p className="text-[16px] sm:text-[18px] mt-4 text-black font-poppins font-medium">
-                We do this by providing them the Systems, Tools, Advisory, and Resources (STARS) they need to Launch, Grow, and Expand in Africa.
-              </p>
-              <p className="text-[16px] sm:text-[18px] mt-4 text-black font-poppins font-medium">
-                With a combined 40+ years of experience from the leadership team spanning various industries in Africa including; Retail, Financial Services, Oil & Gas, Renewable Energy, & Hospitality, we are committed to solving the problem of launching and growing in Africa, with clarity and precision in execution.
-              </p>
+              
+              
             </div>
             <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
@@ -307,7 +301,7 @@ const AboutSection: React.FC = () => {
                     />
                   </div>
                   <h3 className="text-[20px] font-semibold font-caveat-brush text-[#27408F] mt-4">{member.name}</h3>
-                  <p className="text-[14px] text-gray-700 mt-1 text-center font-poppins">{member.role}</p>
+                  <p className="text-[14px] text-gray-700 mt-1 text-center">{member.role}</p>
                   <a
                     href={member.linkedin}
                     target="_blank"
@@ -359,7 +353,7 @@ const AboutSection: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-                className="mt-6 sm:mt-10 text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide italic drop-shadow-md leading-relaxed max-w-3xl mx-auto md:mx-0"
+                className="mt-6 sm:mt-10 text-white text-[16px] sm:text-[18px] font-medium drop-shadow-md leading-relaxed max-w-3xl mx-auto md:mx-0"
               >
                 We blend our expertise across key service areas to deliver tailored solutions for your business.
               </motion.p>
@@ -402,7 +396,7 @@ const AboutSection: React.FC = () => {
                         className="flex items-center justify-between cursor-pointer p-2 hover:bg-white/30 rounded-lg transition-colors duration-200"
                         onClick={() => toggleSection(sectionKey)}
                       >
-                        <h4 className="text-[16px] font-semibold font-poppins text-white mb-0">
+                        <h4 className="text-[16px] font-semibold text-white mb-0">
                           {group.subheading}
                         </h4>
                         <button
@@ -432,7 +426,7 @@ const AboutSection: React.FC = () => {
                               initial="hidden"
                               animate="visible"
                               variants={badgeVariants}
-                              className="text-[16px] text-white font-poppins font-medium mt-1"
+                              className="text-[16px] text-white font-medium mt-1"
                             >
                               {service}
                             </motion.li>
@@ -455,7 +449,7 @@ const AboutSection: React.FC = () => {
                   boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full sm:w-auto px-12 py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base font-poppins shadow-lg transition-all duration-300 hover:shadow-2xl"
+                className="w-full sm:w-auto px-12 py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg transition-all duration-300 hover:shadow-2xl"
               >
                 Explore Solutions
               </motion.button>
@@ -470,22 +464,25 @@ const AboutSection: React.FC = () => {
       </div>
 
       {/* Footer Banner */}
-      <SlideInSection
-        direction="down"
-        className="bg-[#7030A0] text-white py-12 sm:py-16"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div className="text-center sm:text-left">
-            <h2 className="text-[36px] sm:text-[40px] font-extrabold font-caveat-brush">Ready to <span className="text-[#1AF866]">Grow</span> Your Business?</h2>
-            <p className="mt-2 text-[20px] sm:text-[22px] font-caveat-brush tracking-wide italic">
-              Let's discuss how our STARS approach can transform your business.
+      <section className="bg-[#7030A0] text-white py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
+          <div className="mt-0">
+            <h2 className="text-[32px] sm:text-[36px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px]">Grow</span> Your Business?</h2>
+            <p className="mt-4 text-[18px] sm:text-[20px] font-caveat-brush tracking-wide">
+              Let's help you do the dirty work so you can focus on what you know how to do.
             </p>
           </div>
-          <button
+          <Link href="/contact">
+          <motion.button
             onClick={() => scrollToSection("consultation")}
-            className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[18px] font-caveat-brush shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center gap-2"
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
           >
-            Get in Touch
+            <span className="font-caveat-brush text-[18px]">Get in Touch</span>
             <svg
               className="w-5 h-5"
               fill="none"
@@ -500,9 +497,10 @@ const AboutSection: React.FC = () => {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </button>
+          </motion.button>
+          </Link>
         </div>
-      </SlideInSection>
+      </section>
     </main>
   );
 };

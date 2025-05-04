@@ -140,7 +140,7 @@ const Home: React.FC = () => {
           <div className="space-y-6 sm:space-y-10 px-4 sm:px-0">
                         
             <div className="relative">
-              <h1 className="mt-12 text-white text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug">
+              <h1 className="text-white text-[32px] sm:text-[36px] font-extrabold leading-tight sm:leading-snug">
                 Ready to Be The Next Big Thing in Africa?
               </h1>
               <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
@@ -214,7 +214,7 @@ const Home: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-white text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug font-poppins"
+                className="text-white text-[32px] sm:text-[36px] font-extrabold leading-tight sm:leading-snug font-poppins"
               >
                 We remove the <span className="relative inline-block">
                   <span className="relative z-10">Guesswork</span>
@@ -225,7 +225,7 @@ const Home: React.FC = () => {
                     text={rotatingTexts[textIndex]}
                     typingSpeed={40}
                     onComplete={() => setIsTyping(false)}
-                    className="font-caveat-brush text-[#1AF866] text-[42px] sm:text-[46px] transform -rotate-2 inline-block"
+                    className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px] transform -rotate-2 inline-block"
                   />
                   <span className="absolute -bottom-1 left-0 right-0 h-1 bg-[#1AF866]"></span>
                 </span>
@@ -324,11 +324,11 @@ const Home: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="text-black text-[36px] sm:text-[40px] font-extrabold leading-tight sm:leading-snug font-poppins"
+                  className="text-black text-[32px] sm:text-[36px] font-extrabold leading-tight sm:leading-snug font-poppins"
                 >
-                  The Lendous <span className="font-caveat-brush text-[#1AF866] text-[42px] sm:text-[46px] transform inline-block">Assurance</span>: YOU WILL 
+                  The Lendous <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px] transform inline-block">Assurance</span>: YOU WILL 
                   <span className="relative inline-block mx-2">
-                    <span className="font-caveat-brush text-[#1AF866] text-[42px] sm:text-[46px] transform inline-block">NEVER</span>
+                    <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px] transform inline-block">NEVER</span>
                     <span className="absolute -bottom-1 left-0 right-0 h-2 bg-[#7030A0] z-0"></span>
                   </span> 
                   WORK ALONE!
@@ -344,7 +344,7 @@ const Home: React.FC = () => {
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
                 className="text-black text-[20px] font-caveat-brush tracking-wide mt-6"
               >
-                WHENEVER YOU HAVE A BUSINESS PROBLEM, CALL LENDOUS
+                WHENEVER YOU HAVE A BUSINESS PROBLEM, <span className="border-b-7 border-b-[#7030A0]">CALL LENDOUS</span>
               </motion.p>
             </div>
           </div>
@@ -388,11 +388,12 @@ const Home: React.FC = () => {
       <section className="bg-[#7030A0] text-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
           <div className="mt-0">
-            <h2 className="text-[36px] sm:text-[40px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[42px] sm:text-[46px]">Grow</span> Your Business?</h2>
+            <h2 className="text-[32px] sm:text-[36px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px]">Grow</span> Your Business?</h2>
             <p className="mt-4 text-[18px] sm:text-[20px] font-caveat-brush tracking-wide">
               Let's help you do the dirty work so you can focus on what you know how to do.
             </p>
           </div>
+          <Link href="/contact">
           <motion.button
             onClick={() => scrollToSection("consultation")}
             whileHover={{
@@ -418,6 +419,7 @@ const Home: React.FC = () => {
               />
             </svg>
           </motion.button>
+          </Link>
         </div>
       </section>
     </main>
