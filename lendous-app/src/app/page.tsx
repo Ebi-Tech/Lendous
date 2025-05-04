@@ -239,7 +239,7 @@ const Home: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-[#E2D8EC] text-left text-[16px] sm:text-[18px] font-medium italic mt-8 space-y-8 list-decimal pl-6"
+              className="text-[#E2D8EC] text-left text-[12px] sm:text-[14px] font-medium italic mt-8 space-y-8 list-decimal pl-6"
             >
               <li>
                 We offer <span className="text-[#7030A0] font-semibold">Free Consultation</span>
@@ -373,7 +373,7 @@ const Home: React.FC = () => {
                   transition={{ type: "spring", stiffness: 100 }}
                 >
                   <h3 className="text-gray-800 text-[24px] sm:text-[28px] font-caveat-brush">{stat.value}</h3>
-                  <p className="text-gray-600 mt-2 text-[14px] font-poppins">{stat.label}</p>
+                  <p className="text-gray-600 mt-2 text-[12px] font-poppins">{stat.label}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -385,7 +385,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Footer Banner */}
-      <section className="bg-[#7030A0] text-white py-12 sm:py-16">
+      <SlideInSection className="bg-[#7030A0] text-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
           <div className="mt-0">
             <h2 className="text-[32px] sm:text-[36px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px]">Grow</span> Your Business?</h2>
@@ -421,7 +421,7 @@ const Home: React.FC = () => {
           </motion.button>
           </Link>
         </div>
-      </section>
+      </SlideInSection>
     </main>
   );
 };

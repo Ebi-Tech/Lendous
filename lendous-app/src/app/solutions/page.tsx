@@ -2,35 +2,8 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-
-// SlideInSection component for animations
-const SlideInSection: React.FC<{
-  direction: "left" | "right" | "down";
-  children: React.ReactNode;
-  className?: string;
-}> = ({ direction, children, className }) => {
-  const variants = {
-    hidden: {
-      opacity: 0,
-      x: direction === "left" ? -50 : direction === "right" ? 50 : 0,
-      y: direction === "down" ? 50 : 0,
-    },
-    visible: { opacity: 1, x: 0, y: 0 },
-  };
-
-  return (
-    <motion.section
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      transition={{ duration: 1, ease: "easeInOut" }}
-      variants={variants}
-      className={className}
-    >
-      {children}
-    </motion.section>
-  );
-};
+import Link from "next/link";
+import SlideInSection from "../../../components/SlideInSection";
 
 // Define the shape of each tab's content
 interface TabContent {
@@ -77,7 +50,7 @@ const SolutionsSection: React.FC = () => {
         {
           title: "Launch Your Business",
           description:
-            "Grab a drink and relax, let’s handle your business registration and compliance. Our team will engage the necessary agencies, handle the necessary paperwork, and deliver your company legal docs to your doorstep.",
+            "Grab a drink and relax, let's handle your business registration and compliance. Our team will engage the necessary agencies, handle the necessary paperwork, and deliver your company legal docs to your doorstep.",
           image: "/images/customer-experience.jpg",
           imagePosition: "left",
         },
@@ -106,7 +79,7 @@ const SolutionsSection: React.FC = () => {
           title: "Grow Sales",
           subtitle: "with our BD-as-a-Service (BDAaS)",
           description:
-            "We’ll generate digital and physical leads for you to close deals and grow your sales. You start paying when we deliver an agreed number of leads. For B2B leads, if you don’t feel confident or unable to close deals, we could help you with both lead generation and deal closure.",
+            "We'll generate digital and physical leads for you to close deals and grow your sales. You start paying when we deliver an agreed number of leads. For B2B leads, if you don't feel confident or unable to close deals, we could help you with both lead generation and deal closure.",
           image: "/images/supply-chain.jpg",
           imagePosition: "left",
         },
@@ -122,7 +95,7 @@ const SolutionsSection: React.FC = () => {
           title: "Avoid Costly Mistakes",
           subtitle: "with Lendous Analytics",
           description:
-            "Make sound decisions with our Advanced Insights on your business operations, financial performance, or industry trends. We’ll show you what is going well and what isn’t, so you can take prompt clear actions and avoid making wrong decisions that will cost you dearly.",
+            "Make sound decisions with our Advanced Insights on your business operations, financial performance, or industry trends. We'll show you what is going well and what isn't, so you can take prompt clear actions and avoid making wrong decisions that will cost you dearly.",
           image: "/images/project-management.jpg",
           imagePosition: "left",
         },
@@ -147,61 +120,73 @@ const SolutionsSection: React.FC = () => {
   return (
     <main className="bg-white font-poppins">
       {/* Hero Section */}
-      {/* Hero Section */}
-      <div
+      <section
         id="hero-section"
-        className="relative flex flex-col justify-center items-center overflow-hidden bg-gray-900 pt-16 sm:pt-20 lg:pt-24"
-        style={{ minHeight: "80vh", maxHeight: "800px" }}
+        className="relative flex flex-col justify-center bg-cover bg-center"
+        style={{ 
+          minHeight: '700px',
+          backgroundImage: "url('/hero-bg2.jpg')"
+        }}
       >
-        {/* Background Image with Gradient Overlay */}
-        <motion.div
-          className="absolute inset-0 z-0"
-          initial={{ scale: 1.1 }}
-          whileInView={{ scale: 1 }}
-          transition={{ duration: 6, ease: "easeOut" }}
-        >
-          <Image
-            src="/hero-bg2.jpg"
-            alt="Hero Background - Business Solutions"
-            fill
-            style={{ objectFit: "cover" }}
-            priority
-            sizes="100vw"
-            className="transition-transform duration-500"
-            quality={85}
-          />
-          {/* Gradient Overlay for Better Text Readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-900/60 to-gray-900/30 z-1"></div>
-        </motion.div>
+        <div className="absolute inset-0 bg-black opacity-80 z-0"></div>
+        
+        {/* Accent Top Border */}
+        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
 
-        {/* Hero Content */}
-        <SlideInSection
-          direction="left"
-          className="py-16 sm:py-20 lg:py-24 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-4 sm:gap-6"
-        >
-          <div className="text-center max-w-3xl">
-            {/* Main Headline */}
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight [text-shadow:_0_2px_6px_rgba(0,0,0,0.4)]"
-            >
-              Solutions for Every Business Stage
-            </motion.h2>
+        <div className="py-12 sm:py-16 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 sm:gap-12 text-center">
+          <div className="space-y-6 sm:space-y-10 px-4 sm:px-0">
+            <div className="relative">
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="text-white text-[32px] sm:text-[36px] font-extrabold leading-tight sm:leading-snug [text-shadow:_0_2px_6px_rgba(0,0,0,0.4)]"
+              >
+                Solutions for Every Business Stage
+              </motion.h2>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                <svg width="120" height="10" viewBox="0 0 120 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+            </div>
 
-            {/* Subheadline */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-              className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg font-medium text-gray-100 leading-relaxed max-w-2xl mx-auto"
+              className="text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide mt-6"
             >
-              From launching your business to scaling across markets, we’ve got you covered.
+              From launching your business to scaling across markets, we've got you covered.
             </motion.p>
+
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mt-8">
+              <Link href="/contact">
+                <motion.button
+                  onClick={() => scrollToSection("services")}
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: "#FFFFFF",
+                    color: "#7030A0",
+                    boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
+                >
+                  <span className="font-poppins">Explore Solutions</span>
+                </motion.button>
+              </Link>
+            </div>
           </div>
-        </SlideInSection>
-      </div>
+        </div>
+        
+        {/* Section Divider */}
+        <div className="absolute bottom-0 left-0 right-0 z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
+            <path d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z" fill="white" fillOpacity="0.1" />
+          </svg>
+        </div>
+      </section>
 
       {/* Tabs Section */}
       <div
@@ -317,37 +302,42 @@ const SolutionsSection: React.FC = () => {
         </SlideInSection>
       </div>
 
-      {/* CTA Section */}
-      <SlideInSection direction="down" className="bg-white text-gray-900 py-12 sm:py-16 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div className="text-center sm:text-left">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">Ready to Grow Your Business?</h2>
-            <p className="mt-2 text-lg font-medium text-gray-600">
-              Let's discuss how our solutions can transform your business.
+      {/* Footer Banner */}
+      <SlideInSection className="bg-[#7030A0] text-white py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
+          <div className="mt-0">
+            <h2 className="text-[32px] sm:text-[36px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px]">Grow</span> Your Business?</h2>
+            <p className="mt-4 text-[18px] sm:text-[20px] font-caveat-brush tracking-wide">
+              Let's help you do the dirty work so you can focus on what you know how to do.
             </p>
           </div>
-          <motion.button
-            onClick={() => scrollToSection("consultation")}
-            whileHover={{
-              scale: 1.05,
-              backgroundColor: "#4F46E5",
-              color: "#FFFFFF",
-              boxShadow: "0 0 15px rgba(79, 70, 229, 0.3)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 bg-white text-indigo-600 rounded-full font-semibold text-base shadow-md border border-indigo-200 transition-all duration-300 hover:shadow-lg flex items-center gap-2"
-          >
-            Get a Free Consultation
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+          <Link href="/contact">
+            <motion.button
+              onClick={() => scrollToSection("consultation")}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </motion.button>
+              <span className="font-caveat-brush text-[18px]">Get in Touch</span>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </motion.button>
+          </Link>
         </div>
       </SlideInSection>
     </main>

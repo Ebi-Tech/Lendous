@@ -3,6 +3,7 @@ import Image from "next/image";
 import SlideInSection from "../../../components/SlideInSection";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 // Define interfaces for better type safety
 interface TrainingProgram {
@@ -382,63 +383,75 @@ const TrainingProgramsSection: React.FC = () => {
   };
 
   return (
-    <div id="training-programs" className="bg-white font-sans">
+    <div id="training-programs" className="bg-white font-poppins">
       {/* Hero Section */}
-      {/* Hero Section */}
-      <div
+      <section
         id="hero-section"
-        className="relative flex flex-col justify-center items-center overflow-hidden bg-gray-900 pt-16 sm:pt-20 lg:pt-24"
-        style={{ minHeight: "80vh", maxHeight: "800px" }}
+        className="relative flex flex-col justify-center bg-cover bg-center"
+        style={{ 
+          minHeight: '700px',
+          backgroundImage: "url('/hero-bg3.jpg')"
+        }}
       >
-        {/* Background Image with Gradient Overlay */}
-        <motion.div
-          className="absolute inset-0 z-0"
-          initial={{ scale: 1.1 }}
-          whileInView={{ scale: 1 }}
-          transition={{ duration: 6, ease: "easeOut" }}
-        >
-          <Image
-            src="/hero-bg3.jpg"
-            alt="Hero Background - Training Programs"
-            fill
-            style={{ objectFit: "cover" }}
-            priority
-            sizes="100vw"
-            className="transition-transform duration-500"
-            quality={85}
-          />
-          {/* Gradient Overlay for Better Text Readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-900/60 to-gray-900/30 z-1"></div>
-        </motion.div>
+        <div className="absolute inset-0 bg-black opacity-80 z-0"></div>
+        
+        {/* Accent Top Border */}
+        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
 
-        {/* Hero Content */}
-        <SlideInSection
-          direction="left"
-          className="py-16 sm:py-20 lg:py-24 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-4 sm:gap-6"
-        >
-          <div className="text-center max-w-3xl">
-            {/* Main Headline */}
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight [text-shadow:_0_2px_6px_rgba(0,0,0,0.4)]"
-            >
-              Empower Your Future with World-Class Training
-            </motion.h2>
+        <div className="py-12 sm:py-16 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 sm:gap-12 text-center">
+          <div className="space-y-6 sm:space-y-10 px-4 sm:px-0">
+            <div className="relative">
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="text-white text-[32px] sm:text-[36px] font-extrabold leading-tight sm:leading-snug [text-shadow:_0_2px_6px_rgba(0,0,0,0.4)]"
+              >
+                Empower Your Future with World-Class Training
+              </motion.h2>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                <svg width="120" height="10" viewBox="0 0 120 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+            </div>
 
-            {/* Subheadline */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-              className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg font-medium text-gray-100 leading-relaxed max-w-2xl mx-auto"
+              className="text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide mt-6"
             >
-              Discover transformative programs designed to bridge skill gaps and drive success for African SMEs in Leadership, Digital Transformation, and more.
+              Discover transformative programs designed to bridge skill gaps and drive success for African SMEs
             </motion.p>
+
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mt-8">
+              <Link href="/contact">
+                <motion.button
+                  onClick={() => scrollToSection("services")}
+                  whileHover={{
+                    scale: 1.05,
+                    backgroundColor: "#FFFFFF",
+                    color: "#7030A0",
+                    boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
+                >
+                  <span className="font-poppins">Explore Programs</span>
+                </motion.button>
+              </Link>
+            </div>
           </div>
-        </SlideInSection>
-      </div>
+        </div>
+        
+        {/* Section Divider */}
+        <div className="absolute bottom-0 left-0 right-0 z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
+            <path d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z" fill="white" fillOpacity="0.1" />
+          </svg>
+        </div>
+      </section>
 
       {/* Tabs and Training Cards Section */}
       <div
@@ -533,31 +546,41 @@ const TrainingProgramsSection: React.FC = () => {
       </div>
 
       {/* Footer Banner */}
-      <SlideInSection direction="down" className="bg-indigo-600 text-white py-8 sm:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
-          <div className="text-center sm:text-left">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">Ready to Grow Your Business?</h2>
-            <p className="mt-2 text-base sm:text-lg font-medium">
-              Let's discuss how our STARS approach can transform your business.
+      <SlideInSection className="bg-[#7030A0] text-white py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
+          <div className="mt-0">
+            <h2 className="text-[32px] sm:text-[36px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px]">Grow</span> Your Business?</h2>
+            <p className="mt-4 text-[18px] sm:text-[20px] font-caveat-brush tracking-wide">
+              Let's help you do the dirty work so you can focus on what you know how to do.
             </p>
           </div>
-          <motion.button
-            onClick={() => scrollToSection("consultation")}
-            whileHover={{
-              scale: 1.05,
-              backgroundColor: "#FFFFFF",
-              color: "#4F46E5",
-              boxShadow: "0 0 15px rgba(255, 255, 255, 0.3)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="px-6 py-2 sm:px-8 sm:py-3 bg-white text-indigo-600 rounded-full font-semibold text-sm sm:text-base shadow-md transition-all duration-300 hover:shadow-lg flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
-            aria-label="Get in touch for consultation"
-          >
-            Get in Touch
-            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </motion.button>
+          <Link href="/contact">
+            <motion.button
+              onClick={() => scrollToSection("consultation")}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+            >
+              <span className="font-caveat-brush text-[18px]">Get in Touch</span>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </motion.button>
+          </Link>
         </div>
       </SlideInSection>
     </div>

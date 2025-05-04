@@ -29,10 +29,10 @@ const AboutSection: React.FC = () => {
   };
 
   const serviceIcons = {
-    "Lendous Tech": <FaLaptopCode className="w-8 h-8 sm:w-10 sm:h-10 text-[#1AF866]" />,
-    "Lendous People": <FaUsers className="w-8 h-8 sm:w-10 sm:h-10 text-[#1AF866]" />,
-    "Lendous Capital": <FaMoneyBillWave className="w-8 h-8 sm:w-10 sm:h-10 text-[#1AF866]" />,
-    "Lendous Support": <FaHandshake className="w-8 h-8 sm:w-10 sm:h-10 text-[#1AF866]" />,
+    "Lendous Tech": <FaLaptopCode className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />,
+    "Lendous People": <FaUsers className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />,
+    "Lendous Capital": <FaMoneyBillWave className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />,
+    "Lendous Support": <FaHandshake className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />,
   };
 
   const serviceData = [
@@ -164,7 +164,7 @@ const AboutSection: React.FC = () => {
   };
 
   return (
-    <main className="font-poppins">
+    <main className="font-poppins overflow-hidden">
       {/* Hero Section */}
       <div
         id="hero-section"
@@ -239,7 +239,7 @@ const AboutSection: React.FC = () => {
         id="team-section"
         className="relative flex flex-col justify-center overflow-hidden"
         style={{ 
-          minHeight: '700px',
+          minHeight: `${Math.max(500, viewportHeight * 0.8)}px`,
           backgroundColor: '#E2D8EC'
         }}
       >
@@ -249,15 +249,15 @@ const AboutSection: React.FC = () => {
         <div className="absolute top-0 left-0 bottom-0 w-2 bg-gradient-to-b from-[#1AF866] to-[#7030A0] z-10"></div>
         <SlideInSection
           direction="right"
-          className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto"
+          className="py-8 md:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto w-full"
         >
-          <div className="flex flex-col lg:flex-row items-start gap-12">
-            <div className="md:w-1/2 text-center md:text-left">
-              <h2 className="text-center text-[36px] sm:text-[40px] font-extrabold font-caveat-brush text-[#27408F] leading-tight mt-5">
+          <div className="flex flex-col lg:flex-row items-start gap-8 md:gap-12">
+            <div className="w-full lg:w-1/2 text-center lg:text-left">
+              <h2 className="text-center lg:text-left text-3xl md:text-4xl lg:text-5xl font-extrabold font-caveat-brush text-[#27408F] leading-tight mt-5">
                 About
               </h2>
               
-              <p className="text-justify text-[12px] sm:text-[14px] mt-2 text-black font-normal leading-[40px]">
+              <p className="text-justify text-sm md:text-base mt-4 md:mt-6 text-black font-normal leading-relaxed md:leading-loose lg:leading-loose">
                 Lendous is the Growth Partner for businesses in Africa. 
                 We help businesses grow sales, plug revenue leaks, and build structures to support expansion (scale). 
                 We do this by providing them the Systems, Tools, Advisory, and Resources (STARS) they need to Launch, Grow, and Expand in Africa.  
@@ -265,10 +265,8 @@ const AboutSection: React.FC = () => {
                 industries in Africa including; Retail, Financial Services, Oil & Gas, Renewable Energy, & Hospitality, we are committed to solving 
                 the problem of launching and growing in Africa, with clarity and precision in execution.
               </p>
-              
-              
             </div>
-            <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-6 lg:mt-0">
               {[
                 { name: "Charles Charles", role: "CEO", image: "/team-charles.jpg", linkedin: "https://linkedin.com/in/charlescharles" },
                 { name: "Ossai Anoh", role: "COO", image: "/team-patience.jpg", linkedin: "https://linkedin.com/in/ossaianoh" },
@@ -281,15 +279,15 @@ const AboutSection: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="flex flex-col items-center p-4 rounded-lg bg-white shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#1AF866]"
+                  className="flex flex-col items-center p-3 md:p-4 rounded-lg bg-white shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#1AF866]"
                 >
                   <div className="relative">
                     <img
                       src={member.image}
                       alt={member.name}
-                      width={120}
-                      height={120}
-                      className="rounded-full border-4 border-[#7030A0]"
+                      width={100}
+                      height={100}
+                      className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-cover rounded-full border-4 border-[#7030A0]"
                       onError={(e) => {
                         e.currentTarget.src = '/placeholder-team-member.jpg';
                       }}
@@ -300,15 +298,15 @@ const AboutSection: React.FC = () => {
                       transition={{ duration: 0.3 }}
                     />
                   </div>
-                  <h3 className="text-[20px] font-semibold font-caveat-brush text-[#27408F] mt-4">{member.name}</h3>
-                  <p className="text-[14px] text-gray-700 mt-1 text-center">{member.role}</p>
+                  <h3 className="text-base md:text-lg lg:text-xl font-semibold font-caveat-brush text-[#27408F] mt-3 md:mt-4">{member.name}</h3>
+                  <p className="text-xs md:text-sm text-gray-700 mt-1 text-center">{member.role}</p>
                   <a
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
+                    className="mt-2 md:mt-3 text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
                   >
-                    <FaLinkedin className="w-5 h-5" />
+                    <FaLinkedin className="w-4 h-4 md:w-5 md:h-5" />
                   </a>
                 </motion.div>
               ))}
@@ -374,72 +372,76 @@ const AboutSection: React.FC = () => {
                   backgroundColor: "rgba(255, 255, 255, 0.2)",
                   boxShadow: "0 0 20px rgba(26, 248, 102, 0.4)",
                 }}
-                className="p-8 sm:p-10 bg-[#FFFFFF]/10 backdrop-blur-sm rounded-3xl shadow-xl border border-[#FFFFFF]/20 hover:border-[#1AF866]/50 transition-all duration-300 relative z-10"
+                className="p-6 sm:p-8 bg-[#FFFFFF]/10 backdrop-blur-sm rounded-3xl shadow-xl border border-[#FFFFFF]/20 hover:border-[#1AF866]/50 transition-all duration-300 relative z-10 h-full flex flex-col"
               >
                 <div className="flex items-center mb-4">
                   <motion.span
                     whileHover={{ scale: 1.2 }}
                     transition={{ duration: 0.3 }}
+                    className="flex items-center justify-center"
                   >
                     {serviceIcons[category.title as keyof typeof serviceIcons]}
                   </motion.span>
-                  <h3 className="text-[24px] sm:text-[28px] font-semibold font-caveat-brush text-[#1AF866] ml-3 flex-1">
+                  <h3 className="text-xl sm:text-2xl font-semibold font-caveat-brush text-[#1AF866] ml-3 flex-1">
                     {category.title}
                   </h3>
                 </div>
-                {category.groups.map((group, groupIdx) => {
-                  const sectionKey = `${category.title}-${group.subheading}`;
-                  const isOpen = openSections[sectionKey] || false;
-                  return (
-                    <div key={group.subheading} className="mb-4 last:mb-0">
-                      <div 
-                        className="flex items-center justify-between cursor-pointer p-2 hover:bg-white/30 rounded-lg transition-colors duration-200"
-                        onClick={() => toggleSection(sectionKey)}
-                      >
-                        <h4 className="text-[16px] font-semibold text-white mb-0">
-                          {group.subheading}
-                        </h4>
-                        <button
-                          className="text-white hover:text-[#1AF866] transition-colors duration-300"
+                <div className="flex-1">
+                  {category.groups.map((group, groupIdx) => {
+                    const sectionKey = `${category.title}-${group.subheading}`;
+                    const isOpen = openSections[sectionKey] || false;
+                    return (
+                      <div key={group.subheading} className="mb-4 last:mb-0">
+                        <div 
+                          className="flex items-center justify-between cursor-pointer p-2 hover:bg-white/30 rounded-lg transition-colors duration-200"
+                          onClick={() => toggleSection(sectionKey)}
                         >
-                          {isOpen ? (
-                            <Minus className="w-5 h-5" />
-                          ) : (
-                            <Plus className="w-5 h-5" />
-                          )}
-                        </button>
+                          <h4 className="text-[16px] font-semibold text-white mb-0">
+                            {group.subheading}
+                          </h4>
+                          <button
+                            className="text-white hover:text-[#1AF866] transition-colors duration-300 flex items-center justify-center"
+                            aria-label={isOpen ? "Collapse section" : "Expand section"}
+                          >
+                            {isOpen ? (
+                              <Minus className="w-5 h-5" />
+                            ) : (
+                              <Plus className="w-5 h-5" />
+                            )}
+                          </button>
+                        </div>
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{
+                            height: isOpen ? "auto" : 0,
+                            opacity: isOpen ? 1 : 0,
+                          }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden ml-2"
+                        >
+                          <ul className="list-disc pl-5 pt-2">
+                            {group.services.map((service, idx) => (
+                              <motion.li
+                                key={`${group.subheading}-${idx}`}
+                                custom={idx}
+                                initial="hidden"
+                                animate="visible"
+                                variants={badgeVariants}
+                                className="text-sm sm:text-base text-white font-medium mt-1"
+                              >
+                                {service}
+                              </motion.li>
+                            ))}
+                          </ul>
+                        </motion.div>
                       </div>
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{
-                          height: isOpen ? "auto" : 0,
-                          opacity: isOpen ? 1 : 0,
-                        }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden ml-2"
-                      >
-                        <ul className="list-disc pl-5 pt-2">
-                          {group.services.map((service, idx) => (
-                            <motion.li
-                              key={`${group.subheading}-${idx}`}
-                              custom={idx}
-                              initial="hidden"
-                              animate="visible"
-                              variants={badgeVariants}
-                              className="text-[16px] text-white font-medium mt-1"
-                            >
-                              {service}
-                            </motion.li>
-                          ))}
-                        </ul>
-                      </motion.div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </motion.div>
             ))}
           </div>
-          <div className="mt-12 sm:mt-16 text-center">
+          <div className="mt-8 md:mt-12 lg:mt-16 text-center">
             <Link href="/solutions">
               <motion.button
                 whileHover={{
@@ -449,7 +451,7 @@ const AboutSection: React.FC = () => {
                   boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full sm:w-auto px-12 py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-base shadow-lg transition-all duration-300 hover:shadow-2xl"
+                className="w-full sm:w-auto px-6 md:px-8 lg:px-12 py-3 md:py-4 lg:py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm md:text-base shadow-lg transition-all duration-300 hover:shadow-2xl"
               >
                 Explore Solutions
               </motion.button>
@@ -464,11 +466,11 @@ const AboutSection: React.FC = () => {
       </div>
 
       {/* Footer Banner */}
-      <section className="bg-[#7030A0] text-white py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
+      <SlideInSection className="bg-[#7030A0] text-white py-8 md:py-12 lg:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6 md:gap-8 text-center sm:text-left">
           <div className="mt-0">
-            <h2 className="text-[32px] sm:text-[36px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px]">Grow</span> Your Business?</h2>
-            <p className="mt-4 text-[18px] sm:text-[20px] font-caveat-brush tracking-wide">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-3xl md:text-4xl lg:text-5xl">Grow</span> Your Business?</h2>
+            <p className="mt-2 md:mt-4 text-base md:text-lg lg:text-xl font-caveat-brush tracking-wide">
               Let's help you do the dirty work so you can focus on what you know how to do.
             </p>
           </div>
@@ -480,11 +482,11 @@ const AboutSection: React.FC = () => {
               boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
             }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+            className="px-6 md:px-8 py-2 md:py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-sm md:text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
           >
-            <span className="font-caveat-brush text-[18px]">Get in Touch</span>
+            <span className="font-caveat-brush text-base md:text-lg">Get in Touch</span>
             <svg
-              className="w-5 h-5"
+              className="w-4 h-4 md:w-5 md:h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -500,7 +502,7 @@ const AboutSection: React.FC = () => {
           </motion.button>
           </Link>
         </div>
-      </section>
+      </SlideInSection>
     </main>
   );
 };
