@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import SlideInSection from "../../components/SlideInSection";
 import Link from "next/link";
+import { Plus, Minus } from 'lucide-react';
 
 // Custom typewriter effect component using Framer Motion
 interface TypewriterTextProps {
@@ -19,7 +20,6 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({ text, className, typing
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    // Reset when text changes
     setDisplayText("");
     setCurrentIndex(0);
     setIsComplete(false);
@@ -58,13 +58,20 @@ const Home: React.FC = () => {
   const [viewportHeight, setViewportHeight] = useState(0);
   const [textIndex, setTextIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
+  const [openProblemItems, setOpenProblemItems] = useState<{[key: number]: boolean}>({});
   
-  // Array of texts to rotate through
   const rotatingTexts = [
     "Drive Sales",
     "Plug Revenue Leaks",
     "Build structures to expand"
   ];
+
+  const toggleProblemItem = (index: number) => {
+    setOpenProblemItems(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
 
   useEffect(() => {
     const updateViewportHeight = () => {
@@ -76,13 +83,12 @@ const Home: React.FC = () => {
     return () => window.removeEventListener('resize', updateViewportHeight);
   }, []);
 
-  // Text rotation effect with delay for typewriter to complete
   useEffect(() => {
     if (!isTyping) {
       const timeout = setTimeout(() => {
         setIsTyping(true);
         setTextIndex((prevIndex) => (prevIndex + 1) % rotatingTexts.length);
-      }, 2000); // Wait 2 seconds after typing completes before changing text
+      }, 2000);
       
       return () => clearTimeout(timeout);
     }
@@ -131,14 +137,12 @@ const Home: React.FC = () => {
           backgroundImage: "url('/hero-bg1.jpg')"
         }}
       >
-        <div className="absolute inset-0 bg-black opacity-80 z-0"></div> {/* Reduced opacity to 30% */}
+        <div className="absolute inset-0 bg-black opacity-80 z-0"></div>
         
-        {/* Accent Top Border */}
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
 
         <div className="py-12 sm:py-16 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 sm:gap-12 text-center">
           <div className="space-y-6 sm:space-y-10 px-4 sm:px-0">
-                        
             <div className="relative">
               <h1 className="text-white text-[32px] sm:text-[36px] font-extrabold leading-tight sm:leading-snug">
                 Ready to Be The Next Big Thing in Africa?
@@ -174,7 +178,6 @@ const Home: React.FC = () => {
           </div>
         </div>
         
-        {/* Section Divider */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
             <path d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z" fill="white" fillOpacity="0.1" />
@@ -187,12 +190,11 @@ const Home: React.FC = () => {
         className="relative flex flex-col justify-center bg-cover bg-center"
         style={{ 
           minHeight: '700px',
-          backgroundColor: '#5B2A86' // Solid purple background matching the image
+          backgroundColor: '#5B2A86'
         }}
       >
-        <div className="absolute inset-0 bg-black opacity-70 z-0"></div> {/* Reduced opacity to 30% */}
+        <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
         
-        {/* Accent Side Border */}
         <div className="absolute top-0 left-0 bottom-0 w-2 bg-gradient-to-b from-[#1AF866] to-[#7030A0] z-10"></div>
 
         <SlideInSection
@@ -230,33 +232,69 @@ const Home: React.FC = () => {
                   <span className="absolute -bottom-1 left-0 right-0 h-1 bg-[#1AF866]"></span>
                 </span>
               </motion.h1>
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                
-              </div>
             </div>
 
-            <motion.ol
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-[#E2D8EC] text-left text-[12px] sm:text-[14px] font-medium italic mt-8 space-y-8 list-decimal pl-6"
+              className="text-[#E2D8EC] text-left text-[12px] sm:text-[14px] font-medium italic mt-8 space-y-4 list-decimal pl-6"
             >
-              <li>
-                We offer <span className="text-[#7030A0] font-semibold">Free Consultation</span>
-                <br className="block" />
-                <span className="block mt-2">Tell us about your business, challenge, and needs.</span>
-              </li>
-              <li>
-                We build your <span className="text-[#7030A0] font-semibold">Solution Pack</span>
-                <br className="block" />
-                <span className="block mt-2">From our range of growth services, we build you a solution.</span>
-              </li>
-              <li>
-                We deliver the solution & <span className="text-[#7030A0] font-semibold">Support You</span>
-                <br className="block" />
-                <span className="block mt-2">Our solutions are Done-For-You, so you can focus on what you know how to do.</span>
-              </li>
-            </motion.ol>
+              {[
+                {
+                  title: "We offer Free Consultation",
+                  highlight: "Free Consultation",
+                  description: "Tell us about your business, challenge, and needs."
+                },
+                {
+                  title: "We build your Solution Pack",
+                  highlight: "Solution Pack",
+                  description: "From our range of growth services, we build you a solution."
+                },
+                {
+                  title: "We deliver the solution & Support You",
+                  highlight: "Support You",
+                  description: "Our solutions are Done-For-You, so you can focus on what you know how to do."
+                }
+              ].map((item, index) => (
+                <div key={index} className="mb-4 last:mb-0">
+                  <div 
+                    className="flex items-center justify-between cursor-pointer p-2 hover:bg-white/30 rounded-lg transition-colors duration-200"
+                    onClick={() => toggleProblemItem(index)}
+                  >
+                    <li className="text-white" dangerouslySetInnerHTML={{
+                      __html: item.title.replace(
+                        item.highlight, 
+                        `<span class="text-[#B598CF] font-semibold">${item.highlight}</span>`
+                      )
+                    }} />
+                    <button
+                      className="text-white hover:text-[#1AF866] transition-colors duration-300 flex items-center justify-center ml-2"
+                      aria-label={openProblemItems[index] ? "Collapse section" : "Expand section"}
+                    >
+                      {openProblemItems[index] ? (
+                        <Minus className="w-4 h-4" />
+                      ) : (
+                        <Plus className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{
+                      height: openProblemItems[index] ? "auto" : 0,
+                      opacity: openProblemItems[index] ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden ml-4 pl-2"
+                  >
+                    <div className="text-white mt-1 pl-2">
+                      {item.description}
+                    </div>
+                  </motion.div>
+                </div>
+              ))}
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -283,7 +321,6 @@ const Home: React.FC = () => {
           </div>
         </SlideInSection>
         
-        {/* Section Divider */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
             <path d="M0 0C240 48 480 48 720 48C960 48 1200 32 1440 0V48H0V0Z" fill="white" fillOpacity="0.1" />
@@ -296,12 +333,11 @@ const Home: React.FC = () => {
         className="pb-10 relative flex flex-col justify-center bg-cover bg-center"
         style={{ 
           minHeight: '700px',
-          backgroundColor: '#F5F5F5' // Solid background color as requested
+          backgroundColor: '#F5F5F5'
         }}
       >
-        <div className="absolute inset-0 bg-transparent z-0"></div> {/* Removed black overlay */}
+        <div className="absolute inset-0 bg-transparent z-0"></div>
         
-        {/* Accent Right Border */}
         <div className="absolute top-0 right-0 bottom-0 w-2 bg-gradient-to-b from-[#7030A0] to-[#1AF866] z-10"></div>
 
         <SlideInSection
@@ -333,9 +369,6 @@ const Home: React.FC = () => {
                   </span> 
                   WORK ALONE!
                 </motion.h1>
-                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                  
-                </div>
               </div>
 
               <motion.p
