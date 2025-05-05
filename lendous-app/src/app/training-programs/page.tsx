@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import SlideInSection from "../../../components/SlideInSection";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 // Define interfaces for better type safety
 interface TrainingProgram {
@@ -56,11 +56,11 @@ const TrainingCard: React.FC<{ program: TrainingProgram; index: number }> = ({ p
 
       {/* Content */}
       <div className="p-4 sm:p-6 text-center sm:text-center md:text-left">
-        <h3 className="font-bold text-lg sm:text-xl text-gray-900 tracking-tight">{program.title}</h3>
+        <h3 className="font-bold text-[16px] text-gray-900 tracking-tight">{program.title}</h3>
 
         {/* Program Details */}
         <div className="mt-2 flex flex-wrap justify-center sm:justify-center md:justify-start gap-2 sm:gap-3">
-          <span className="inline-flex items-center text-xs sm:text-sm text-indigo-600">
+          <span className="inline-flex items-center text-[14px] font-normal text-indigo-600">
             <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
@@ -70,7 +70,7 @@ const TrainingCard: React.FC<{ program: TrainingProgram; index: number }> = ({ p
             </svg>
             {program.duration}
           </span>
-          <span className="inline-flex items-center text-xs sm:text-sm text-indigo-600">
+          <span className="inline-flex items-center text-[14px] font-normal text-indigo-600">
             <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
@@ -80,7 +80,7 @@ const TrainingCard: React.FC<{ program: TrainingProgram; index: number }> = ({ p
             </svg>
             {program.format}
           </span>
-          <span className="inline-flex items-center text-xs sm:text-sm text-orange-500">
+          <span className="inline-flex items-center text-[14px] font-normal text-orange-500">
             <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
@@ -93,11 +93,11 @@ const TrainingCard: React.FC<{ program: TrainingProgram; index: number }> = ({ p
         </div>
 
         {/* Description */}
-        <p className="mt-3 text-xs sm:text-sm text-gray-600 leading-relaxed font-medium">{program.description}</p>
+        <p className="mt-3 text-[14px] font-normal text-gray-600 leading-relaxed">{program.description}</p>
 
         {/* Benefits */}
         <div className="mt-4">
-          <p className="font-semibold text-gray-800 text-xs sm:text-sm">Key Benefits:</p>
+          <p className="font-bold text-[14px] text-gray-800">Key Benefits:</p>
           <ul className="mt-2 space-y-1.5">
             {program.benefits.map((benefit, idx) => (
               <li key={idx} className="flex items-start justify-center sm:justify-center md:justify-start">
@@ -108,7 +108,7 @@ const TrainingCard: React.FC<{ program: TrainingProgram; index: number }> = ({ p
                     clipRule="evenodd"
                   />
                 </svg>
-                <span className="text-xs sm:text-sm text-gray-600 font-medium">{benefit}</span>
+                <span className="text-[14px] font-normal text-gray-600">{benefit}</span>
               </li>
             ))}
           </ul>
@@ -117,7 +117,7 @@ const TrainingCard: React.FC<{ program: TrainingProgram; index: number }> = ({ p
         {/* CTA Button */}
         <div className="mt-4">
           <button
-            className="w-full py-2.5 sm:py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs sm:text-sm rounded-lg transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mx-auto sm:mx-auto md:mx-0"
+            className="w-full py-2.5 sm:py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-[14px] rounded-lg transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mx-auto sm:mx-auto md:mx-0"
             aria-label={`Register for ${program.title}`}
           >
             Register Now
@@ -387,14 +387,27 @@ const TrainingProgramsSection: React.FC = () => {
       {/* Hero Section */}
       <section
         id="hero-section"
-        className="relative flex flex-col justify-center bg-cover bg-center"
-        style={{ 
-          minHeight: '700px',
-          backgroundImage: "url('/hero-bg3.jpg')"
-        }}
+        className="relative flex flex-col justify-center overflow-hidden"
+        style={{ minHeight: "80vh", maxHeight: "800px" }}
       >
-        <div className="absolute inset-0 bg-black opacity-80 z-0"></div>
-        
+        <motion.div
+          className="absolute inset-0 z-0"
+          initial={{ scale: 1 }}
+          whileInView={{ scale: 1.05 }}
+          transition={{ duration: 5, ease: "easeOut" }}
+        >
+          <Image
+            src="/hero-bg3.jpg"
+            alt="Training Programs Background"
+            fill
+            style={{ objectFit: "cover" }}
+            priority
+            sizes="100vw"
+            className="transition-transform duration-300"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/50 to-gray-900/10 z-1"></div>
+        </motion.div>
+
         {/* Accent Top Border */}
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
 
@@ -405,13 +418,13 @@ const TrainingProgramsSection: React.FC = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-white text-[32px] sm:text-[36px] font-extrabold leading-tight sm:leading-snug [text-shadow:_0_2px_6px_rgba(0,0,0,0.4)]"
+                className="text-white text-[16px] font-bold"
               >
                 Empower Your Future with World-Class Training
               </motion.h2>
               <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
                 <svg width="120" height="10" viewBox="0 0 120 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </div>
             </div>
@@ -420,7 +433,7 @@ const TrainingProgramsSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-              className="text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide mt-6"
+              className="text-white text-[14px] font-normal mt-6 bg-gray-900/50 p-4 rounded-xl shadow-lg max-w-md mx-auto"
             >
               Discover transformative programs designed to bridge skill gaps and drive success for African SMEs
             </motion.p>
@@ -436,15 +449,15 @@ const TrainingProgramsSection: React.FC = () => {
                     boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
                   }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
+                  className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-bold text-[14px] shadow-lg transition-all duration-300 hover:text-[#1AF866] hover:bg-white"
                 >
-                  <span className="font-poppins">Explore Programs</span>
+                  Explore Programs
                 </motion.button>
               </Link>
             </div>
           </div>
         </div>
-        
+
         {/* Section Divider */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
@@ -482,9 +495,9 @@ const TrainingProgramsSection: React.FC = () => {
                   scrollToSection("tabs-section");
                 }}
                 onKeyDown={(e) => handleKeyDown(e, tab)}
-                className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-semibold text-xs sm:text-sm transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${activeTab === tab
-                  ? "bg-indigo-600 text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
+                className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-bold text-[14px] transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${activeTab === tab
+                    ? "bg-indigo-600 text-white"
+                    : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
                   }`}
                 role="tab"
                 aria-selected={activeTab === tab}
@@ -530,12 +543,12 @@ const TrainingProgramsSection: React.FC = () => {
                     d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <p className="mt-3 sm:mt-4 text-base sm:text-lg font-medium text-gray-600">
+                <p className="mt-3 sm:mt-4 text-[14px] font-normal text-gray-600">
                   No programs available in this category at the moment.
                 </p>
                 <button
                   onClick={() => setActiveTab("All Programs")}
-                  className="mt-4 sm:mt-6 px-5 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white rounded-full font-semibold text-sm sm:text-base transition-all duration-300 hover:bg-indigo-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="mt-4 sm:mt-6 px-5 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white rounded-full font-bold text-[14px] transition-all duration-300 hover:bg-indigo-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   View All Programs
                 </button>
@@ -549,8 +562,10 @@ const TrainingProgramsSection: React.FC = () => {
       <SlideInSection className="bg-[#7030A0] text-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
           <div className="mt-0">
-            <h2 className="text-[32px] sm:text-[36px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px]">Grow</span> Your Business?</h2>
-            <p className="mt-4 text-[18px] sm:text-[20px] font-caveat-brush tracking-wide">
+            <h2 className="text-[16px] font-bold font-poppins">
+              Ready to <span className="font-caveat-brush text-[#1AF866] text-[20px]">Grow</span> Your Business?
+            </h2>
+            <p className="mt-4 text-[14px] font-normal tracking-wide">
               Let's help you do the dirty work so you can focus on what you know how to do.
             </p>
           </div>
@@ -562,23 +577,9 @@ const TrainingProgramsSection: React.FC = () => {
                 boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+              className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-bold text-[14px] shadow-lg transition-all duration-300 hover:text-[#1AF866] hover:bg-[#5a2480]"
             >
-              <span className="font-caveat-brush text-[18px]">Get in Touch</span>
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+              Get in Touch
             </motion.button>
           </Link>
         </div>
