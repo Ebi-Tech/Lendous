@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import SlideInSection from "../../components/SlideInSection";
 import Link from "next/link";
 import { Plus, Minus } from 'lucide-react';
 
-// Custom typewriter effect component using Framer Motion
+// Custom typewriter effect component with dynamic underline
 interface TypewriterTextProps {
   text: string;
   className?: string;
@@ -18,11 +18,14 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({ text, className, typing
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [textWidth, setTextWidth] = useState(0);
+  const textRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     setDisplayText("");
     setCurrentIndex(0);
     setIsComplete(false);
+    setTextWidth(0);
   }, [text]);
 
   useEffect(() => {
@@ -39,17 +42,27 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({ text, className, typing
     }
   }, [currentIndex, text, typingSpeed, isComplete, onComplete]);
 
+  useEffect(() => {
+    if (textRef.current) {
+      setTextWidth(textRef.current.offsetWidth);
+    }
+  }, [displayText]);
+
   return (
-    <span className={className}>
-      {displayText}
+    <div className={`relative flex flex-row items-center whitespace-nowrap ${className}`}>
+      <span ref={textRef} className="inline-block">{displayText}</span>
       <motion.span
         animate={{ opacity: [0, 1, 0] }}
         transition={{ repeat: Infinity, duration: 0.8 }}
-        className="inline-block ml-0.5"
+        className="inline-block align-baseline ml-1"
       >
         |
       </motion.span>
-    </span>
+      <span
+        className="absolute -bottom-1 left-0 h-1 bg-[#1AF866] transition-all duration-100 ease-linear"
+        style={{ width: `${textWidth}px` }}
+      />
+    </div>
   );
 };
 
@@ -154,7 +167,7 @@ const Home: React.FC = () => {
               </div>
             </div>
 
-            <p className="text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide mt-6">
+            <p className="text-white text-[16px] sm:text-[18px] font-comic-neue tracking-wide mt-6">
             Launch. <span className="text-[#1AF866]">Grow. </span>Expand. your business with Lendous
             </p>
 
@@ -201,14 +214,14 @@ const Home: React.FC = () => {
           direction="right"
           className="py-16 sm:py-20 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 sm:gap-12 text-center"
         >
-          <div className="pt-5 space-y-8 sm:space-y-12 px-4 sm:px-0">
+          <div className="space-y-8 sm:space-y-12 px-4 sm:px-0">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
               className="mb-10 inline-block bg-[#27408F]/80 px-6 py-2 rounded-full"
             >
-              <span className="text-white text-lg font-caveat-brush tracking-wider">Problem We Solve</span>
+              <span className="text-white text-lg font-comic-neue tracking-wider">Problem We Solve</span>
             </motion.div>
             
             <div className="relative">
@@ -216,29 +229,31 @@ const Home: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-white text-[32px] sm:text-[36px] font-extrabold leading-tight sm:leading-snug font-poppins"
+                className="text-white text-[28px] sm:text-[32px] font-extrabold leading-tight sm:leading-snug font-poppins"
               >
                 We remove the <span className="relative inline-block">
                   <span className="relative z-10">Guesswork</span>
                   <span className="absolute -bottom-1 left-0 right-0 h-3 bg-[#1AF866]/30 -rotate-1 z-0"></span>
-                </span> in Running Your Business<br className="block sm:hidden" /><br className="hidden sm:block" />
-                and Help You <span className="relative inline-block">
+                </span> in Running Your Business
+                <br className="block sm:hidden" />
+                <br className="hidden sm:block" />
+                and Help You{" "}
+                <span className="relative block sm:inline-block align-baseline">
                   <TypewriterText
                     text={rotatingTexts[textIndex]}
                     typingSpeed={40}
                     onComplete={() => setIsTyping(false)}
-                    className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px] transform -rotate-2 inline-block"
+                    className="font-comic-neue text-[#1AF866] text-[28px] sm:text-[32px] inline-block align-baseline"
                   />
-                  <span className="absolute -bottom-1 left-0 right-0 h-1 bg-[#1AF866]"></span>
                 </span>
               </motion.h1>
             </div>
 
-            <motion.div
+            <motion.ol
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-[#E2D8EC] text-left text-[12px] sm:text-[14px] font-medium italic mt-8 space-y-4 list-decimal pl-6"
+              className="text-[#E2D8EC] text-left text-[12px] sm:text-[14px] font-medium mt-8 space-y-4 list-decimal pl-6"
             >
               {[
                 {
@@ -257,12 +272,12 @@ const Home: React.FC = () => {
                   description: "Our solutions are Done-For-You, so you can focus on what you know how to do."
                 }
               ].map((item, index) => (
-                <div key={index} className="mb-4 last:mb-0">
+                <li key={index} className="mb-4 last:mb-0">
                   <div 
                     className="flex items-center justify-between cursor-pointer p-2 hover:bg-white/30 rounded-lg transition-colors duration-200"
                     onClick={() => toggleProblemItem(index)}
                   >
-                    <li className="text-white" dangerouslySetInnerHTML={{
+                    <span className="text-white" dangerouslySetInnerHTML={{
                       __html: item.title.replace(
                         item.highlight, 
                         `<span class="text-[#B598CF] font-semibold">${item.highlight}</span>`
@@ -292,9 +307,9 @@ const Home: React.FC = () => {
                       {item.description}
                     </div>
                   </motion.div>
-                </div>
+                </li>
               ))}
-            </motion.div>
+            </motion.ol>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -352,7 +367,7 @@ const Home: React.FC = () => {
                 transition={{ duration: 0.8 }}
                 className="mb-8 inline-block bg-[#7030A0] px-6 py-2 rounded-full"
               >
-                <span className="text-white text-lg font-caveat-brush tracking-wider font-bold">Why Lendous?</span>
+                <span className="text-white text-lg font-comic-neue tracking-wider font-bold">Why Lendous?</span>
               </motion.div>
               
               <div className="relative">
@@ -360,14 +375,14 @@ const Home: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="text-black text-[32px] sm:text-[36px] font-extrabold leading-tight sm:leading-snug font-poppins"
+                  className="text-black text-[28px] sm:text-[32px] font-extrabold leading-tight sm:leading-snug font-poppins"
                 >
-                  The Lendous <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px] transform inline-block">Assurance</span>: YOU WILL 
+                  The Lendous <span className="font-comic-neue text-[#1AF866] text-[28px] sm:text-[32px] transform inline-block">Assurance</span>: You Will 
                   <span className="relative inline-block mx-2">
-                    <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px] transform inline-block">NEVER</span>
+                    <span className="font-comic-neue text-[#1AF866] text-[28px] sm:text-[32px] transform inline-block">Never</span>
                     <span className="absolute -bottom-1 left-0 right-0 h-2 bg-[#7030A0] z-0"></span>
                   </span> 
-                  WORK ALONE!
+                  Work Alone!
                 </motion.h1>
               </div>
 
@@ -375,9 +390,9 @@ const Home: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                className="text-black text-[20px] font-caveat-brush tracking-wide mt-6"
+                className="text-black text-[20px] font-comic-neue tracking-wide mt-6"
               >
-                WHENEVER YOU HAVE A BUSINESS PROBLEM, <span className="border-b-7 border-b-[#7030A0]">CALL LENDOUS</span>
+                Whenever you have a business problem, <span className="border-b-7 border-b-[#7030A0]">call Lendous</span>
               </motion.p>
             </div>
           </div>
@@ -405,53 +420,53 @@ const Home: React.FC = () => {
                   }}
                   transition={{ type: "spring", stiffness: 100 }}
                 >
-                  <h3 className="text-gray-800 text-[24px] sm:text-[28px] font-caveat-brush">{stat.value}</h3>
+                  <h3 className="text-gray-800 text-[28px] sm:text-[32px] font-bold font-comic-neue">{stat.value}</h3>
                   <p className="text-gray-600 mt-2 text-[12px] font-poppins">{stat.label}</p>
                 </motion.div>
               ))}
             </motion.div>
           </div>
-          <p className="text-[12px] text-black mt-12 text-left w-full px-4 sm:px-6 lg:px-8">
+          <p className="text-[10px] text-black mt-12 text-left w-full px-4 sm:px-6 lg:px-8">
             * Impact delivered by Lendous leaders in the last 10 years
           </p>
         </SlideInSection>
       </section>
 
       {/* Footer Banner */}
-      <SlideInSection className="bg-[#7030A0] text-white py-12 sm:py-16">
+      <SlideInSection className="bg-[#7030A0] text-white py-5 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
           <div className="mt-0">
-            <h2 className="text-[32px] sm:text-[36px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px]">Grow</span> Your Business?</h2>
-            <p className="mt-4 text-[18px] sm:text-[20px] font-caveat-brush tracking-wide">
+            <h2 className="text-[14px] sm:text-[18px] font-extrabold font-poppins">Ready to <span className="font-comic-neue text-[#1AF866] text-[14px] sm:text-[18px]">Grow</span> Your Business?</h2>
+            <p className="mt-4 text-[12px] sm:text-[14px] font-comic-neue tracking-wide">
               Let's help you do the dirty work so you can focus on what you know how to do.
             </p>
           </div>
           <Link href="/contact">
-          <motion.button
-            onClick={() => scrollToSection("consultation")}
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
-          >
-            <span className="font-caveat-brush text-[18px]">Get in Touch</span>
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+            <motion.button
+              onClick={() => scrollToSection("consultation")}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="px-5 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[14px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </motion.button>
+              <span className="font-comic-neue text-[14px]">Get in Touch</span>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </motion.button>
           </Link>
         </div>
       </SlideInSection>

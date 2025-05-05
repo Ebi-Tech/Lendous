@@ -174,8 +174,8 @@ const AboutSection: React.FC = () => {
           backgroundImage: "url('/hero-bg4.jpg')"
         }}
       >
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[#7030A0]/100 opacity-85 z-1 backdrop-blur-sm"></div>
+        <div className="absolute bg-black opacity-85 inset-0 z-0">
+          <div className="absolute inset-0 bg-[#7030A0] opacity-60 z-1 backdrop-blur-sm"></div>
         </div>
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
         <div className="py-12 sm:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 sm:gap-12">
@@ -184,7 +184,7 @@ const AboutSection: React.FC = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut" }}
-              className="text-white text-[36px] sm:text-[40px] font-extrabold tracking-tight leading-tight sm:leading-snug"
+              className="text-white text-[32px] sm:text-[36px] font-extrabold tracking-tight leading-tight sm:leading-snug font-poppins"
             >
               Who We Are
             </motion.h1>
@@ -192,7 +192,7 @@ const AboutSection: React.FC = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-              className="text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide mt-6"
+              className="text-white text-[20px] sm:text-[22px] font-comic-neue tracking-wide mt-6"
             >
               We are experienced professionals bringing our collective years of expertise to SMEs
             </motion.p>
@@ -206,7 +206,7 @@ const AboutSection: React.FC = () => {
                   boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl font-poppins"
               >
                 Meet the Team
               </motion.button>
@@ -220,7 +220,7 @@ const AboutSection: React.FC = () => {
                   borderColor: "#7030A0",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-2 sm:py-3 bg-transparent border-2 border-[#1AF866] text-[#FFFFFF] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-transparent border-2 border-[#1AF866] text-[#FFFFFF] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl font-poppins"
               >
                 Explore Services
               </motion.button>
@@ -253,11 +253,11 @@ const AboutSection: React.FC = () => {
         >
           <div className="flex flex-col lg:flex-row items-start gap-8 md:gap-12">
             <div className="w-full lg:w-1/2 text-center lg:text-left">
-              <h2 className="text-center lg:text-left text-3xl md:text-4xl lg:text-5xl font-extrabold font-caveat-brush text-[#27408F] leading-tight mt-5">
+              <h2 className="text-center lg:text-left text-[28px] sm:text-[32px] font-extrabold font-poppins text-[#27408F] leading-tight mt-5">
                 About
               </h2>
               
-              <p className="text-justify text-sm md:text-base mt-4 md:mt-6 text-black font-normal leading-relaxed md:leading-loose lg:leading-loose">
+              <p className="text-justify text-[12px] sm:text-[14px] mt-4 md:mt-6 text-black font-medium leading-relaxed md:leading-loose lg:leading-loose font-poppins">
                 Lendous is the Growth Partner for businesses in Africa. 
                 We help businesses grow sales, plug revenue leaks, and build structures to support expansion (scale). 
                 We do this by providing them the Systems, Tools, Advisory, and Resources (STARS) they need to Launch, Grow, and Expand in Africa.  
@@ -298,8 +298,8 @@ const AboutSection: React.FC = () => {
                       transition={{ duration: 0.3 }}
                     />
                   </div>
-                  <h3 className="text-base md:text-lg lg:text-xl font-semibold font-caveat-brush text-[#27408F] mt-3 md:mt-4">{member.name}</h3>
-                  <p className="text-xs md:text-sm text-gray-700 mt-1 text-center">{member.role}</p>
+                  <h3 className="text-[12px] sm:text-[14px] font-semibold font-comic-neue text-[#27408F] mt-3 md:mt-4">{member.name}</h3>
+                  <p className="text-[10px] sm:text-[12px] text-gray-700 mt-1 text-center font-poppins">{member.role}</p>
                   <a
                     href={member.linkedin}
                     target="_blank"
@@ -324,25 +324,27 @@ const AboutSection: React.FC = () => {
       <div
         id="services-section"
         className="relative flex flex-col justify-center overflow-hidden"
-        style={{ minHeight: '700px' }}
+        style={{ 
+          minHeight: `${Math.max(500, viewportHeight * 0.8)}px`,
+          backgroundColor: '#5B2A86'
+        }}
       >
         <div className="absolute inset-0 z-0">
-          <div className="h-full bg-[#5B2A86]"></div>
           <div className="absolute inset-0 bg-black opacity-70 z-1 backdrop-blur-sm"></div>
         </div>
         <div className="absolute top-0 right-0 bottom-0 w-2 bg-gradient-to-b from-[#7030A0] to-[#1AF866] z-10"></div>
         <SlideInSection
           direction="up"
-          className="py-12 sm:py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          className="py-8 md:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto w-full"
         >
-          <div className="flex flex-col md:flex-row items-center gap-12">
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="md:w-1/2 text-center md:text-left">
               <motion.h2
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, ease: "easeInOut" }}
-                className="text-white text-[32px] sm:text-[36px] font-extrabold font-caveat-brush tracking-tight leading-tight sm:leading-snug"
+                className="text-white text-[28px] sm:text-[32px] font-extrabold font-poppins tracking-tight leading-tight sm:leading-snug"
               >
                 Our Services
               </motion.h2>
@@ -351,13 +353,13 @@ const AboutSection: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-                className="mt-6 sm:mt-10 text-white text-[16px] sm:text-[18px] font-medium drop-shadow-md leading-relaxed max-w-3xl mx-auto md:mx-0"
+                className="mt-6 sm:mt-10 text-white text-[20px] sm:text-[22px] font-comic-neue tracking-wide max-w-3xl mx-auto md:mx-0"
               >
                 We blend our expertise across key service areas to deliver tailored solutions for your business.
               </motion.p>
             </div>
           </div>
-          <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10">
+          <div className="mt-6 lg:mt-12 w-full grid grid-cols-2 gap-3 sm:gap-4">
             {serviceData.map((category, index) => (
               <motion.div
                 key={category.title}
@@ -369,10 +371,10 @@ const AboutSection: React.FC = () => {
                 whileHover={{
                   scale: 1.02,
                   translateY: -5,
-                  backgroundColor: "rgba(255, 255, 255, 0.2)",
+                  backgroundColor: "rgba(255, 255, 255, 0.25)",
                   boxShadow: "0 0 20px rgba(26, 248, 102, 0.4)",
                 }}
-                className="p-6 sm:p-8 bg-[#FFFFFF]/10 backdrop-blur-sm rounded-3xl shadow-xl border border-[#FFFFFF]/20 hover:border-[#1AF866]/50 transition-all duration-300 relative z-10 h-full flex flex-col"
+                className="w-full p-3 sm:p-4 bg-[#FFFFFF]/20 backdrop-blur-sm rounded-2xl shadow-xl border border-[#FFFFFF]/10 transition-all duration-300 relative z-10 flex flex-col min-h-[200px]"
               >
                 <div className="flex items-center mb-4">
                   <motion.span
@@ -382,7 +384,7 @@ const AboutSection: React.FC = () => {
                   >
                     {serviceIcons[category.title as keyof typeof serviceIcons]}
                   </motion.span>
-                  <h3 className="text-xl sm:text-2xl font-semibold font-caveat-brush text-[#1AF866] ml-3 flex-1">
+                  <h3 className="text-[18px] sm:text-[22px] font-semibold font-comic-neue text-[#1AF866] ml-3 flex-1">
                     {category.title}
                   </h3>
                 </div>
@@ -391,16 +393,16 @@ const AboutSection: React.FC = () => {
                     const sectionKey = `${category.title}-${group.subheading}`;
                     const isOpen = openSections[sectionKey] || false;
                     return (
-                      <div key={group.subheading} className="mb-4 last:mb-0">
+                      <div key={group.subheading} className="mb-1 last:mb-0">
                         <div 
                           className="flex items-center justify-between cursor-pointer p-2 hover:bg-white/30 rounded-lg transition-colors duration-200"
                           onClick={() => toggleSection(sectionKey)}
                         >
-                          <h4 className="text-[16px] font-semibold text-white mb-0">
+                          <h4 className="text-[12px] sm:text-[14px] font-semibold text-white mb-0 font-poppins">
                             {group.subheading}
                           </h4>
                           <button
-                            className="text-white hover:text-[#1AF866] transition-colors duration-300 flex items-center justify-center"
+                            className="text-white hover:text-gray-300 transition-colors duration-300 flex items-center justify-center"
                             aria-label={isOpen ? "Collapse section" : "Expand section"}
                           >
                             {isOpen ? (
@@ -417,9 +419,9 @@ const AboutSection: React.FC = () => {
                             opacity: isOpen ? 1 : 0,
                           }}
                           transition={{ duration: 0.3 }}
-                          className="overflow-hidden ml-2"
+                          className="overflow-hidden"
                         >
-                          <ul className="list-disc pl-5 pt-2">
+                          <ul className="list-disc pl-4 pt-2">
                             {group.services.map((service, idx) => (
                               <motion.li
                                 key={`${group.subheading}-${idx}`}
@@ -427,7 +429,7 @@ const AboutSection: React.FC = () => {
                                 initial="hidden"
                                 animate="visible"
                                 variants={badgeVariants}
-                                className="text-sm sm:text-base text-white font-medium mt-1"
+                                className="text-[12px] sm:text-[14px] text-white mt-1 font-poppins"
                               >
                                 {service}
                               </motion.li>
@@ -451,7 +453,7 @@ const AboutSection: React.FC = () => {
                   boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full sm:w-auto px-6 md:px-8 lg:px-12 py-3 md:py-4 lg:py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm md:text-base shadow-lg transition-all duration-300 hover:shadow-2xl"
+                className="w-full sm:w-auto px-6 md:px-8 lg:px-12 py-3 md:py-4 lg:py-5 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-2xl font-poppins"
               >
                 Explore Solutions
               </motion.button>
@@ -466,40 +468,40 @@ const AboutSection: React.FC = () => {
       </div>
 
       {/* Footer Banner */}
-      <SlideInSection className="bg-[#7030A0] text-white py-8 md:py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6 md:gap-8 text-center sm:text-left">
+      <SlideInSection className="bg-[#7030A0] text-white py-5 sm:py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
           <div className="mt-0">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-3xl md:text-4xl lg:text-5xl">Grow</span> Your Business?</h2>
-            <p className="mt-2 md:mt-4 text-base md:text-lg lg:text-xl font-caveat-brush tracking-wide">
+            <h2 className="text-[14px] sm:text-[18px] font-extrabold font-poppins">Ready to <span className="font-comic-neue text-[#1AF866] text-[14px] sm:text-[18px]">Grow</span> Your Business?</h2>
+            <p className="mt-4 text-[12px] sm:text-[14px] font-comic-neue tracking-wide">
               Let's help you do the dirty work so you can focus on what you know how to do.
             </p>
           </div>
           <Link href="/contact">
-          <motion.button
-            onClick={() => scrollToSection("consultation")}
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="px-6 md:px-8 py-2 md:py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-sm md:text-base shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
-          >
-            <span className="font-caveat-brush text-base md:text-lg">Get in Touch</span>
-            <svg
-              className="w-4 h-4 md:w-5 md:h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+            <motion.button
+              onClick={() => scrollToSection("consultation")}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="px-5 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[14px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 font-poppins"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </motion.button>
+              <span className="font-comic-neue text-[14px]">Get in Touch</span>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </motion.button>
           </Link>
         </div>
       </SlideInSection>

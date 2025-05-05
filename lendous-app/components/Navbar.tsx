@@ -18,20 +18,20 @@ const Navbar: React.FC = () => {
   }, [isMenuOpen]);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-[#FFFFFF] to-[#E6D8F0] shadow-lg" style={{ boxShadow: "0 4px 15px rgba(112, 48, 160, 0.2)" }}>
+    <nav
+      className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-[#FFFFFF] to-[#E6D8F0] shadow-lg"
+      style={{ boxShadow: "0 4px 15px rgba(112, 48, 160, 0.2)" }}
+    >
       <div className="relative z-10 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 max-w-7xl mx-auto">
         {/* Logo and Brand Name */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/footer-logo.png"
+            src="/nav-logo.png"
             alt="Lendous Logo"
-            width={40}
-            height={40}
-            className="mr-2 h-10 w-10"
+            width={100}
+            height={100}
+            className="mr-2 w-full h-auto"
           />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8563ad] to-[#758cbd] font-bold text-2xl sm:text-3xl">
-            Lendous
-          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -72,27 +72,28 @@ const Navbar: React.FC = () => {
         {isMenuOpen && (
           <div className="fixed inset-0 z-40 md:hidden">
             {/* Backdrop */}
-            <div 
+            <div
               className="absolute inset-0 bg-black bg-opacity-50"
               onClick={toggleMenu}
             ></div>
-            
+
             {/* Menu Content */}
             <div className="absolute right-0 top-0 h-full w-4/5 max-w-sm bg-white shadow-xl">
               <div className="flex flex-col h-full p-4">
                 {/* Mobile Header */}
                 <div className="flex items-center justify-between mb-8">
-                  <Link href="/" className="flex items-center" onClick={toggleMenu}>
+                  <Link
+                    href="/"
+                    className="flex items-center"
+                    onClick={toggleMenu}
+                  >
                     <Image
-                      src="/footer-logo.png"
+                      src="/nav-logo.png"
                       alt="Lendous Logo"
-                      width={40}
-                      height={40}
-                      className="mr-2"
+                      width={100}
+                      height={100}
+                      className="mr-2 w-full h-auto"
                     />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8563ad] to-[#758cbd] font-bold text-2xl">
-                      Lendous
-                    </span>
                   </Link>
                   <button
                     onClick={toggleMenu}
