@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
+import SlideInSection from "../../../components/SlideInSection";
 import { motion } from "framer-motion";
 import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
 import { useState } from "react";
-import Link from "next/link";
-import SlideInSection from "../../../components/SlideInSection";
 
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -73,14 +73,27 @@ const FAQSection = () => {
       {/* Hero Section */}
       <section
         id="faq-hero-section"
-        className="relative flex flex-col justify-center bg-cover bg-center"
-        style={{ 
-          minHeight: '700px',
-          backgroundImage: "url('/hero-bg3.jpg')"
-        }}
+        className="relative flex flex-col justify-center overflow-hidden"
+        style={{ minHeight: "80vh", maxHeight: "800px" }}
       >
-        <div className="absolute inset-0 bg-black opacity-80 z-0"></div>
-        
+        <motion.div
+          className="absolute inset-0 z-0"
+          initial={{ scale: 1 }}
+          whileInView={{ scale: 1.05 }}
+          transition={{ duration: 5, ease: "easeOut" }}
+        >
+          <Image
+            src="/hero-bg6.jpg"
+            alt="FAQ Section Background"
+            fill
+            style={{ objectFit: "cover" }}
+            priority
+            sizes="100vw"
+            className="transition-transform duration-300"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/50 to-gray-900/10 z-1"></div>
+        </motion.div>
+
         {/* Accent Top Border */}
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
 
@@ -91,13 +104,13 @@ const FAQSection = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-white text-[32px] sm:text-[36px] font-extrabold leading-tight sm:leading-snug [text-shadow:_0_2px_6px_rgba(0,0,0,0.4)]"
+                className="text-white text-[16px] font-bold"
               >
                 Answers to Your Questions
               </motion.h2>
               <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
                 <svg width="120" height="10" viewBox="0 0 120 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </div>
             </div>
@@ -106,7 +119,7 @@ const FAQSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-              className="text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide mt-6"
+              className="text-white text-[14px] font-normal mt-6"
             >
               Explore our FAQs to learn more about how we can support your business
             </motion.p>
@@ -121,14 +134,14 @@ const FAQSection = () => {
                   boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-bold text-[14px] shadow-lg transition-all duration-300 hover:text-[#1AF866] hover:bg-white"
               >
-                <span className="font-poppins">Explore FAQs</span>
+                Explore FAQs
               </motion.button>
             </div>
           </div>
         </div>
-        
+
         {/* Section Divider */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
@@ -144,13 +157,13 @@ const FAQSection = () => {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full mb-6">
               <HelpCircle size={18} className="text-blue-600" />
-              <span className="text-sm font-medium text-blue-600">Common Questions</span>
+              <span className="text-[14px] font-normal text-blue-600">Common Questions</span>
             </div>
             <motion.h2
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight tracking-tight"
+              className="text-[16px] font-bold text-gray-900"
             >
               Frequently Asked Questions
             </motion.h2>
@@ -158,7 +171,7 @@ const FAQSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto"
+              className="mt-4 text-[14px] font-normal text-gray-600 max-w-3xl mx-auto"
             >
               Find answers to common asked questions about our services and approach.
             </motion.p>
@@ -180,7 +193,7 @@ const FAQSection = () => {
                   aria-controls={`faq-answer-${index}`}
                   className="flex items-center justify-between w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
-                  <h3 className="text-xl font-semibold text-gray-900">{faq.question}</h3>
+                  <h3 className="text-[16px] font-bold text-gray-900">{faq.question}</h3>
                   <div>
                     {openIndex === index ? (
                       <ChevronUp size={20} className="text-gray-500" />
@@ -194,7 +207,7 @@ const FAQSection = () => {
                   className={`px-6 pb-6 overflow-hidden transition-all duration-300 ${openIndex === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                     }`}
                 >
-                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                  <p className="text-[14px] font-normal text-gray-600 leading-relaxed">{faq.answer}</p>
                 </div>
               </motion.div>
             ))}
@@ -206,8 +219,10 @@ const FAQSection = () => {
       <SlideInSection className="bg-[#7030A0] text-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
           <div className="mt-0">
-            <h2 className="text-[32px] sm:text-[36px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px]">Grow</span> Your Business?</h2>
-            <p className="mt-4 text-[18px] sm:text-[20px] font-caveat-brush tracking-wide">
+            <h2 className="text-[16px] font-bold font-poppins">
+              Ready to <span className="font-caveat-brush text-[#1AF866] text-[20px]">Grow</span> Your Business?
+            </h2>
+            <p className="mt-4 text-[14px] font-normal tracking-wide">
               Let's help you do the dirty work so you can focus on what you know how to do.
             </p>
           </div>
@@ -219,23 +234,9 @@ const FAQSection = () => {
                 boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+              className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-bold text-[14px] shadow-lg transition-all duration-300 hover:text-[#1AF866] hover:bg-[#5a2480]"
             >
-              <span className="font-caveat-brush text-[18px]">Get in Touch</span>
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+              Get in Touch
             </motion.button>
           </Link>
         </div>
