@@ -2,7 +2,9 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
-import { JSX, useState } from "react";
+import { useState } from "react";
+import Link from "next/link";
+import SlideInSection from "../../../components/SlideInSection";
 
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -67,65 +69,73 @@ const FAQSection = () => {
   };
 
   return (
-    <div>
+    <div className="font-poppins">
       {/* Hero Section */}
-      <div
+      <section
         id="faq-hero-section"
-        className="relative flex flex-col justify-center overflow-hidden"
-        style={{ minHeight: "80vh", maxHeight: "800px" }}
+        className="relative flex flex-col justify-center bg-cover bg-center"
+        style={{ 
+          minHeight: '700px',
+          backgroundImage: "url('/hero-bg3.jpg')"
+        }}
       >
-        <motion.div
-          className="absolute inset-0 z-0"
-          initial={{ scale: 1 }}
-          whileInView={{ scale: 1.05 }}
-          transition={{ duration: 5, ease: "easeOut" }}
-        >
-          <Image
-            src="/hero-bg3.jpg"
-            alt="FAQ Hero Background"
-            fill
-            style={{ objectFit: "cover" }}
-            priority
-            sizes="100vw"
-            className="transition-transform duration-300"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/70 to-gray-900/30 z-1 backdrop-blur-[3px]"></div>
-        </motion.div>
-        <div className="py-16 sm:py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center md:items-start gap-6 sm:gap-8">
-          <div className="text-center md:text-left md:max-w-2xl">
-            <motion.h2
-              initial={{ opacity: 0, y: -30, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight"
-            >
-              Answers to Your Questions
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="mt-4 sm:mt-6 text-lg sm:text-xl font-medium text-gray-200 leading-relaxed bg-gray-900/50 p-4 sm:p-6 rounded-xl shadow-lg max-w-md"
-            >
-              Explore our FAQs to learn more about how we can support your business growth and address your unique challenges.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-              className="mt-6"
-            >
-              <button
-                onClick={() => scrollToSection("faq-content-section")}
-                className="px-6 sm:px-8 py-3 bg-indigo-600 text-white rounded-full font-semibold text-base shadow-md transition-all duration-300 hover:bg-indigo-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
-                aria-label="Explore FAQs"
+        <div className="absolute inset-0 bg-black opacity-80 z-0"></div>
+        
+        {/* Accent Top Border */}
+        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
+
+        <div className="py-12 sm:py-16 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 sm:gap-12 text-center">
+          <div className="space-y-6 sm:space-y-10 px-4 sm:px-0">
+            <div className="relative">
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="text-white text-[32px] sm:text-[36px] font-extrabold leading-tight sm:leading-snug [text-shadow:_0_2px_6px_rgba(0,0,0,0.4)]"
               >
-                Explore FAQs
-              </button>
-            </motion.div>
+                Answers to Your Questions
+              </motion.h2>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                <svg width="120" height="10" viewBox="0 0 120 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+              className="text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide mt-6"
+            >
+              Explore our FAQs to learn more about how we can support your business
+            </motion.p>
+
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mt-8">
+              <motion.button
+                onClick={() => scrollToSection("faq-content-section")}
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: "#FFFFFF",
+                  color: "#7030A0",
+                  boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
+              >
+                <span className="font-poppins">Explore FAQs</span>
+              </motion.button>
+            </div>
           </div>
         </div>
-      </div>
+        
+        {/* Section Divider */}
+        <div className="absolute bottom-0 left-0 right-0 z-10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
+            <path d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z" fill="white" fillOpacity="0.1" />
+          </svg>
+        </div>
+      </section>
 
       {/* FAQ Content Section */}
       <section id="faq-content-section" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
@@ -191,6 +201,45 @@ const FAQSection = () => {
           </div>
         </div>
       </section>
+
+      {/* Footer Banner */}
+      <SlideInSection className="bg-[#7030A0] text-white py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
+          <div className="mt-0">
+            <h2 className="text-[32px] sm:text-[36px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px]">Grow</span> Your Business?</h2>
+            <p className="mt-4 text-[18px] sm:text-[20px] font-caveat-brush tracking-wide">
+              Let's help you do the dirty work so you can focus on what you know how to do.
+            </p>
+          </div>
+          <Link href="/contact">
+            <motion.button
+              onClick={() => scrollToSection("consultation")}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+            >
+              <span className="font-caveat-brush text-[18px]">Get in Touch</span>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </motion.button>
+          </Link>
+        </div>
+      </SlideInSection>
     </div>
   );
 };
