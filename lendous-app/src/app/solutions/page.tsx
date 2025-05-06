@@ -216,8 +216,9 @@ const SolutionsSection: React.FC = () => {
                 onKeyDown={(e) => handleKeyDown(e, tab)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-4 py-2 rounded-full font-semibold text-sm transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${activeTab === tab ? "bg-indigo-600 text-white" : "bg-white/80 text-gray-700 hover:bg-white"
-                  }`}
+                className={`px-4 py-2 rounded-full font-semibold text-sm transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                  activeTab === tab ? "bg-indigo-600 text-white" : "bg-white/80 text-gray-700 hover:bg-white"
+                }`}
                 role="tab"
                 aria-selected={activeTab === tab}
                 aria-controls={`tabpanel-${tab.toLowerCase().replace(" ", "-")}`}
@@ -233,14 +234,6 @@ const SolutionsSection: React.FC = () => {
             {tabs.map((tab) => (
               activeTab === tab && (
                 <div key={tab}>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="text-center md:text-left"
-                  >
-                    <h3 className="text-[28px] sm:text-[32px] font-bold text-gray-900 tracking-tight">{tabContent[tab].stage}</h3>
-                  </motion.div>
                   <div className="mt-8 sm:mt-10">
                     {tabContent[tab].sections.map((section, index) => (
                       <motion.div
@@ -252,22 +245,24 @@ const SolutionsSection: React.FC = () => {
                       >
                         <SlideInSection
                           direction={section.imagePosition}
-                          className="flex flex-col md:flex-row items-center gap-8 sm:gap-12 mb-12"
+                          className={`flex flex-col ${section.imagePosition === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 sm:gap-12 mb-12`}
                         >
-                          {section.imagePosition === "left" && (
-                            <div className="md:w-1/2">
-                              <Image
-                                src={section.image}
-                                alt={section.title}
-                                width={0}
-                                height={0}
-                                sizes="100vw"
-                                className="object-cover rounded-xl shadow-md w-full h-auto sm:max-h-[400px] sm:aspect-[5/3] md:aspect-[5/3] hover:scale-[1.02] transition-transform duration-300"
-                              />
-                            </div>
-                          )}
-                          <div className="md:w-1/2 text-center sm:text-center md:text-left">
-                            <h4 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-1 tracking-tight">{section.title}</h4>
+                          {/* Image - always comes first on mobile */}
+                          <div className="w-full md:w-1/2 order-1">
+                            <Image
+                              src={section.image}
+                              alt={section.title}
+                              width={0}
+                              height={0}
+                              sizes="100vw"
+                              className="object-cover rounded-xl shadow-md w-full h-auto sm:max-h-[400px] sm:aspect-[5/3] md:aspect-[5/3] hover:scale-[1.02] transition-transform duration-300"
+                            />
+                          </div>
+                          {/* Text content */}
+                          <div className="w-full md:w-1/2 text-center md:text-left order-2">
+                            <h4 className="text-2xl sm:text-3xl font-semibold text-[#7030A0] font-kristen-itc mb-1 tracking-tight">
+                              {section.title}
+                            </h4>
                             {section.subtitle && (
                               <p className="text-lg sm:text-xl font-medium text-indigo-600 mb-3">{section.subtitle}</p>
                             )}
@@ -275,23 +270,11 @@ const SolutionsSection: React.FC = () => {
                             <motion.button
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
-                              className="mt-6 px-6 py-3 bg-indigo-600 text-white rounded-full font-semibold text-sm shadow-md transition-all duration-300 hover:bg-indigo-700 hover:shadow-lg mx-auto sm:mx-auto md:mx-0"
+                              className="mt-6 px-6 py-3 bg-indigo-600 text-white rounded-full font-semibold text-sm shadow-md transition-all duration-300 hover:bg-indigo-700 hover:shadow-lg mx-auto md:mx-0"
                             >
                               Learn More
                             </motion.button>
                           </div>
-                          {section.imagePosition === "right" && (
-                            <div className="md:w-1/2">
-                              <Image
-                                src={section.image}
-                                alt={section.title}
-                                width={0}
-                                height={0}
-                                sizes="100vw"
-                                className="object-cover rounded-xl shadow-md w-full h-auto sm:max-h-[400px] sm:aspect-[5/3] md:aspect-[5/3] hover:scale-[1.02] transition-transform duration-300"
-                              />
-                            </div>
-                          )}
                         </SlideInSection>
                       </motion.div>
                     ))}
@@ -303,11 +286,13 @@ const SolutionsSection: React.FC = () => {
         </SlideInSection>
       </div>
 
-    {/* Footer Banner */}
-    <SlideInSection className="bg-[#7030A0] text-white py-5 sm:py-10">
+      {/* Footer Banner */}
+      <SlideInSection className="bg-[#7030A0] text-white py-5 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
           <div className="mt-0">
-            <h2 className="text-[14px] sm:text-[18px] font-extrabold font-poppins">Ready to <span className="font-comic-neue text-[#1AF866] text-[14px] sm:text-[18px]">Grow</span> Your Business?</h2>
+            <h2 className="text-[14px] sm:text-[18px] font-extrabold font-poppins">
+              Ready to <span className="font-comic-neue text-[#1AF866] text-[14px] sm:text-[18px]">Grow</span> Your Business?
+            </h2>
             <p className="mt-4 text-[12px] sm:text-[14px] font-comic-neue tracking-wide">
               Let's help you do the dirty work so you can focus on what you know how to do.
             </p>

@@ -64,6 +64,15 @@
   font-display: swap;
 }
 
+/* Add Kristen ITC font */
+@font-face {
+  font-family: 'Kristen ITC';
+  src: url('/ITCKRIST.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -96,4 +105,9 @@ body {
 
 .font-caveat-brush {
   font-family: 'Comic Neue', cursive;
+}
+
+/* Add utility class for Kristen ITC font */
+.font-kristen-itc {
+  font-family: 'Kristen ITC', cursive;
 }
