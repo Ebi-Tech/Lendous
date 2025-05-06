@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
             <Link
               key={item.label}
               href={item.href}
-              className="text-gray-800 hover:text-[#1AF866] text-sm lg:text-base font-medium transition-colors duration-200 relative group"
+              className="text-gray-800 hover:text-[#1AF866] text-[14px] font-medium transition-colors duration-200 relative group"
             >
               {item.label}
               <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#1AF866] transition-all duration-300 group-hover:w-full"></span>

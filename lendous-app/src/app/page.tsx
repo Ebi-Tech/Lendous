@@ -221,7 +221,7 @@ const Home: React.FC = () => {
               transition={{ duration: 0.8 }}
               className="mb-10 inline-block bg-[#27408F]/80 px-6 py-2 rounded-full"
             >
-              <span className="text-white text-lg font-comic-neue tracking-wider">Problem We Solve</span>
+              <span className="text-white text-[14px] font-comic-neue tracking-wider">Problem We Solve</span>
             </motion.div>
             
             <div className="relative">
@@ -367,7 +367,7 @@ const Home: React.FC = () => {
                 transition={{ duration: 0.8 }}
                 className="mb-8 inline-block bg-[#7030A0] px-6 py-2 rounded-full"
               >
-                <span className="text-white text-lg font-comic-neue tracking-wider font-bold">Why Lendous?</span>
+                <span className="text-white text-[14px] font-comic-neue tracking-wider">Why Lendous?</span>
               </motion.div>
               
               <div className="relative">
@@ -405,9 +405,9 @@ const Home: React.FC = () => {
               className="grid grid-cols-1 sm:grid-cols-3 gap-6"
             >
               {[
-                { value: "40+", label: "Years Combined Experience" },
-                { value: "$300M+", label: "Revenue Delivered To-Date*" },
-                { value: "3+", label: "Countries in Sub-Saharan Africa" },
+                { value: "40+", sub: "Years", label: "Combined Experience" },
+                { value: "$300M+", sub:"Revenue", label: "Delivered To-Date*" },
+                { value: "3+", sub: "Countries", label: "in Sub-Saharan Africa" },
               ].map((stat, index) => (
                 <motion.div
                   key={index}
@@ -420,8 +420,9 @@ const Home: React.FC = () => {
                   }}
                   transition={{ type: "spring", stiffness: 100 }}
                 >
-                  <h3 className="text-gray-800 text-[28px] sm:text-[32px] font-bold font-comic-neue">{stat.value}</h3>
-                  <p className="text-gray-600 mt-2 text-[12px] font-poppins">{stat.label}</p>
+                  <h3 className="text-gray-800 text-[28px] sm:text-[32px] font-extrabold font-comic-neue">{stat.value}</h3>
+                  <h3 className="text-gray-800 text-[12px] sm:text-[14px] font-bold font-comic-neue">{stat.sub}</h3>
+                  <p className="text-gray-600 mt-2 text-[12px] font-comic-neue">{stat.label}</p>
                 </motion.div>
               ))}
             </motion.div>
