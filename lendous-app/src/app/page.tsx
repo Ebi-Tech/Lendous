@@ -253,7 +253,7 @@ const Home: React.FC = () => {
           backgroundColor: "#5B2A86",
         }}
       >
-        <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
+        <div className="absolute inset-0 bg-black opacity-70 z-0 "></div>
 
         <div className="absolute top-0 left-0 bottom-0 w-2 bg-gradient-to-b from-[#1AF866] to-[#7030A0] z-10"></div>
 
@@ -273,12 +273,12 @@ const Home: React.FC = () => {
               </span>
             </motion.div>
 
-            <div className="relative">
+            <div className="relative ">
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-white text-[28px] sm:text-[32px] font-extrabold leading-tight sm:leading-snug font-poppins"
+                className="text-white text-[28px]  sm:text-[28px] font-extrabold leading-loose sm:leading-snug font-poppins"
               >
                 We remove the{" "}
                 <span className="relative inline-block">
@@ -294,12 +294,11 @@ const Home: React.FC = () => {
                     text={rotatingTexts[textIndex]}
                     typingSpeed={40}
                     onComplete={() => setIsTyping(false)}
-                    className="font-comic-neue text-[#1AF866] text-[28px] sm:text-[32px] inline-block align-baseline"
+                    className="font-comic-neue text-[#1AF866] text-[22px] lg:text-[28px] inline-block align-baseline"
                   />
                 </span>
               </motion.h1>
             </div>
-
             <div className="flex flex-col md:flex-row items-start justify-between gap-8">
               {steps.map((step, index) => (
                 <motion.div
