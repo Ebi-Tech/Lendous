@@ -272,7 +272,7 @@ const SolutionsSection: React.FC = () => {
                           </div>
                           {/* Text content */}
                           <div className="w-full md:w-1/2 text-center md:text-left order-2">
-                            <h4 className="text-2xl sm:text-3xl font-semibold text-[#7030A0] font-kristen-itc mb-1 tracking-tight">
+                            <h4 className="text-2xl sm:text-3xl font-semibold text-[#7030A0] font-comic-neu mb-1 tracking-tight">
                               {section.title}
                             </h4>
                             {section.subtitle && (
