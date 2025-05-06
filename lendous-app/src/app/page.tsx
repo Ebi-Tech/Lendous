@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import SlideInSection from "../../components/SlideInSection";
 import Link from "next/link";
-import { Plus, Minus } from 'lucide-react';
+import { Plus, Minus, MessageSquare, Wrench, Rocket } from 'lucide-react';
 
 // Custom typewriter effect component with dynamic underline
 interface TypewriterTextProps {
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
   const [viewportHeight, setViewportHeight] = useState(0);
   const [textIndex, setTextIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
-  const [openProblemItems, setOpenProblemItems] = useState<{[key: number]: boolean}>({});
+  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
   
   const rotatingTexts = [
     "Drive Sales",
@@ -79,12 +79,26 @@ const Home: React.FC = () => {
     "Build structures to expand"
   ];
 
-  const toggleProblemItem = (index: number) => {
-    setOpenProblemItems(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
-  };
+  const steps = [
+    {
+      icon: MessageSquare,
+      title: "Free Consultation",
+      description: "Tell us about your business, challenge, and needs.",
+      prefix: "We offer"
+    },
+    {
+      icon: Wrench,
+      title: "Solution Pack",
+      description: "From our range of growth services, we build you a solution.",
+      prefix: "We build your"
+    },
+    {
+      icon: Rocket,
+      title: "Support You",
+      description: "Our solutions are Done-For-You, so you can focus on what you know how to do.",
+      prefix: "We deliver the solution &"
+    }
+  ];
 
   useEffect(() => {
     const updateViewportHeight = () => {
@@ -249,67 +263,51 @@ const Home: React.FC = () => {
               </motion.h1>
             </div>
 
-            <motion.ol
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-[#E2D8EC] text-left text-[12px] sm:text-[14px] font-medium mt-8 space-y-4 list-decimal pl-6"
-            >
-              {[
-                {
-                  title: "We offer Free Consultation",
-                  highlight: "Free Consultation",
-                  description: "Tell us about your business, challenge, and needs."
-                },
-                {
-                  title: "We build your Solution Pack",
-                  highlight: "Solution Pack",
-                  description: "From our range of growth services, we build you a solution."
-                },
-                {
-                  title: "We deliver the solution & Support You",
-                  highlight: "Support You",
-                  description: "Our solutions are Done-For-You, so you can focus on what you know how to do."
-                }
-              ].map((item, index) => (
-                <li key={index} className="mb-4 last:mb-0">
-                  <div 
-                    className="flex items-center justify-between cursor-pointer p-2 hover:bg-white/30 rounded-lg transition-colors duration-200"
-                    onClick={() => toggleProblemItem(index)}
-                  >
-                    <span className="text-white" dangerouslySetInnerHTML={{
-                      __html: item.title.replace(
-                        item.highlight, 
-                        `<span class="text-[#B598CF] font-semibold">${item.highlight}</span>`
-                      )
-                    }} />
-                    <button
-                      className="text-white hover:text-[#1AF866] transition-colors duration-300 flex items-center justify-center ml-2"
-                      aria-label={openProblemItems[index] ? "Collapse section" : "Expand section"}
-                    >
-                      {openProblemItems[index] ? (
-                        <Minus className="w-4 h-4" />
-                      ) : (
-                        <Plus className="w-4 h-4" />
-                      )}
-                    </button>
+            <div className="flex flex-col md:flex-row items-start justify-between gap-8">
+              {steps.map((step, index) => (
+                <motion.div
+                  key={`problem-step-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  className={`relative bg-white/10 backdrop-blur-sm rounded-xl p-6 w-full md:w-1/3 transition-all duration-300 ${hoveredStep === index ? 'ring-2 ring-[#1AF866]' : ''}`}
+                  onMouseEnter={() => setHoveredStep(index)}
+                  onMouseLeave={() => setHoveredStep(null)}
+                  whileHover={{ 
+                    scale: 1.03,
+                    backgroundColor: "rgba(255,255,255,0.15)"
+                  }}
+                >
+                  <div className="absolute -top-5 -left-2 w-12 h-12 rounded-full bg-[#7030A0] flex items-center justify-center">
+                    <step.icon className="w-6 h-6 text-white" />
                   </div>
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{
-                      height: openProblemItems[index] ? "auto" : 0,
-                      opacity: openProblemItems[index] ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden ml-4 pl-2"
-                  >
-                    <div className="text-white mt-1 pl-2">
-                      {item.description}
-                    </div>
-                  </motion.div>
-                </li>
+                  
+                  <div className="mt-4">
+                    <h3 className="text-lg font-bold text-white mb-1">{index + 1}. {step.prefix}</h3>
+                    <h4 className="text-lg font-bold text-[#B598CF] mb-3">{step.title}</h4>
+                    
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ 
+                        height: hoveredStep === index ? "auto" : 0,
+                        opacity: hoveredStep === index ? 1 : 0
+                      }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-white text-sm">{step.description}</p>
+                    </motion.div>
+                  </div>
+                  
+                  <motion.div 
+                    className="absolute bottom-0 left-0 h-1 bg-[#1AF866]"
+                    initial={{ width: "0%" }}
+                    animate={{ width: hoveredStep === index ? "100%" : "0%" }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </motion.div>
               ))}
-            </motion.ol>
+            </div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}

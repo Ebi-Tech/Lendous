@@ -28,9 +28,9 @@ const Navbar: React.FC = () => {
           <Image
             src="/nav-logo.png"
             alt="Lendous Logo"
-            width={100}
-            height={100}
-            className="mr-2 w-full h-auto"
+            width={500}
+            height={500}
+            className="w-45 h-auto mr-2"
           />
         </Link>
 

@@ -12,22 +12,17 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
     <footer
       className={`bg-[#1A2535] text-[#FFFFFF] py-10 sm:py-12 px-4 sm:px-6 ${className}`}
     >
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20 sm:gap-20">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
         {/* Lendous Section */}
-        <div className="sm:col-span-2 lg:col-span-1">
-          <h3 className="text-[36px] font-bold flex items-center">
-            <Image
-              src="/favicon.ico"
-              alt="Lendous Logo"
-              width={32}
-              height={32}
-              className="w-8 h-8 mr-2"
-            />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C4A7E7] to-[#A3BFFA]">
-              Lendous
-            </span>
-          </h3>
-          <p className="text-[12px] mt-4">
+        <div className="w-full">
+          <Image
+            src="/footer-logo.png"
+            alt="Lendous Logo"
+            width={500}
+            height={500}
+            className="w-45 h-auto mr-2"
+          />
+          <p className="text-[12px] lg:text-[14px] mt-4 lg:mr-30 text-left leading-loose">
             Growth Partner for African SMEs, providing Systems, Tools, Advisory,
             and Resources to help businesses shine out of Africa.
           </p>
@@ -53,11 +48,17 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         </div>
 
         {/* Quick Links Section */}
-        <div>
-          <h3 className="text-[16px] sm:text-[20px] font-bold mb-4">
-            Quick Links
+        <div className="w-full mt-2 lg:ml-15 leading-7">
+          <h3 className="text-[16px] sm:text-[20px] font-semibold mb-4">
+            <span>
+              {" "}
+              <span className="border-b-[2px] border-b-[#7030A0]">
+                Quick
+              </span>{" "}
+              Links
+            </span>
           </h3>
-          <ul className="space-y-3 text-[12px]">
+          <ul className="list-disc space-y-3 pl-5 text-[12px] lg:text-[14px]">
             {[
               { name: "Home", path: "/" },
               { name: "About Us", path: "/about" },
@@ -78,9 +79,13 @@ const Footer: React.FC<FooterProps> = ({ className }) => {
         </div>
 
         {/* Contact Us Section */}
-        <div>
-          <h3 className="text-[16px] sm:text-[20px] font-bold mb-4">
-            Contact Us
+        <div className="w-full mt-2">
+          <h3 className="text-[16px] sm:text-[20px] font-semibold mb-4 flex">
+            <span>
+              {" "}
+              <span className="border-b-[2px] border-b-[#7030A0]">Conta</span>ct
+              Us
+            </span>
           </h3>
           <address className="not-italic text-[12px] space-y-3">
             <div>

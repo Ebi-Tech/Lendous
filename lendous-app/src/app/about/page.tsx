@@ -257,7 +257,7 @@ const AboutSection: React.FC = () => {
                 About
               </h2>
               
-              <p className="text-justify text-[12px] sm:text-[14px] mt-4 md:mt-6 text-black font-medium leading-relaxed md:leading-loose lg:leading-loose font-poppins">
+              <p className="text-justify text-[12px] lg:text-[14px] mt-4 md:mt-6 text-black font-medium leading-relaxed md:leading-loose lg:leading-[40px] font-poppins">
                 Lendous is the Growth Partner for businesses in Africa. 
                 We help businesses grow sales, plug revenue leaks, and build structures to support expansion (scale). 
                 We do this by providing them the Systems, Tools, Advisory, and Resources (STARS) they need to Launch, Grow, and Expand in Africa.  
@@ -344,7 +344,7 @@ const AboutSection: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, ease: "easeInOut" }}
-                className="text-white text-[28px] sm:text-[32px] font-extrabold font-poppins tracking-tight leading-tight sm:leading-snug"
+                className="pt-5 text-white text-[28px] sm:text-[32px] font-extrabold font-poppins tracking-tight leading-tight sm:leading-snug"
               >
                 Our Services
               </motion.h2>
