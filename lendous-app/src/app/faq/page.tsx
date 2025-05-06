@@ -44,14 +44,6 @@ const FAQSection = () => {
       answer: "We specialize in supporting African SMEs across diverse sectors including technology startups, financial services, manufacturing, agriculture, retail, healthcare, and operational businesses. Our tailored solutions address industry-specific challenges while promoting sustainable growth and innovation.",
     },
     {
-      question: "How can I schedule a complimentary consultation?",
-      answer: "You can easily schedule a complimentary consultation through our online booking system. Simply visit our Services page, select the category that aligns with your business needs, and choose an available time slot that works for you. Our team will confirm your appointment within 24 hours.",
-    },
-    {
-      question: "What is your process for developing customized quotes?",
-      answer: "Following your initial consultation, our team conducts a comprehensive assessment of your specific business requirements. We then prepare a detailed, transparent quote outlining proposed solutions, implementation timeline, deliverables, and investment requirements. This personalized document is typically delivered within 3-5 business days.",
-    },
-    {
       question: "Do you provide post-implementation support services?",
       answer: "Absolutely. We offer comprehensive post-implementation support packages designed to ensure long-term success. Our dedicated support team provides technical assistance, maintenance services, system updates, and ongoing optimization recommendations. Support plans can be customized based on your specific operational requirements and budget considerations.",
     },
@@ -73,26 +65,14 @@ const FAQSection = () => {
       {/* Hero Section */}
       <section
         id="faq-hero-section"
-        className="relative flex flex-col justify-center overflow-hidden"
-        style={{ minHeight: "80vh", maxHeight: "800px" }}
+        className="relative flex flex-col justify-center bg-cover bg-center"
+        style={{
+          minHeight: "700px",
+          backgroundImage: "url('/hero-bg6.jpg')",
+        }}
       >
-        <motion.div
-          className="absolute inset-0 z-0"
-          initial={{ scale: 1 }}
-          whileInView={{ scale: 1.05 }}
-          transition={{ duration: 5, ease: "easeOut" }}
-        >
-          <Image
-            src="/hero-bg6.jpg"
-            alt="FAQ Section Background"
-            fill
-            style={{ objectFit: "cover" }}
-            priority
-            sizes="100vw"
-            className="transition-transform duration-300"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/50 to-gray-900/10 z-1"></div>
-        </motion.div>
+        <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-300/50 to-purple-100/10 z-1"></div>
 
         {/* Accent Top Border */}
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
@@ -104,13 +84,18 @@ const FAQSection = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-white text-[16px] font-bold"
+                className="text-white text-[20px] sm:text-[36px] font-extrabold leading-tight [text-shadow:_0_2px_6px_rgba(0,0,0,0.4)]"
               >
                 Answers to Your Questions
               </motion.h2>
               <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
                 <svg width="120" height="10" viewBox="0 0 120 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round" />
+                  <path
+                    d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5"
+                    stroke="#1AF866"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </div>
             </div>
@@ -119,13 +104,15 @@ const FAQSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-              className="text-white text-[14px] font-normal mt-6"
+              className="text-white text-[16px] sm:text-[18px] font-comic-neue tracking-wide mt-6"
             >
               Explore our FAQs to learn more about how we can support your business
             </motion.p>
 
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mt-8">
               <motion.button
+                role="button"
+                tabIndex={0}
                 onClick={() => scrollToSection("faq-content-section")}
                 whileHover={{
                   scale: 1.05,
@@ -134,9 +121,9 @@ const FAQSection = () => {
                   boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-bold text-[14px] shadow-lg transition-all duration-300 hover:text-[#1AF866] hover:bg-white"
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
               >
-                Explore FAQs
+                <span className="font-poppins">Explore FAQs</span>
               </motion.button>
             </div>
           </div>
@@ -144,8 +131,18 @@ const FAQSection = () => {
 
         {/* Section Divider */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
-            <path d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z" fill="white" fillOpacity="0.1" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 48"
+            fill="none"
+            preserveAspectRatio="none"
+            className="w-full h-12"
+          >
+            <path
+              d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z"
+              fill="white"
+              fillOpacity="0.1"
+            />
           </svg>
         </div>
       </section>
@@ -153,30 +150,6 @@ const FAQSection = () => {
       {/* FAQ Content Section */}
       <section id="faq-content-section" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          {/* Header Section */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full mb-6">
-              <HelpCircle size={18} className="text-blue-600" />
-              <span className="text-[14px] font-normal text-blue-600">Common Questions</span>
-            </div>
-            <motion.h2
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-[16px] font-bold text-gray-900"
-            >
-              Frequently Asked Questions
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="mt-4 text-[14px] font-normal text-gray-600 max-w-3xl mx-auto"
-            >
-              Find answers to common asked questions about our services and approach.
-            </motion.p>
-          </div>
-
           {/* FAQ Accordion */}
           <div className="space-y-4">
             {faqs.map((faq, index) => (

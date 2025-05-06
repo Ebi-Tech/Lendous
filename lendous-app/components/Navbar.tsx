@@ -1,9 +1,8 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -125,10 +124,15 @@ const Navbar: React.FC = () => {
                 </nav>
 
                 {/* Mobile Footer */}
-                <div className="mt-auto pt-4 text-gray-500 text-sm">
-                  <p>© 2025 Lendous</p>
-                  <p>Lendous Inc.</p>
-                </div>
+                {/* <div className="mt-auto pt-4 text-gray-500 text-sm">
+                  <Image
+                    src="/nav-logo.png"
+                    alt="Lendous Logo"
+                    width={100}
+                    height={100}
+                    className="mr-2 w-full h-auto"
+                  />
+                </div> */}
               </div>
             </div>
           </div>

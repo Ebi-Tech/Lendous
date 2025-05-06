@@ -35,7 +35,7 @@ const TrainingCard: React.FC<{ program: TrainingProgram; index: number }> = ({ p
       className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg hover:bg-gray-50 transition-all duration-300"
     >
       {/* Program Image */}
-      <div className="h-48 sm:h-56 relative">
+      <div className="h-40 sm:h-48 relative">
         <Image
           src={program.image}
           alt={program.title}
@@ -47,21 +47,21 @@ const TrainingCard: React.FC<{ program: TrainingProgram; index: number }> = ({ p
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="h-full w-full aspect-[4/3] hover:scale-[1.02] transition-transform duration-300"
         />
-        <div className="absolute top-3 left-3">
-          <span className="px-2.5 py-1 rounded-full bg-indigo-600 text-white text-xs sm:text-sm font-medium">
+        <div className="absolute top-2 left-2">
+          <span className="px-2 py-0.5 rounded-full bg-indigo-600 text-white text-xs font-medium">
             {program.category}
           </span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-4 sm:p-6 text-center sm:text-center md:text-left">
-        <h3 className="font-bold text-[16px] text-gray-900 tracking-tight">{program.title}</h3>
+      <div className="p-3 sm:p-4 text-left sm:text-left">
+        <h3 className="font-bold text-[14px] text-gray-900 tracking-tight">{program.title}</h3>
 
         {/* Program Details */}
-        <div className="mt-2 flex flex-wrap justify-center sm:justify-center md:justify-start gap-2 sm:gap-3">
-          <span className="inline-flex items-center text-[14px] font-normal text-indigo-600">
-            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+        <div className="mt-1 flex flex-wrap justify-start gap-2">
+          <span className="inline-flex items-center text-[12px] font-normal text-indigo-600">
+            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
@@ -70,8 +70,8 @@ const TrainingCard: React.FC<{ program: TrainingProgram; index: number }> = ({ p
             </svg>
             {program.duration}
           </span>
-          <span className="inline-flex items-center text-[14px] font-normal text-indigo-600">
-            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+          <span className="inline-flex items-center text-[12px] font-normal text-indigo-600">
+            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
                 d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
@@ -80,8 +80,8 @@ const TrainingCard: React.FC<{ program: TrainingProgram; index: number }> = ({ p
             </svg>
             {program.format}
           </span>
-          <span className="inline-flex items-center text-[14px] font-normal text-orange-500">
-            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+          <span className="inline-flex items-center text-[12px] font-normal text-orange-500">
+            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
                 d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
@@ -93,31 +93,31 @@ const TrainingCard: React.FC<{ program: TrainingProgram; index: number }> = ({ p
         </div>
 
         {/* Description */}
-        <p className="mt-3 text-[14px] font-normal text-gray-600 leading-relaxed">{program.description}</p>
+        <p className="mt-2 text-[12px] font-normal text-gray-600 leading-relaxed">{program.description}</p>
 
         {/* Benefits */}
-        <div className="mt-4">
-          <p className="font-bold text-[14px] text-gray-800">Key Benefits:</p>
-          <ul className="mt-2 space-y-1.5">
+        <div className="mt-3">
+          <p className="font-bold text-[12px] text-gray-800">Key Benefits:</p>
+          <ul className="mt-1 space-y-1">
             {program.benefits.map((benefit, idx) => (
-              <li key={idx} className="flex items-start justify-center sm:justify-center md:justify-start">
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mr-1.5 sm:mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <li key={idx} className="flex items-start justify-start">
+                <svg className="w-4 h-4 text-green-500 mr-1 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fillRule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                     clipRule="evenodd"
                   />
                 </svg>
-                <span className="text-[14px] font-normal text-gray-600">{benefit}</span>
+                <span className="text-[12px] font-normal text-gray-600">{benefit}</span>
               </li>
             ))}
           </ul>
         </div>
 
         {/* CTA Button */}
-        <div className="mt-4">
+        <div className="mt-3">
           <button
-            className="w-full py-2.5 sm:py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-[14px] rounded-lg transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mx-auto sm:mx-auto md:mx-0"
+            className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-[12px] rounded-lg transition-all duration-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             aria-label={`Register for ${program.title}`}
           >
             Register Now
@@ -387,26 +387,14 @@ const TrainingProgramsSection: React.FC = () => {
       {/* Hero Section */}
       <section
         id="hero-section"
-        className="relative flex flex-col justify-center overflow-hidden"
-        style={{ minHeight: "80vh", maxHeight: "800px" }}
+        className="relative flex flex-col justify-center bg-cover bg-center"
+        style={{
+          minHeight: "700px",
+          backgroundImage: "url('/hero-bg3.jpg')",
+        }}
       >
-        <motion.div
-          className="absolute inset-0 z-0"
-          initial={{ scale: 1 }}
-          whileInView={{ scale: 1.05 }}
-          transition={{ duration: 5, ease: "easeOut" }}
-        >
-          <Image
-            src="/hero-bg3.jpg"
-            alt="Training Programs Background"
-            fill
-            style={{ objectFit: "cover" }}
-            priority
-            sizes="100vw"
-            className="transition-transform duration-300"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/50 to-gray-900/10 z-1"></div>
-        </motion.div>
+        <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-300/50 to-blue-100/10 z-1"></div>
 
         {/* Accent Top Border */}
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
@@ -418,13 +406,18 @@ const TrainingProgramsSection: React.FC = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-white text-[16px] font-bold"
+                className="text-white text-[20px] sm:text-[36px] font-extrabold leading-tight [text-shadow:_0_2px_6px_rgba(0,0,0,0.4)]"
               >
                 Empower Your Future with World-Class Training
               </motion.h2>
               <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
                 <svg width="120" height="10" viewBox="0 0 120 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round" />
+                  <path
+                    d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5"
+                    stroke="#1AF866"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </div>
             </div>
@@ -433,35 +426,45 @@ const TrainingProgramsSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-              className="text-white text-[14px] font-normal mt-6 bg-gray-900/50 p-4 rounded-xl shadow-lg max-w-md mx-auto"
+              className="text-white text-[16px] sm:text-[18px] font-comic-neue tracking-wide mt-6"
             >
               Discover transformative programs designed to bridge skill gaps and drive success for African SMEs
             </motion.p>
 
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mt-8">
-              <Link href="/contact">
-                <motion.button
-                  onClick={() => scrollToSection("services")}
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "#FFFFFF",
-                    color: "#7030A0",
-                    boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-bold text-[14px] shadow-lg transition-all duration-300 hover:text-[#1AF866] hover:bg-white"
-                >
-                  Explore Programs
-                </motion.button>
-              </Link>
+              <motion.button
+                role="button"
+                tabIndex={0}
+                onClick={() => scrollToSection("tabs-section")}
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: "#FFFFFF",
+                  color: "#7030A0",
+                  boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
+              >
+                <span className="font-poppins">Explore Programs</span>
+              </motion.button>
             </div>
           </div>
         </div>
 
         {/* Section Divider */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
-            <path d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z" fill="white" fillOpacity="0.1" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 48"
+            fill="none"
+            preserveAspectRatio="none"
+            className="w-full h-12"
+          >
+            <path
+              d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z"
+              fill="white"
+              fillOpacity="0.1"
+            />
           </svg>
         </div>
       </section>
@@ -474,14 +477,14 @@ const TrainingProgramsSection: React.FC = () => {
       >
         <SlideInSection
           direction="right"
-          className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto"
+          className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl mx-auto"
         >
           {/* Tabs */}
           <motion.div
             initial={{ opacity: 0.5, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex flex-wrap justify-center gap-2 sm:gap-3 lg:gap-4 mb-6 sm:mb-8 max-w-full"
+            className="flex flex-wrap justify-start sm:justify-center gap-2 sm:gap-3 mb-4 sm:mb-6 max-w-full"
           >
             {tabs.map((tab, index) => (
               <motion.button
@@ -495,7 +498,7 @@ const TrainingProgramsSection: React.FC = () => {
                   scrollToSection("tabs-section");
                 }}
                 onKeyDown={(e) => handleKeyDown(e, tab)}
-                className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-bold text-[14px] transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${activeTab === tab
+                className={`px-3 py-1.5 rounded-full font-bold text-[12px] transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${activeTab === tab
                     ? "bg-indigo-600 text-white"
                     : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
                   }`}
@@ -510,13 +513,13 @@ const TrainingProgramsSection: React.FC = () => {
           </motion.div>
 
           {/* Training Cards or No Results */}
-          <div className="min-h-[200px]">
+          <div className="min-h-[150px]">
             {filteredPrograms.length > 0 ? (
               <motion.div
                 initial={{ opacity: 0.5 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4 }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6"
               >
                 {filteredPrograms.map((program, index) => (
                   <TrainingCard key={program.id} program={program} index={index} />
@@ -527,10 +530,10 @@ const TrainingProgramsSection: React.FC = () => {
                 initial={{ opacity: 0.5 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4 }}
-                className="text-center py-8 sm:py-12"
+                className="text-left sm:text-center py-6 sm:py-8"
               >
                 <svg
-                  className="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400"
+                  className="mx-auto h-8 w-8 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -543,12 +546,12 @@ const TrainingProgramsSection: React.FC = () => {
                     d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <p className="mt-3 sm:mt-4 text-[14px] font-normal text-gray-600">
+                <p className="mt-2 text-[12px] font-normal text-gray-600">
                   No programs available in this category at the moment.
                 </p>
                 <button
                   onClick={() => setActiveTab("All Programs")}
-                  className="mt-4 sm:mt-6 px-5 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white rounded-full font-bold text-[14px] transition-all duration-300 hover:bg-indigo-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="mt-3 px-4 py-2 bg-indigo-600 text-white rounded-full font-bold text-[12px] transition-all duration-300 hover:bg-indigo-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   View All Programs
                 </button>
@@ -559,13 +562,13 @@ const TrainingProgramsSection: React.FC = () => {
       </div>
 
       {/* Footer Banner */}
-      <SlideInSection className="bg-[#7030A0] text-white py-12 sm:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
+      <SlideInSection className="bg-[#7030A0] text-white py-8 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 text-left sm:text-left">
           <div className="mt-0">
-            <h2 className="text-[16px] font-bold font-poppins">
-              Ready to <span className="font-caveat-brush text-[#1AF866] text-[20px]">Grow</span> Your Business?
+            <h2 className="text-[14px] font-bold font-poppins">
+              Ready to <span className="font-caveat-brush text-[#1AF866] text-[18px]">Grow</span> Your Business?
             </h2>
-            <p className="mt-4 text-[14px] font-normal tracking-wide">
+            <p className="mt-3 text-[12px] font-normal tracking-wide">
               Let's help you do the dirty work so you can focus on what you know how to do.
             </p>
           </div>
@@ -577,7 +580,7 @@ const TrainingProgramsSection: React.FC = () => {
                 boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-bold text-[14px] shadow-lg transition-all duration-300 hover:text-[#1AF866] hover:bg-[#5a2480]"
+              className="px-6 py-2 bg-white text-[#7030A0] rounded-lg font-bold text-[12px] shadow-lg transition-all duration-300 hover:text-[#1AF866] hover:bg-[#5a2480]"
             >
               Get in Touch
             </motion.button>

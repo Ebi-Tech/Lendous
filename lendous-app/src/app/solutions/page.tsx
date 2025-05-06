@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import SlideInSection from "../../../components/SlideInSection";
+import { motion } from "framer-motion";
 
 // Define the shape of each tab's content
 interface TabContent {
@@ -123,14 +123,14 @@ const SolutionsSection: React.FC = () => {
       <section
         id="hero-section"
         className="relative flex flex-col justify-center bg-cover bg-center"
-        style={{ 
-          minHeight: '700px',
-          backgroundImage: "url('/hero-bg2.jpg')"
+        style={{
+          minHeight: "700px",
+          backgroundImage: "url('/hero-bg2.jpg')",
         }}
       >
         <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
         <div className="absolute inset-0 bg-[#27408F] opacity-60 z-1 backdrop-blur-sm"></div>
-        
+
         {/* Accent Top Border */}
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
 
@@ -147,7 +147,12 @@ const SolutionsSection: React.FC = () => {
               </motion.h2>
               <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
                 <svg width="120" height="10" viewBox="0 0 120 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5" stroke="#1AF866" strokeWidth="2" strokeLinecap="round"/>
+                  <path
+                    d="M0 5C20 -1.66667 40 -1.66667 60 5C80 11.6667 100 11.6667 120 5"
+                    stroke="#1AF866"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
                 </svg>
               </div>
             </div>
@@ -162,29 +167,37 @@ const SolutionsSection: React.FC = () => {
             </motion.p>
 
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mt-8">
-              <Link href="/contact">
-                <motion.button
-                  onClick={() => scrollToSection("services")}
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "#FFFFFF",
-                    color: "#7030A0",
-                    boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
-                >
-                  <span className="font-poppins">Explore Solutions</span>
-                </motion.button>
-              </Link>
+              <motion.button
+                onClick={() => scrollToSection("tabs-section")}
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: "#FFFFFF",
+                  color: "#7030A0",
+                  boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
+              >
+                <span className="font-poppins">Explore Solutions</span>
+              </motion.button>
             </div>
           </div>
         </div>
-        
+
         {/* Section Divider */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none" className="w-full h-12">
-            <path d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z" fill="white" fillOpacity="0.1" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 48"
+            fill="none"
+            preserveAspectRatio="none"
+            className="w-full h-12"
+          >
+            <path
+              d="M0 48H1440V0C1200 32 960 48 720 48C480 48 240 32 0 0V48Z"
+              fill="white"
+              fillOpacity="0.1"
+            />
           </svg>
         </div>
       </section>
@@ -216,9 +229,8 @@ const SolutionsSection: React.FC = () => {
                 onKeyDown={(e) => handleKeyDown(e, tab)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`px-4 py-2 rounded-full font-semibold text-sm transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${
-                  activeTab === tab ? "bg-indigo-600 text-white" : "bg-white/80 text-gray-700 hover:bg-white"
-                }`}
+                className={`px-4 py-2 rounded-full font-semibold text-sm transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${activeTab === tab ? "bg-indigo-600 text-white" : "bg-white/80 text-gray-700 hover:bg-white"
+                  }`}
                 role="tab"
                 aria-selected={activeTab === tab}
                 aria-controls={`tabpanel-${tab.toLowerCase().replace(" ", "-")}`}
