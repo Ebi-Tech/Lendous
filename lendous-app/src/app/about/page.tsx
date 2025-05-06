@@ -282,12 +282,16 @@ const AboutSection: React.FC = () => {
                 About
               </h2>
 
-              <p className="text-justify text-[12px] lg:text-[14px] mt-4 md:mt-6 text-black font-medium leading-relaxed md:leading-loose lg:leading-[40px] font-poppins">
-                Lendous is the Growth Partner for businesses in Africa. We help
+              <p className="text-justify text-[12px] lg:text-[14px] mt-4 md:mt-6 text-black font-medium leading-relaxed md:leading-loose lg:leading-[30px] font-poppins">
+                Lendous is <span className="font-semibold">the Growth Partner for businesses in Africa.</span> We help
                 businesses grow sales, plug revenue leaks, and build structures
-                to support expansion (scale). We do this by providing them the
+                to support expansion (scale). <br />
+                <br />
+                We do this by providing them the
                 Systems, Tools, Advisory, and Resources (STARS) they need to
-                Launch, Grow, and Expand in Africa. With a combined 40+ years of
+                Launch, Grow, and Expand in Africa. <br />
+                <br />
+                With a combined 40+ years of
                 experience from the leadership team spanning various industries
                 in Africa including; Retail, Financial Services, Oil & Gas,
                 Renewable Energy, & Hospitality, we are committed to solving the
@@ -304,7 +308,7 @@ const AboutSection: React.FC = () => {
                   linkedin: "https://linkedin.com/in/charlescharles",
                 },
                 {
-                  name: "Ossai Anoh",
+                  name: "Ossar Anoh",
                   role: "COO",
                   image: "/team-patience.jpg",
                   linkedin: "https://linkedin.com/in/ossaianoh",
@@ -547,9 +551,9 @@ const AboutSection: React.FC = () => {
       <SlideInSection className="bg-[#7030A0] text-white py-5 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
           <div className="mt-0">
-            <h2 className="text-[14px] sm:text-[18px] font-extrabold font-poppins">
+            <h2 className="text-[24px]  font-extrabold font-poppins">
               Ready to{" "}
-              <span className="font-comic-neue text-[#1AF866] text-[14px] sm:text-[18px]">
+              <span className="font-comic-neue text-[#1AF866] text-[24px]">
                 Grow
               </span>{" "}
               Your Business?

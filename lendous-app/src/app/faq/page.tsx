@@ -189,14 +189,19 @@ const FAQSection = () => {
       </section>
 
       {/* Footer Banner */}
-      <SlideInSection className="bg-[#7030A0] text-white py-12 sm:py-16">
+      <SlideInSection className="bg-[#7030A0] text-white py-5 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
           <div className="mt-0">
-            <h2 className="text-[16px] font-bold font-poppins">
-              Ready to <span className="font-caveat-brush text-[#1AF866] text-[20px]">Grow</span> Your Business?
+            <h2 className="text-[24px]  font-extrabold font-poppins">
+              Ready to{" "}
+              <span className="font-comic-neue text-[#1AF866] text-[24px]">
+                Grow
+              </span>{" "}
+              Your Business?
             </h2>
-            <p className="mt-4 text-[14px] font-normal tracking-wide">
-              Let's help you do the dirty work so you can focus on what you know how to do.
+            <p className="mt-4 text-[12px] sm:text-[14px] font-comic-neue tracking-wide">
+              Let's help you do the dirty work so you can focus on what you know
+              how to do.
             </p>
           </div>
           <Link href="/contact">
@@ -207,9 +212,23 @@ const FAQSection = () => {
                 boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-bold text-[14px] shadow-lg transition-all duration-300 hover:text-[#1AF866] hover:bg-[#5a2480]"
+              className="px-5 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[14px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 font-poppins"
             >
-              Get in Touch
+              <span className="font-comic-neue text-[14px]">Get in Touch</span>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
             </motion.button>
           </Link>
         </div>

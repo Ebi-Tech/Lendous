@@ -81,6 +81,9 @@ const Home: React.FC = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
+  const [clickedStep, setClickedStep] = useState<number | null>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const rotatingTexts = [
     "Drive Sales",
@@ -114,12 +117,31 @@ const Home: React.FC = () => {
   useEffect(() => {
     const updateViewportHeight = () => {
       setViewportHeight(window.innerHeight);
+      setIsMobile(window.innerWidth <= 768);
     };
 
     updateViewportHeight();
     window.addEventListener("resize", updateViewportHeight);
     return () => window.removeEventListener("resize", updateViewportHeight);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isMobile) {
+        const isOutside = cardsRef.current.every(
+          (ref) => ref && !ref.contains(event.target as Node)
+        );
+        if (isOutside) {
+          setClickedStep(null);
+        }
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMobile]);
 
   useEffect(() => {
     if (!isTyping) {
@@ -161,6 +183,12 @@ const Home: React.FC = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleCardClick = (index: number) => {
+    if (isMobile) {
+      setClickedStep(clickedStep === index ? null : index);
     }
   };
 
@@ -278,7 +306,7 @@ const Home: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-white text-[28px]  sm:text-[28px] font-extrabold leading-loose sm:leading-snug font-poppins"
+                className="text-white text-[24px]  lg:text-[28px] font-extrabold leading-loose sm:leading-snug font-poppins"
               >
                 We remove the{" "}
                 <span className="relative inline-block">
@@ -303,18 +331,24 @@ const Home: React.FC = () => {
               {steps.map((step, index) => (
                 <motion.div
                   key={`problem-step-${index}`}
+                  ref={(el) => {
+                    cardsRef.current[index] = el;
+                  }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                   className={`relative bg-white/10 backdrop-blur-sm rounded-xl p-6 w-full md:w-1/3 transition-all duration-300 ${
-                    hoveredStep === index ? "ring-2 ring-[#1AF866]" : ""
+                    (isMobile ? clickedStep === index : hoveredStep === index) 
+                      ? "ring-2 ring-[#1AF866]" 
+                      : ""
                   }`}
-                  onMouseEnter={() => setHoveredStep(index)}
-                  onMouseLeave={() => setHoveredStep(null)}
-                  whileHover={{
+                  onMouseEnter={() => !isMobile && setHoveredStep(index)}
+                  onMouseLeave={() => !isMobile && setHoveredStep(null)}
+                  onClick={() => handleCardClick(index)}
+                  whileHover={!isMobile ? {
                     scale: 1.03,
                     backgroundColor: "rgba(255,255,255,0.15)",
-                  }}
+                  } : {}}
                 >
                   <div className="absolute -top-5 -left-2 w-12 h-12 rounded-full bg-[#7030A0] flex items-center justify-center">
                     <step.icon className="w-6 h-6 text-white" />
@@ -331,8 +365,12 @@ const Home: React.FC = () => {
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{
-                        height: hoveredStep === index ? "auto" : 0,
-                        opacity: hoveredStep === index ? 1 : 0,
+                        height: isMobile 
+                          ? (clickedStep === index ? "auto" : 0)
+                          : (hoveredStep === index ? "auto" : 0),
+                        opacity: isMobile 
+                          ? (clickedStep === index ? 1 : 0)
+                          : (hoveredStep === index ? 1 : 0),
                       }}
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
@@ -344,7 +382,11 @@ const Home: React.FC = () => {
                   <motion.div
                     className="absolute bottom-0 left-0 h-1 bg-[#1AF866]"
                     initial={{ width: "0%" }}
-                    animate={{ width: hoveredStep === index ? "100%" : "0%" }}
+                    animate={{
+                      width: isMobile
+                        ? (clickedStep === index ? "100%" : "0%")
+                        : (hoveredStep === index ? "100%" : "0%"),
+                    }}
                     transition={{ duration: 0.5 }}
                   />
                 </motion.div>
@@ -357,7 +399,7 @@ const Home: React.FC = () => {
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
               className="flex justify-center mt-10"
             >
-              <Link href="/solutions">
+              <Link href="/contact">
                 <motion.button
                   onClick={() => scrollToSection("services")}
                   whileHover={{
@@ -369,7 +411,7 @@ const Home: React.FC = () => {
                   whileTap={{ scale: 0.95 }}
                   className="px-6 sm:px-8 py-2 sm:py-3 bg-[#1AF866] text-[#27408F] rounded-lg font-semibold text-sm sm:text-base shadow-lg transition-all duration-300 hover:shadow-xl"
                 >
-                  <span className="font-poppins">Explore Solutions</span>
+                  <span className="font-poppins"> Get Free Consultation</span>
                 </motion.button>
               </Link>
             </motion.div>
@@ -508,13 +550,13 @@ const Home: React.FC = () => {
         </SlideInSection>
       </section>
 
-      {/* Footer Banner */}
-      <SlideInSection className="bg-[#7030A0] text-white py-5 sm:py-10">
+     {/* Footer Banner */}
+     <SlideInSection className="bg-[#7030A0] text-white py-5 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
           <div className="mt-0">
-            <h2 className="text-[14px] sm:text-[18px] font-extrabold font-poppins">
+            <h2 className="text-[24px]  font-extrabold font-poppins">
               Ready to{" "}
-              <span className="font-comic-neue text-[#1AF866] text-[14px] sm:text-[18px]">
+              <span className="font-comic-neue text-[#1AF866] text-[24px]">
                 Grow
               </span>{" "}
               Your Business?
@@ -532,7 +574,7 @@ const Home: React.FC = () => {
                 boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
-              className="px-5 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[14px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+              className="px-5 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[14px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 font-poppins"
             >
               <span className="font-comic-neue text-[14px]">Get in Touch</span>
               <svg

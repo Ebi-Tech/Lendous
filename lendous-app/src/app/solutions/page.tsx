@@ -302,11 +302,16 @@ const SolutionsSection: React.FC = () => {
       <SlideInSection className="bg-[#7030A0] text-white py-5 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
           <div className="mt-0">
-            <h2 className="text-[14px] sm:text-[18px] font-extrabold font-poppins">
-              Ready to <span className="font-comic-neue text-[#1AF866] text-[14px] sm:text-[18px]">Grow</span> Your Business?
+            <h2 className="text-[24px]  font-extrabold font-poppins">
+              Ready to{" "}
+              <span className="font-comic-neue text-[#1AF866] text-[24px]">
+                Grow
+              </span>{" "}
+              Your Business?
             </h2>
             <p className="mt-4 text-[12px] sm:text-[14px] font-comic-neue tracking-wide">
-              Let's help you do the dirty work so you can focus on what you know how to do.
+              Let's help you do the dirty work so you can focus on what you know
+              how to do.
             </p>
           </div>
           <Link href="/contact">
