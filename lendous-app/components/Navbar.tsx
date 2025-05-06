@@ -116,23 +116,14 @@ const Navbar: React.FC = () => {
                       key={item.label}
                       href={item.href}
                       onClick={toggleMenu}
-                      className="px-4 py-3 text-gray-800 hover:text-[#1AF866] text-lg font-medium border-b border-gray-100"
+                      className="px-4 py-3 text-gray-800 hover:text-[#1AF866] text-[14px] font-medium border-b border-gray-100"
                     >
                       {item.label}
                     </Link>
                   ))}
                 </nav>
 
-                {/* Mobile Footer */}
-                {/* <div className="mt-auto pt-4 text-gray-500 text-sm">
-                  <Image
-                    src="/nav-logo.png"
-                    alt="Lendous Logo"
-                    width={100}
-                    height={100}
-                    className="mr-2 w-full h-auto"
-                  />
-                </div> */}
+                
               </div>
             </div>
           </div>
