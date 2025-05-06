@@ -192,7 +192,7 @@ const AboutSection: React.FC = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-              className="text-white text-[20px] sm:text-[22px] font-comic-neue tracking-wide mt-6"
+              className="text-white text-[16px] sm:text-[18px] font-comic-neue tracking-wide mt-6"
             >
               We are experienced professionals bringing our collective years of expertise to SMEs
             </motion.p>

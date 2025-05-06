@@ -128,7 +128,8 @@ const SolutionsSection: React.FC = () => {
           backgroundImage: "url('/hero-bg2.jpg')"
         }}
       >
-        <div className="absolute inset-0 bg-black opacity-80 z-0"></div>
+        <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
+        <div className="absolute inset-0 bg-[#27408F] opacity-60 z-1 backdrop-blur-sm"></div>
         
         {/* Accent Top Border */}
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
@@ -155,7 +156,7 @@ const SolutionsSection: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-              className="text-white text-[20px] sm:text-[22px] font-caveat-brush tracking-wide mt-6"
+              className="text-white text-[16px] sm:text-[18px] font-comic-neue tracking-wide mt-6"
             >
               From launching your business to scaling across markets, we've got you covered.
             </motion.p>
@@ -238,7 +239,7 @@ const SolutionsSection: React.FC = () => {
                     transition={{ duration: 0.5 }}
                     className="text-center md:text-left"
                   >
-                    <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">{tabContent[tab].stage}</h3>
+                    <h3 className="text-[28px] sm:text-[32px] font-bold text-gray-900 tracking-tight">{tabContent[tab].stage}</h3>
                   </motion.div>
                   <div className="mt-8 sm:mt-10">
                     {tabContent[tab].sections.map((section, index) => (
@@ -270,7 +271,7 @@ const SolutionsSection: React.FC = () => {
                             {section.subtitle && (
                               <p className="text-lg sm:text-xl font-medium text-indigo-600 mb-3">{section.subtitle}</p>
                             )}
-                            <p className="text-base sm:text-lg text-gray-600 leading-relaxed">{section.description}</p>
+                            <p className="text-[12px] sm:text-[14px] text-gray-600 leading-relaxed">{section.description}</p>
                             <motion.button
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
@@ -302,12 +303,12 @@ const SolutionsSection: React.FC = () => {
         </SlideInSection>
       </div>
 
-      {/* Footer Banner */}
-      <SlideInSection className="bg-[#7030A0] text-white py-12 sm:py-16">
+    {/* Footer Banner */}
+    <SlideInSection className="bg-[#7030A0] text-white py-5 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-8 text-center sm:text-left">
           <div className="mt-0">
-            <h2 className="text-[32px] sm:text-[36px] font-extrabold font-poppins">Ready to <span className="font-caveat-brush text-[#1AF866] text-[36px] sm:text-[40px]">Grow</span> Your Business?</h2>
-            <p className="mt-4 text-[18px] sm:text-[20px] font-caveat-brush tracking-wide">
+            <h2 className="text-[14px] sm:text-[18px] font-extrabold font-poppins">Ready to <span className="font-comic-neue text-[#1AF866] text-[14px] sm:text-[18px]">Grow</span> Your Business?</h2>
+            <p className="mt-4 text-[12px] sm:text-[14px] font-comic-neue tracking-wide">
               Let's help you do the dirty work so you can focus on what you know how to do.
             </p>
           </div>
@@ -319,9 +320,9 @@ const SolutionsSection: React.FC = () => {
                 boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+              className="px-5 py-3 bg-white text-[#7030A0] rounded-lg font-semibold text-[14px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 font-poppins"
             >
-              <span className="font-caveat-brush text-[18px]">Get in Touch</span>
+              <span className="font-comic-neue text-[14px]">Get in Touch</span>
               <svg
                 className="w-5 h-5"
                 fill="none"
