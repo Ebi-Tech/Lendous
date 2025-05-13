@@ -472,7 +472,7 @@ const Home: React.FC = () => {
                   className="text-black text-[28px] sm:text-[32px] font-extrabold leading-tight sm:leading-snug font-poppins"
                 >
                   The Lendous{" "}
-                  <span className="font-comic-neue text-[#1AF866] text-[28px] sm:text-[32px] transform inline-block">
+                  <span className="font-comic-neue text-black text-[28px] sm:text-[32px] transform inline-block">
                     Assurance
                   </span>
                   : You Will

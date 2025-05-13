@@ -283,20 +283,22 @@ const AboutSection: React.FC = () => {
               </h2>
 
               <p className="text-justify text-[12px] lg:text-[14px] mt-4 md:mt-6 text-black font-medium leading-relaxed md:leading-loose lg:leading-[30px] font-poppins">
-                Lendous is <span className="font-semibold">the Growth Partner for businesses in Africa.</span> We help
-                businesses grow sales, plug revenue leaks, and build structures
-                to support expansion (scale). <br />
+                Lendous is{" "}
+                <span className="font-semibold">
+                  the Growth Partner for businesses in Africa.
+                </span>{" "}
+                We help businesses grow sales, plug revenue leaks, and build
+                structures to support expansion (scale). <br />
                 <br />
-                We do this by providing them the
-                Systems, Tools, Advisory, and Resources (STARS) they need to
-                Launch, Grow, and Expand in Africa. <br />
+                We do this by providing them the Systems, Tools, Advisory, and
+                Resources (STARS) they need to Launch, Grow, and Expand in
+                Africa. <br />
                 <br />
-                With a combined 40+ years of
-                experience from the leadership team spanning various industries
-                in Africa including; Retail, Financial Services, Oil & Gas,
-                Renewable Energy, & Hospitality, we are committed to solving the
-                problem of launching and growing in Africa, with clarity and
-                precision in execution.
+                With a combined 40+ years of experience from the leadership team
+                spanning various industries in Africa including; Retail,
+                Financial Services, Oil & Gas, Renewable Energy, & Hospitality,
+                we are committed to solving the problem of launching and growing
+                in Africa, with clarity and precision in execution.
               </p>
             </div>
             <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-6 lg:mt-0">
@@ -427,31 +429,19 @@ const AboutSection: React.FC = () => {
               </motion.p>
             </div>
           </div>
-          <div className="mt-6 lg:mt-12 w-full grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+          <SlideInSection
+            direction="left"
+            className="mt-6 lg:mt-12 w-full grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4"
+          >
             {serviceData.map((category, index) => (
-              <motion.div
+              <div
                 key={category.title}
-                custom={index}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={cardVariants}
-                whileHover={{
-                  scale: 1.02,
-                  translateY: -5,
-                  backgroundColor: "rgba(255, 255, 255, 0.25)",
-                  boxShadow: "0 0 20px rgba(26, 248, 102, 0.4)",
-                }}
-                className="w-full p-3 sm:p-4 bg-[#FFFFFF]/20 backdrop-blur-sm rounded-2xl shadow-xl border border-[#FFFFFF]/10 transition-all duration-300 relative z-10 flex flex-col min-h-[200px]"
+                className="w-full p-3 sm:p-4 bg-[#FFFFFF]/20 backdrop-blur-sm rounded-2xl shadow-xl border border-[#FFFFFF]/10 transition-all duration-300 relative z-10 flex flex-col min-h-[200px] hover:scale-[1.02] hover:-translate-y-1 hover:bg-white/25 hover:shadow-[0_0_20px_rgba(26,248,102,0.4)]"
               >
                 <div className="flex items-center mb-4">
-                  <motion.span
-                    whileHover={{ scale: 1.2 }}
-                    transition={{ duration: 0.3 }}
-                    className="flex items-center justify-center"
-                  >
+                  <span className="flex items-center justify-center hover:scale-120 transition-transform duration-300">
                     {serviceIcons[category.title as keyof typeof serviceIcons]}
-                  </motion.span>
+                  </span>
                   <h3 className="text-[18px] sm:text-[22px] font-semibold font-comic-neue text-[#1AF866] ml-3 flex-1">
                     {category.title}
                   </h3>
@@ -510,9 +500,9 @@ const AboutSection: React.FC = () => {
                     );
                   })}
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </div>
+          </SlideInSection>
           <div className="mt-8 md:mt-12 lg:mt-16 text-center">
             <Link href="/solutions">
               <motion.button
