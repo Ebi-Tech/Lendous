@@ -1,13 +1,71 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState } from "react";
+
+interface FormData {
+  name: string;
+  email: string;
+  company: string;
+  interest: string;
+  message: string;
+}
 
 const ContactSection: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    company: "",
+    interest: "",
+    message: "",
+  });
+
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Format the report for the email body
+    const report = `
+New Contact Form Submission
+-----------------------
+Name: ${formData.name}
+Email: ${formData.email}
+Company: ${formData.company || "Not provided"}
+Interest: ${formData.interest || "Not selected"}
+Message: ${formData.message}
+-----------------------
+Submitted on: ${new Date().toLocaleString()}
+    `.trim();
+
+    // Encode the subject and body for the mailto link
+    const subject = encodeURIComponent("Contact Form Submission");
+    const body = encodeURIComponent(report);
+
+    // Create the mailto link and trigger it
+    const mailtoLink = `mailto:difebi14@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
+
+    // Reset form after submission
+    setFormData({
+      name: "",
+      email: "",
+      company: "",
+      interest: "",
+      message: "",
+    });
   };
 
   return (
@@ -182,12 +240,15 @@ const ContactSection: React.FC = () => {
                 transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
               >
                 <h3 className="text-[16px] font-bold text-[#27408F] mb-6">Send Us a Message</h3>
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <div className="flex-1">
                       <input
                         type="text"
+                        name="name"
                         placeholder="Your Name *"
+                        value={formData.name}
+                        onChange={handleInputChange}
                         className="w-full p-3 rounded-lg border border-gray-300 focus:border-[#7030A0] focus:ring-2 focus:ring-[#7030A0] outline-none text-gray-700 text-[14px] font-normal placeholder-gray-500 transition-all duration-300"
                         required
                         aria-label="Your Name"
@@ -196,7 +257,10 @@ const ContactSection: React.FC = () => {
                     <div className="flex-1">
                       <input
                         type="email"
+                        name="email"
                         placeholder="Your Email *"
+                        value={formData.email}
+                        onChange={handleInputChange}
                         className="w-full p-3 rounded-lg border border-gray-300 focus:border-[#7030A0] focus:ring-2 focus:ring-[#7030A0] outline-none text-gray-700 text-[14px] font-normal placeholder-gray-500 transition-all duration-300"
                         required
                         aria-label="Your Email"
@@ -207,17 +271,23 @@ const ContactSection: React.FC = () => {
                     <div className="flex-1">
                       <input
                         type="text"
+                        name="company"
                         placeholder="Company Name"
+                        value={formData.company}
+                        onChange={handleInputChange}
                         className="w-full p-3 rounded-lg border border-gray-300 focus:border-[#7030A0] focus:ring-2 focus:ring-[#7030A0] outline-none text-gray-700 text-[14px] font-normal placeholder-gray-500 transition-all duration-300"
                         aria-label="Company Name"
                       />
                     </div>
                     <div className="flex-1">
                       <select
+                        name="interest"
+                        value={formData.interest}
+                        onChange={handleInputChange}
                         className="w-full p-3 rounded-lg border border-gray-300 focus:border-[#7030A0] focus:ring-2 focus:ring-[#7030A0] outline-none text-gray-700 text-[14px] font-normal transition-all duration-300"
                         aria-label="I'm interested in"
                       >
-                        <option value="" disabled selected hidden>
+                        <option value="" disabled hidden>
                           I’m interested in
                         </option>
                         <option value="general-inquiry">General Inquiry</option>
@@ -229,8 +299,11 @@ const ContactSection: React.FC = () => {
                   </div>
                   <div>
                     <textarea
+                      name="message"
                       placeholder="Your Message *"
                       rows={4}
+                      value={formData.message}
+                      onChange={handleInputChange}
                       className="w-full p-3 rounded-lg border border-gray-300 focus:border-[#7030A0] focus:ring-2 focus:ring-[#7030A0] outline-none text-gray-700 text-[14px] font-normal resize-none placeholder-gray-500 transition-all duration-300"
                       required
                       aria-label="Your Message"
