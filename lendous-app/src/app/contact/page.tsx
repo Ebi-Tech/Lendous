@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 
 interface FormData {
   name: string;
@@ -19,6 +20,15 @@ const ContactSection: React.FC = () => {
     interest: "",
     message: "",
   });
+  const [isSending, setIsSending] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  // Initialize EmailJS with Public Key
+  useEffect(() => {
+    emailjs.init({
+      publicKey: "PfJaE_q0VQU_oGv_J", // Replace with your EmailJS Public Key
+    });
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -34,38 +44,36 @@ const ContactSection: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSending(true);
+    setSubmitStatus("idle");
 
-    // Format the report for the email body
-    const report = `
-New Contact Form Submission
------------------------
-Name: ${formData.name}
-Email: ${formData.email}
-Company: ${formData.company || "Not provided"}
-Interest: ${formData.interest || "Not selected"}
-Message: ${formData.message}
------------------------
-Submitted on: ${new Date().toLocaleString()}
-    `.trim();
+    try {
+      // Send form data using EmailJS
+      await emailjs.sendForm(
+        "service_7lu5yle", // Replace with your Service ID (e.g., service_f0n72lt)
+        "template_kcl1pye", // Replace with your Template ID (e.g., template_4cs1frb)
+        e.target as HTMLFormElement,
+        {
+          publicKey: "PfJaE_q0VQU_oGv_J", // Replace with your Public Key
+        }
+      );
 
-    // Encode the subject and body for the mailto link
-    const subject = encodeURIComponent("Contact Form Submission");
-    const body = encodeURIComponent(report);
-
-    // Create the mailto link and trigger it
-    const mailtoLink = `mailto:difebi14@gmail.com?subject=${subject}&body=${body}`;
-    window.location.href = mailtoLink;
-
-    // Reset form after submission
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      interest: "",
-      message: "",
-    });
+      setSubmitStatus("success");
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        interest: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Email sending failed:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -240,6 +248,12 @@ Submitted on: ${new Date().toLocaleString()}
                 transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
               >
                 <h3 className="text-[16px] font-bold text-[#27408F] mb-6">Send Us a Message</h3>
+                {submitStatus === "success" && (
+                  <p className="text-green-600 mb-4">Message sent successfully! ✅</p>
+                )}
+                {submitStatus === "error" && (
+                  <p className="text-red-600 mb-4">Failed to send message. Please try again. ❌</p>
+                )}
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <div className="flex-1">
@@ -308,15 +322,25 @@ Submitted on: ${new Date().toLocaleString()}
                       required
                       aria-label="Your Message"
                     />
+                    <input
+                      type="hidden"
+                      name="submitted_on"
+                      value={new Date().toLocaleString()}
+                    />
                   </div>
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(26, 248, 102, 0.5)" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-full px-8 py-3 bg-[#7030A0] text-white rounded-lg font-bold text-[14px] transition-all duration-300 shadow-lg hover:text-[#1AF866] hover:bg-[#5a2480] focus:outline-none focus:ring-2 focus:ring-[#7030A0] focus:ring-offset-2"
+                    disabled={isSending}
+                    whileHover={{ scale: isSending ? 1 : 1.05, boxShadow: isSending ? "none" : "0 0 15px rgba(26, 248, 102, 0.5)" }}
+                    whileTap={{ scale: isSending ? 1 : 0.95 }}
+                    className={`w-full px-8 py-3 rounded-lg font-bold text-[14px] transition-all duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-[#7030A0] focus:ring-offset-2 ${
+                      isSending
+                        ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+                        : "bg-[#7030A0] text-white hover:text-[#1AF866] hover:bg-[#5a2480]"
+                    }`}
                     aria-label="Send Message"
                   >
-                    Send Message
+                    {isSending ? "Sending..." : "Send Message"}
                   </motion.button>
                 </form>
               </motion.div>
