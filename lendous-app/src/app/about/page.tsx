@@ -8,15 +8,15 @@ import {
   FaLaptopCode,
   FaMoneyBillWave,
   FaUsers,
+  FaTwitter,
+  FaGlobe,
 } from "react-icons/fa";
 import { Plus, Minus } from "lucide-react";
 import SlideInSection from "../../../components/SlideInSection";
 import { useState, useEffect } from "react";
 
 const AboutSection: React.FC = () => {
-  const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>(
-    {}
-  );
+  const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
   const [viewportHeight, setViewportHeight] = useState(0);
 
   useEffect(() => {
@@ -37,18 +37,10 @@ const AboutSection: React.FC = () => {
   };
 
   const serviceIcons = {
-    "Lendous Tech": (
-      <FaLaptopCode className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />
-    ),
-    "Lendous People": (
-      <FaUsers className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />
-    ),
-    "Lendous Capital": (
-      <FaMoneyBillWave className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />
-    ),
-    "Lendous Support": (
-      <FaHandshake className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />
-    ),
+    "Lendous Tech": <FaLaptopCode className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />,
+    "Lendous People": <FaUsers className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />,
+    "Lendous Capital": <FaMoneyBillWave className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />,
+    "Lendous Support": <FaHandshake className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />,
   };
 
   const serviceData = [
@@ -281,7 +273,6 @@ const AboutSection: React.FC = () => {
               <h2 className="text-center lg:text-left text-[28px] sm:text-[32px] font-extrabold font-poppins text-[#27408F] leading-tight mt-5">
                 About
               </h2>
-
               <p className="text-justify text-[12px] lg:text-[14px] mt-4 md:mt-6 text-black font-medium leading-relaxed md:leading-loose lg:leading-[30px] font-poppins">
                 Lendous is{" "}
                 <span className="font-semibold">
@@ -301,31 +292,30 @@ const AboutSection: React.FC = () => {
                 in Africa, with clarity and precision in execution.
               </p>
             </div>
-            <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-6 lg:mt-0">
+            <div className="w-full lg:w-1/2 flex flex-col gap-4 md:gap-6 mt-6 lg:mt-0">
               {[
                 {
                   name: "Charles Charles",
                   role: "CEO",
+                  description: "Visionary leader with 15+ years experience driving business growth across Africa. Specializes in digital transformation and market expansion strategies.",
                   image: "/team-charles.jpg",
                   linkedin: "https://linkedin.com/in/charlescharles",
+                  twitter: "https://twitter.com/charlescharles",
                 },
                 {
                   name: "Ossar Anoh",
                   role: "COO",
+                  description: "Operations expert focused on process optimization and team leadership. Has successfully scaled operations in 5 African countries.",
                   image: "/team-patience.jpg",
                   linkedin: "https://linkedin.com/in/ossaianoh",
+                  website: "https://ossar-anoh.com",
                 },
                 {
                   name: "Peter Abasiano",
                   role: "Strategic Partnerships",
+                  description: "Business development specialist with extensive network across key African industries. Leads our investor and partner relations.",
                   image: "/team-peter.jpg",
                   linkedin: "https://linkedin.com/in/peterabasiano",
-                },
-                {
-                  name: "Fidel Castro",
-                  role: "CTO",
-                  image: "/team-fidel.jpg",
-                  linkedin: "https://linkedin.com/in/fidelcastro",
                 },
               ].map((member, index) => (
                 <motion.div
@@ -334,39 +324,68 @@ const AboutSection: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="flex flex-col items-center p-3 md:p-4 rounded-lg bg-white shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#1AF866]"
+                  className="w-full flex flex-col p-4 md:p-6 rounded-xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#1AF866]"
                 >
-                  <div className="relative">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      width={100}
-                      height={100}
-                      className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 object-cover rounded-full border-4 border-[#7030A0]"
-                      onError={(e) => {
-                        e.currentTarget.src = "/placeholder-team-member.jpg";
-                      }}
-                    />
-                    <motion.div
-                      className="absolute inset-0 rounded-full border-2 border-[#1AF866] opacity-0"
-                      whileHover={{ opacity: 1, scale: 1.1 }}
-                      transition={{ duration: 0.3 }}
-                    />
+                  <div className="flex flex-col sm:flex-row items-start gap-4 md:gap-6">
+                    <div className="relative shrink-0">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        width={120}
+                        height={120}
+                        className="w-24 h-24 md:w-28 md:h-28 object-cover rounded-full border-4 border-[#7030A0]"
+                        onError={(e) => {
+                          e.currentTarget.src = "/placeholder-team-member.jpg";
+                        }}
+                      />
+                      <motion.div
+                        className="absolute inset-0 rounded-full border-2 border-[#1AF866] opacity-0"
+                        whileHover={{ opacity: 1, scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-[16px] sm:text-[18px] font-bold font-comic-neue text-[#27408F]">
+                        {member.name}
+                      </h3>
+                      <p className="text-[14px] sm:text-[16px] font-semibold text-[#7030A0] mt-1">
+                        {member.role}
+                      </p>
+                      <p className="text-[12px] sm:text-[14px] text-gray-700 mt-2 font-poppins">
+                        {member.description}
+                      </p>
+                      <div className="flex gap-3 mt-3">
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
+                        >
+                          <FaLinkedin className="w-5 h-5" />
+                        </a>
+                        {member.twitter && (
+                          <a
+                            href={member.twitter}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
+                          >
+                            <FaTwitter className="w-5 h-5" />
+                          </a>
+                        )}
+                        {member.website && (
+                          <a
+                            href={member.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
+                          >
+                            <FaGlobe className="w-5 h-5" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-[12px] sm:text-[14px] font-semibold font-comic-neue text-[#27408F] mt-3 md:mt-4">
-                    {member.name}
-                  </h3>
-                  <p className="text-[10px] sm:text-[12px] text-gray-700 mt-1 text-center font-poppins">
-                    {member.role}
-                  </p>
-                  <a
-                    href={member.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 md:mt-3 text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
-                  >
-                    <FaLinkedin className="w-4 h-4 md:w-5 md:h-5" />
-                  </a>
                 </motion.div>
               ))}
             </div>
