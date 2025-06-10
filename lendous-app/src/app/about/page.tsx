@@ -16,7 +16,9 @@ import SlideInSection from "../../../components/SlideInSection";
 import { useState, useEffect } from "react";
 
 const AboutSection: React.FC = () => {
-  const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({});
+  const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>(
+    {}
+  );
   const [viewportHeight, setViewportHeight] = useState(0);
 
   useEffect(() => {
@@ -37,10 +39,18 @@ const AboutSection: React.FC = () => {
   };
 
   const serviceIcons = {
-    "Lendous Tech": <FaLaptopCode className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />,
-    "Lendous People": <FaUsers className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />,
-    "Lendous Capital": <FaMoneyBillWave className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />,
-    "Lendous Support": <FaHandshake className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />,
+    "Lendous Tech": (
+      <FaLaptopCode className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />
+    ),
+    "Lendous People": (
+      <FaUsers className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />
+    ),
+    "Lendous Capital": (
+      <FaMoneyBillWave className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />
+    ),
+    "Lendous Support": (
+      <FaHandshake className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-[#1AF866]" />
+    ),
   };
 
   const serviceData = [
@@ -297,23 +307,23 @@ const AboutSection: React.FC = () => {
                 {
                   name: "Charles Charles",
                   role: "CEO",
-                  description: "Visionary leader with 15+ years experience driving business growth across Africa. Specializes in digital transformation and market expansion strategies.",
+                  description:
+                    "Visionary leader with 15+ years experience driving business growth across Africa. Specializes in digital transformation and market expansion strategies.",
                   image: "/team-charles.jpg",
                   linkedin: "https://linkedin.com/in/charlescharles",
-                  twitter: "https://twitter.com/charlescharles",
                 },
                 {
                   name: "Ossar Anoh",
                   role: "COO",
-                  description: "Operations expert focused on process optimization and team leadership. Has successfully scaled operations in 5 African countries.",
+                  description: "Operations expert with 10 years experience in sales, HR management, and customer relationship management across microfinance, oil & gas, hospitality and consulting.",
                   image: "/team-patience.jpg",
                   linkedin: "https://linkedin.com/in/ossaianoh",
-                  website: "https://ossar-anoh.com",
                 },
                 {
                   name: "Peter Abasiano",
                   role: "Strategic Partnerships",
-                  description: "Business development specialist with extensive network across key African industries. Leads our investor and partner relations.",
+                  description:
+                    "Business development specialist with extensive network across key African industries. Leads our investor and partner relations.",
                   image: "/team-peter.jpg",
                   linkedin: "https://linkedin.com/in/peterabasiano",
                 },
@@ -363,26 +373,6 @@ const AboutSection: React.FC = () => {
                         >
                           <FaLinkedin className="w-5 h-5" />
                         </a>
-                        {member.twitter && (
-                          <a
-                            href={member.twitter}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
-                          >
-                            <FaTwitter className="w-5 h-5" />
-                          </a>
-                        )}
-                        {member.website && (
-                          <a
-                            href={member.website}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[#27408F] hover:text-[#1AF866] transition-colors duration-300"
-                          >
-                            <FaGlobe className="w-5 h-5" />
-                          </a>
-                        )}
                       </div>
                     </div>
                   </div>

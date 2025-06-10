@@ -203,7 +203,8 @@ const Home: React.FC = () => {
           backgroundImage: "url('/hero-bg1.jpg')",
         }}
       >
-        <div className="absolute inset-0 bg-black opacity-80 z-0"></div>
+        <div className="absolute inset-0 bg-black opacity-70 z-0"></div>
+        <div className="absolute inset-0 bg-[#27408F] opacity-60 z-1 backdrop-blur-sm"></div>
 
         <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1AF866] via-[#27408F] to-[#7030A0] z-10"></div>
 
@@ -477,10 +478,10 @@ const Home: React.FC = () => {
                   </span>
                   : You Will
                   <span className="relative inline-block mx-2">
-                    <span className="font-comic-neue text-[#1AF866] text-[28px] sm:text-[32px] transform inline-block">
+                    <span className="font-comic-neue text-[#7030A0] text-[28px] sm:text-[32px] transform inline-block">
                       Never
                     </span>
-                    <span className="absolute -bottom-1 left-0 right-0 h-2 bg-[#7030A0] z-0"></span>
+                    <span className="absolute -bottom-1 left-0 right-0 h-2 bg-[#1AF866] z-0"></span>
                   </span>
                   Work Alone!
                 </motion.h1>
